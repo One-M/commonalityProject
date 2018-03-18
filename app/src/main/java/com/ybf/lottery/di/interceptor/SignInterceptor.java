@@ -7,7 +7,7 @@ import okhttp3.Response;
 
 /**
  * Created by XQyi on 2018/3/9.
- * Use:
+ * Use:拦截器
  */
 
 public class SignInterceptor implements Interceptor {

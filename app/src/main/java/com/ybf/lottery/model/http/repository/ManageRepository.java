@@ -22,16 +22,22 @@ public class ManageRepository {
         this.manageApi = api;
     }
 
-    public Flowable<HttpNoResult> loginData(String userId, String loginToken, String lang, String timeZone,
-                                            String version, String versionCode, String channelNumber, String sign){
-
-        return manageApi.loginData(userId, loginToken, lang, timeZone, version, versionCode, channelNumber, sign);
-    }
-
+    /**
+     * /**
+     * 北京赛车历史开奖倒计时接口
+     * @param lottery
+     * @return
+     */
     public Flowable<BJRacecarCountDownBean> bjRacecarCountDownLoginData(String lottery){
         return manageApi.bjRacecarCountDownLoginData(lottery);
     }
 
+    /**
+     * 北京赛车历史开奖数据
+     * @param drawDate 日期
+     * ps: ResponseBody——retrofit中 返回未解析的原始json数据，这里处理不规范接口数据时单独解析
+     * @return
+     */
     public Flowable<ResponseBody> bjRacecarHistoryResponseBodyLoginData(String drawDate){
         return manageApi.bjRacecarHistoryResponseBodyLoginData(drawDate);
     }

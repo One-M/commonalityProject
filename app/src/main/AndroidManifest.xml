@@ -20,13 +20,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.ybf.lottery.activity.RaceCarActivity"
-                  android:screenOrientation="portrait" />
-        <activity android:name="com.ybf.lottery.activity.RaceCarFragActivity"
-                  android:screenOrientation="portrait" />
         <activity android:name="com.ybf.lottery.function.BJRacecarActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name="com.ybf.lottery.activity.CalendarActivity"/>
     </application>
 
 </manifest>

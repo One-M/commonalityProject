@@ -28,7 +28,6 @@ import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
 import com.ybf.lottery.utils.CustomDate;
 import com.ybf.lottery.utils.DisplayUtil;
-import com.ybf.lottery.utils.TimestampUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -58,8 +57,8 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
 
     private MyCountDown countDown;
 
-    private static CustomDate currClickDate = new CustomDate();//记录选中的date
-    private static CustomDate todayDate = new CustomDate();//当天日期
+    private static CustomDate currClickDate;//记录选中的date
+    private static CustomDate todayDate;//当天日期
     private static int pagesize = 100;
 
     @Override
@@ -73,6 +72,9 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         setContentView(R.layout.bj_racecar_lay);
 
         ButterKnife.bind(this);
+
+        currClickDate = new CustomDate();
+        todayDate = new CustomDate();
         initData();
         setData();
 
@@ -118,10 +120,11 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         switch (view.getId()){
             case R.id.cloe_show_ll:
                 group.setVisibility(View.GONE);
+                countDown.cancel();
                 break;
             case R.id.public_img_back:
-                myFinish();
-
+                finish();
+                countDown.cancel();
                /* long t = TimestampUtils.getUnixStamp();
                 *//*long t = Long.parseLong("1521257564000");*//*
                 String d = TimestampUtils.getTimeMS(t);

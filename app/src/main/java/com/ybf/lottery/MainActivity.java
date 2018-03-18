@@ -6,15 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ybf.lottery.base.BaseMvpActivity;
-import com.ybf.lottery.contract.MainContract;
+import com.ybf.lottery.base.BaseActivity;
 import com.ybf.lottery.function.BJRacecarActivity;
-import com.ybf.lottery.presenter.MainPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.IView {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.to_lottery)
     TextView world;
@@ -35,10 +33,4 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
             }
         });
     }
-
-    @Override
-    protected MainPresenter initInject() {
-        return new MainPresenter(this);
-    }
-
 }

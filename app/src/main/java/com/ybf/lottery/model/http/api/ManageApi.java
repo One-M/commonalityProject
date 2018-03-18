@@ -20,18 +20,6 @@ import retrofit2.http.Query;
 
 public interface ManageApi {
 
-    @FormUrlEncoded
-    @POST("user/card/info")
-    Flowable<HttpNoResult> loginData(@Field("userId") String userId,
-                                     @Field("loginToken") String loginToken,
-                                     @Field("lang") String lang,
-                                     @Field("timeZone") String timeZone,
-                                     @Field("version") String version,
-                                     @Field("versionCode") String versionCode,
-                                     @Field("channelNumber") String channelNumber,
-                                     @Field("sign") String sign
-    );
-
     /**
      * 北京赛车历史开奖倒计时接口
      * @param lottery
