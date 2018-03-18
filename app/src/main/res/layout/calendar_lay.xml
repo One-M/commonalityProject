@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="300dp"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
+
+        <LinearLayout
+            android:id="@+id/btnPreMonth_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tvCurrentMonth"
+            android:padding="10dp"
+            android:layout_marginRight="40dp">
+
+            <ImageButton
+                android:id="@+id/btnPreMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_before" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnNextMonth_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:layout_marginLeft="40dip"
+            android:layout_toRightOf="@+id/tvCurrentMonth">
+
+            <ImageButton
+                android:id="@+id/btnNextMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_next" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvCurrentMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="3月"
+            android:textColor="#323232"
+            android:textSize="15sp" />
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/btnClose"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:background="@mipmap/close_x_icon" />-->
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dip"
+            android:layout_marginBottom="2dip"
+            android:layout_marginTop="2dip" >
+
+            <TableRow>
+
+                <TextView
+                    style="@style/dateStyle"
+                    android:text="@string/sunday"
+                    android:textColor="@color/canlendar_text_color" />
+
+                <TextView
+                    style="@style/dateStyle"
+                    android:text="@string/monday"
+                    android:textColor="@color/canlendar_text_color" />
+                <TextView
+                    style="@style/dateStyle"
+                    android:text="@string/thesday"
+                    android:textColor="@color/canlendar_text_color" />
+
+                <TextView
+                    style="@style/dateStyle"
+                    android:text="@string/wednesday"
+                    android:textColor="@color/canlendar_text_color" />
+
+                <TextView
+                    style="@style/dateStyle"
+                    android:text="@string/thursday"
+                    android:textColor="@color/canlendar_text_color" />
+
+                <TextView
+                    style="@style/dateStyle"
+                    android:text="@string/friday"
+                    android:textColor="@color/canlendar_text_color" />
+
+                <TextView
+                    style="@style/dateStyle"
+                    android:text="@string/saturday"
+                    android:textColor="@color/canlendar_text_color" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp">
+
+        <com.ybf.lottery.diyview.CanotSlidingViewPager
+            android:id="@+id/vp_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white" >
+        </com.ybf.lottery.diyview.CanotSlidingViewPager>
+    </LinearLayout>
+
+</LinearLayout>

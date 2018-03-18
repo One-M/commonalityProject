@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="window_width">280dp</dimen>
+    <dimen name="window_height">300dp</dimen>
+
+    <!--走势图中宽高-->
+    <dimen name="trend_ball_wh">16.66666666666667dp</dimen>
+    <dimen name="item_wh">33.33333333333333dp</dimen>
+    <dimen name="footer_itemwh">25dp</dimen>
+    <dimen name="kj_history_itemw">40dp</dimen>
+    <dimen name="kj_qihao_itemh">80dp</dimen>
+    <dimen name="kj_header_itemh">60dp</dimen>
+    <dimen name="kj_half_header_itemh">30dp</dimen>
+</resources>

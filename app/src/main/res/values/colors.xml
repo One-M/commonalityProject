@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0085e1</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="line">#F5F5F5</color>
+    <color name="white">#ffffff</color>
+    <color name="canlendar_text_color">#323232</color>
+    <color name="sdfa">#fffffe</color>
+
+    <color name="num_1">#bfb800</color>
+    <color name="num_2">#2597ff</color>
+    <color name="num_3">#5c5c5c</color>
+    <color name="num_4">#ff7600</color>
+    <color name="num_5">#40d5d7</color>
+    <color name="num_6">#5337ff</color>
+    <color name="num_7">#bdbdbd</color>
+    <color name="num_8">#ff2700</color>
+    <color name="num_9">#780a00</color>
+    <color name="num_10">#0d9e13</color>
+
+    <color name="manage_text_color">#F63F3F</color>
+
+</resources>

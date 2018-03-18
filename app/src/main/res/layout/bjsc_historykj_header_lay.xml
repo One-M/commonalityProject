@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/kj_header_itemh"
+    android:layout_gravity="center"
+    >
+
+    <LinearLayout
+        android:layout_width="270dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/border_b_color"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开奖号码"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/kj_half_header_itemh"
+                android:background="@drawable/border_b_color"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="冠亚总分"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/kj_half_header_itemh">
+                <TextView
+                    android:id="@+id/gy_text_zf"
+                    android:layout_width="@dimen/kj_history_itemw"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/border_b_color"
+                    android:text="总和"/>
+                <TextView
+                    android:id="@+id/gy_text_dx"
+                    android:layout_width="@dimen/kj_history_itemw"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/border_b_color"
+                    android:text="大小"/>
+                <TextView
+                    android:id="@+id/gy_text_ds"
+                    android:layout_width="@dimen/kj_history_itemw"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/border_b_color"
+                    android:text="单双"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/kj_half_header_itemh"
+                android:background="@drawable/border_b_color">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="龙虎"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/kj_half_header_itemh">
+                <TextView
+                    android:id="@+id/lh_text_1"
+                    android:layout_width="@dimen/kj_history_itemw"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/border_b_color"
+                    android:text="冠军"/>
+                <TextView
+                    android:id="@+id/lh_text_2"
+                    android:layout_width="@dimen/kj_history_itemw"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/border_b_color"
+                    android:text="亚军"/>
+                <TextView
+                    android:id="@+id/lh_text_3"
+                    android:layout_width="@dimen/kj_history_itemw"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/border_b_color"
+                    android:text="第3名"/>
+                <TextView
+                    android:id="@+id/lh_text_4"
+                    android:layout_width="@dimen/kj_history_itemw"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/border_b_color"
+                    android:text="第4名"/>
+                <TextView
+                    android:id="@+id/lh_text_5"
+                    android:layout_width="@dimen/kj_history_itemw"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/border_b_color"
+                    android:text="第5名"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>
