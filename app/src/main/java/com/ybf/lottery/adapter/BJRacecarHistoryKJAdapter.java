@@ -1,5 +1,6 @@
 package com.ybf.lottery.adapter;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
 
@@ -7,8 +8,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.ybf.lottery.R;
 import com.ybf.lottery.model.bean.BJRacecarHistoryKJBean;
-import com.ybf.lottery.utils.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,9 +19,11 @@ import java.util.List;
 
 public class BJRacecarHistoryKJAdapter extends BaseQuickAdapter<BJRacecarHistoryKJBean , BaseViewHolder> {
 
+    private Context context;
 
-    public BJRacecarHistoryKJAdapter(@Nullable List<BJRacecarHistoryKJBean> data) {
+    public BJRacecarHistoryKJAdapter(@Nullable List<BJRacecarHistoryKJBean> data , Context context) {
         super(R.layout.kj_number_itemlay ,data);
+        this.context = context;
     }
 
     @Override
@@ -28,8 +31,7 @@ public class BJRacecarHistoryKJAdapter extends BaseQuickAdapter<BJRacecarHistory
 
         String deCode = itemData.getDrawCode();
         if (deCode != null) {
-            List<String> strList = StringUtils.stringToList(deCode);
-            setKJNumber(holder , strList);
+            setKJNumber(holder , stringToList(deCode));
         }
 
         holder.setText(R.id.value_text1 , itemData.getSumVal()+"");
@@ -48,7 +50,7 @@ public class BJRacecarHistoryKJAdapter extends BaseQuickAdapter<BJRacecarHistory
     }
     /**数据设置 StringUtils中处理*/
     private String setData(String d){
-        return StringUtils.toChineseString(StringUtils.splitString(filterStr(d) , 13 , filterStr(d).length()));
+        return toChineseString(splitString(filterStr(d) , 13 , filterStr(d).length()));
     }
 
     /**设置开奖号码*/
@@ -80,41 +82,40 @@ public class BJRacecarHistoryKJAdapter extends BaseQuickAdapter<BJRacecarHistory
     private void setKJNumColor(TextView tView , String num){
         switch (num){
             case "01":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_1));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_1));
                 break;
             case "02":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_2));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_2));
                 break;
             case "03":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_3));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_3));
                 break;
             case "04":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_4));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_4));
                 break;
             case "05":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_5));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_5));
                 break;
             case "06":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_6));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_6));
                 break;
             case "07":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_7));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_7));
                 break;
             case "08":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_8));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_8));
                 break;
             case "09":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_9));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_9));
                 break;
             case "10":
-                tView.setBackgroundColor(mContext.getResources().getColor(R.color.num_10));
+                tView.setBackgroundColor(context.getResources().getColor(R.color.num_10));
                 break;
         }
     }
 
     /**设置单双行bg*/
     private void setItemBg(BaseViewHolder mHolder , int position){
-
         if (position%2 == 0) {
             mHolder.setBackgroundRes(R.id.kj_num_ll , R.drawable.border_color);
             mHolder.setBackgroundRes(R.id.value_text1 , R.drawable.border_color);
@@ -136,10 +137,56 @@ public class BJRacecarHistoryKJAdapter extends BaseQuickAdapter<BJRacecarHistory
             mHolder.setBackgroundRes(R.id.value_text7 , R.drawable.border_b_color);
             mHolder.setBackgroundRes(R.id.value_text8 , R.drawable.border_b_color);
         }
-
     }
 
     private String filterStr(String str){
         return str == null ? "" : str;
+    }
+
+    /**
+     * string ==> List<String>
+     * @param strs
+     * @return
+     */
+    private List<String> stringToList(String strs){
+        String str[] = strs.split(",");
+        return Arrays.asList(str);
+    }
+    /**
+     * 北京赛车历史开奖英文字符串
+     * @param s
+     * @param start
+     * @param end
+     */
+    private String splitString(String s , int start , int end){
+        return start < end ? s.substring(start , end) : "";
+    }
+    /**
+     * 英==>中
+     * @return
+     */
+    private String toChineseString(String str){
+        String chineseStr = "";
+        switch (str){
+            case "small":
+                chineseStr = "小";
+                break;
+            case "big":
+                chineseStr = "大";
+                break;
+            case "odd":
+                chineseStr = "单";
+                break;
+            case "even":
+                chineseStr = "双";
+                break;
+            case "tiger":
+                chineseStr = "虎";
+                break;
+            case "dragon":
+                chineseStr = "龙";
+                break;
+        }
+        return chineseStr;
     }
 }

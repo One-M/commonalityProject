@@ -32,6 +32,7 @@ import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
 import com.ybf.lottery.model.bean.BJRacecarHistoryKJBean;
 import com.ybf.lottery.model.bean.HistoryKJBean;
 import com.ybf.lottery.utils.CustomDate;
+import com.ybf.lottery.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -74,17 +75,20 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     LinearLayout dataDetailsll;
 
     private View mView;
+    private DataAdapter dataAdapter;
+    private BJRacecarHistoryKJAdapter historyKJAdapter;
+
     @Override
     public BJRacecarHistoryKJContract.Presenter initPresenter() {
         return new BJRacecarHistoryKJPresenter(this);
     }
 
-    public static BJRacecarHistoryKJFragment newInstance() {
-        Bundle args = new Bundle();
-        BJRacecarHistoryKJFragment fragment = new BJRacecarHistoryKJFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static BJRacecarHistoryKJFragment newInstance() {
+//        Bundle args = new Bundle();
+//        BJRacecarHistoryKJFragment fragment = new BJRacecarHistoryKJFragment();
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Nullable
     @Override
@@ -96,7 +100,7 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
 
         initView();
         CustomDate cuDate = new CustomDate();
-        String cyString = cuDate.getYear() + "-" + cuDate.getMonth() + "-" + cuDate.getDay();
+        String cyString = DateUtil.getDateFormattingString(cuDate.getYear() , cuDate.getMonth() , cuDate.getDay());
         initDatas(cyString);
 
        return mView;
@@ -122,10 +126,10 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
 
     }
 
-    private static final int STATUS_LOADING = 0;//加载中
-    private static final int STATUS_LOAD_SUCCESS = 1;//加载成功
-    private static final int STATUS_LOAD_FAILED = 2;//加载失败
-    private static final int STATUS_SEREVER_ERROR = 3;//加载失败
+    private final int STATUS_LOADING = 0;//加载中
+    private final int STATUS_LOAD_SUCCESS = 1;//加载成功
+    private final int STATUS_LOAD_FAILED = 2;//加载失败
+    private final int STATUS_SEREVER_ERROR = 3;//加载失败
 
     private void setStatus(int status){
         switch (status){
@@ -154,7 +158,6 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     private void initDatas(String dateStr){
         setStatus(STATUS_LOADING);
         mPresenter.loadData(dateStr);
-
     }
     @Override
     public void loadSuccess(List<BJRacecarHistoryKJBean> historyKJBeanList) {
@@ -177,11 +180,33 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     }
 
     /**
+     * 测试期号的数据绑定显示
+     */
+    private void bindQiHaoData(List<String> numList) {
+        if (dataAdapter == null) {
+            dataAdapter = new DataAdapter(R.layout.items);
+            dataAdapter.bindData(numList);
+            mListView.setAdapter(dataAdapter);
+        }else{
+            dataAdapter.bindData(numList);
+            dataAdapter.notifyDataSetChanged();
+            //复位
+            mLeftScroll.scrollTo(0, 0);
+            mHeadScroll.scrollTo(0,0);
+        }
+    }
+
+    /**
      * 添加内容数据
      */
     private void bindNeiRongData(List<BJRacecarHistoryKJBean> dataBean){
-        BJRacecarHistoryKJAdapter adapter = new BJRacecarHistoryKJAdapter(dataBean);
-        recyclerView.setAdapter(adapter);
+        if(historyKJAdapter == null){
+            historyKJAdapter = new BJRacecarHistoryKJAdapter(dataBean , getContext());
+            recyclerView.setAdapter(historyKJAdapter);
+        }else{
+            historyKJAdapter.setNewData(dataBean);
+            historyKJAdapter.notifyDataSetChanged();
+        }
     }
 
     /***
@@ -209,15 +234,6 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         mContentScroll.scrollTo(mContentScroll.getScrollX(), top);
         //有走势图头部...
         mHeadScroll.scrollTo(mContentScroll.getScrollX(),0);
-    }
-
-    /**
-     * 测试期号的数据绑定显示
-     */
-    private void bindQiHaoData(List<String> numList) {
-        DataAdapter adapter = new DataAdapter(R.layout.items);
-        adapter.bindData(numList);
-        mListView.setAdapter(adapter);
     }
 
     /**

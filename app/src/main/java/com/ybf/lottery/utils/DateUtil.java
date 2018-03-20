@@ -117,4 +117,13 @@ public class DateUtil {
         return(date.year == DateUtil.getYear() &&
                 date.month == DateUtil.getMonth());
     }
+
+    /**
+     * YY-MM-DD 转化 （2018-3-5 --> 2018-03-05）
+     * @return
+     */
+    public static String getDateFormattingString(int year , int month , int day){
+        String dateString = year + "-" + (month > 9 ? month : ("0" + month)) + "-" + (day > 9 ? day : ("0" + day));
+        return dateString;
+    }
 }

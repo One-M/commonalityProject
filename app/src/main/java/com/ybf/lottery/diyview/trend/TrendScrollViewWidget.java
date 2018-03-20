@@ -20,7 +20,7 @@ import android.widget.Scroller;
 /**
  * Created by XQyi on 2018/3/10.
  * Reference to ScrollView and HorizontalScrollView
- * 嵌套自定义走势图的ScrollView能够360度滑动.......
+ * 嵌套自定义的ScrollView能够360度滑动.......
  */
 public class TrendScrollViewWidget extends FrameLayout {
 	static final int ANIMATED_SCROLL_GAP = 250;

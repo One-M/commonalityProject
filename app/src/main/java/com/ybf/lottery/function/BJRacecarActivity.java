@@ -27,9 +27,10 @@ import com.ybf.lottery.diyview.CustomTextView;
 import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
 import com.ybf.lottery.utils.CustomDate;
+import com.ybf.lottery.utils.DateUtil;
 import com.ybf.lottery.utils.DisplayUtil;
-
 import org.greenrobot.eventbus.EventBus;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +39,6 @@ import butterknife.ButterKnife;
  * Created by XQyi on 2018/3/10.
  * Use: 北京赛车
  */
-
 public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Presenter> implements BJRacecarContract.IView, View.OnClickListener {
 
     @BindView(R.id.marquee)
@@ -57,9 +57,11 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
 
     private MyCountDown countDown;
 
-    private static CustomDate currClickDate;//记录选中的date
-    private static CustomDate todayDate;//当天日期
-    private static int pagesize = 100;
+    private CustomDate currClickDate;//记录选中的date
+    private CustomDate todayDate;//当天日期
+    private int pagesize = 100;
+    private String issue; //期号
+    private int surplusIssue;//剩余期数
 
     @Override
     protected BJRacecarContract.Presenter initInject() {
@@ -70,31 +72,38 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bj_racecar_lay);
-
         ButterKnife.bind(this);
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        BJRacecarHistoryKJFragment issueRecommendFragment = new BJRacecarHistoryKJFragment();
+        fragmentTransaction.add(R.id.data_fragment, issueRecommendFragment);
+        fragmentTransaction.commit();
 
         currClickDate = new CustomDate();
         todayDate = new CustomDate();
         initData();
-        setData();
-
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        BJRacecarHistoryKJFragment issueRecommendFragment = BJRacecarHistoryKJFragment.newInstance();
-        fragmentTransaction.add(R.id.data_fragment, issueRecommendFragment);
-        fragmentTransaction.commit();
     }
 
     private void initData(){
         basePresenter.loadData();
     }
 
-    private void setData(){
+    private void setData(BJRacecarCountDownBean countDownBean){
 
-        countDown = new MyCountDown(70000 , 1000);
+        long endTime = countDownBean.getInfo().getSaleEndTime();
+        long serverTime = countDownBean.getInfo().getServerTime();
+        long time = endTime - serverTime;
+
+        String timeStr = formatLongToTimeStr(time);
+
+        issue = countDownBean.getInfo().getIssue();
+        surplusIssue = 179 - countDownBean.getIssue();
+
+        countDown = new MyCountDown(time , 1000);
         countDown.start();
 
-        mMarquee.setText("第662520期开奖倒计时:01分18秒 每日售179期,今日剩余125期");
+        mMarquee.setText("第" + issue + "期开奖倒计时:" + timeStr + " 每日售179期,今日剩余" + surplusIssue + "期");
         mMarquee.init(getWindowManager());
         mMarquee.startScroll();
 
@@ -103,11 +112,13 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         mCloeShowll.setOnClickListener(this);
         backimg.setOnClickListener(this);
         mTextDate.setOnClickListener(this);
+
+        Log.d("qwer==> " , countDownBean.getCode() + " success" + time);
     }
 
     @Override
     public void loadSuccess(BJRacecarCountDownBean countDownBean) {
-        Log.d("qwer==> " , countDownBean.getCode() + " success");
+        setData(countDownBean);
     }
 
     @Override
@@ -123,12 +134,8 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
                 countDown.cancel();
                 break;
             case R.id.public_img_back:
-                finish();
                 countDown.cancel();
-               /* long t = TimestampUtils.getUnixStamp();
-                *//*long t = Long.parseLong("1521257564000");*//*
-                String d = TimestampUtils.getTimeMS(t);
-                Log.d("BJRacecarActivity: " , t + " - " + d );*/
+                finish();
                 break;
             case R.id.public_txt_date:
                 calendarPopupWindow();
@@ -145,16 +152,16 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         @Override
         public void onTick(long l) {
             String timeStr = formatLongToTimeStr(l);
-//            mMarquee.setText("倒计时开始 [" + timeStr + "]");
-            mMarquee.setText("第"+ "662520" + "期开奖倒计时:" + timeStr+ " 每日售179期,今日剩余125期");
+            mMarquee.setText("第" + issue + "期开奖倒计时:" + timeStr + " 每日售179期,今日剩余" + surplusIssue + "期");
             mMarquee.init(getWindowManager());
         }
 
         @Override
         public void onFinish() {
-            mMarquee.setText("开讲啦！");
+            mMarquee.setText("开奖啦！");
             mMarquee.init(getWindowManager());
             countDown.cancel();
+            initData();
         }
     }
 
@@ -300,7 +307,7 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         }
         @Override
         public void clickDate(CustomDate date) {
-            String dStr = date.getYear() + "-" + date.getMonth() + "-" + date.getDay();
+            String dStr = DateUtil.getDateFormattingString(date.getYear() , date.getMonth() , date.getDay());
             Log.d("date: " , dStr);
             currClickDate = date;
             EventBus.getDefault().post(new HistoryKJEvent(dStr));

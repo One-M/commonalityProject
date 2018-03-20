@@ -24,11 +24,9 @@
                 android:id="@+id/textview1"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="10"
                 />
         </LinearLayout>
         <LinearLayout
@@ -42,11 +40,9 @@
                 android:id="@+id/textview2"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="9"
                 />
         </LinearLayout>
         <LinearLayout
@@ -60,11 +56,9 @@
                 android:id="@+id/textview3"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="8"
                 />
         </LinearLayout>
         <LinearLayout
@@ -78,11 +72,9 @@
                 android:id="@+id/textview4"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="7"
                 />
         </LinearLayout>
         <LinearLayout
@@ -96,11 +88,9 @@
                 android:id="@+id/textview5"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="6"
                 />
         </LinearLayout>
         <LinearLayout
@@ -114,11 +104,9 @@
                 android:id="@+id/textview6"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="5"
                 />
         </LinearLayout>
         <LinearLayout
@@ -132,11 +120,9 @@
                 android:id="@+id/textview7"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="4"
                 />
         </LinearLayout>
         <LinearLayout
@@ -150,11 +136,9 @@
                 android:id="@+id/textview8"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="3"
                 />
         </LinearLayout>
         <LinearLayout
@@ -168,11 +152,9 @@
                 android:id="@+id/textview9"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="2"
                 />
         </LinearLayout>
         <LinearLayout
@@ -186,77 +168,11 @@
                 android:id="@+id/textview10"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="#0085e1"
                 android:gravity="center"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
-                android:text="1"
                 />
         </LinearLayout>
-
-        <!--<ImageView
-            android:id="@+id/imageView2"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/aicai_lottery_trend_blue_down"
-            />
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/aicai_lottery_trend_blue_down"
-            />
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/aicai_lottery_trend_blue_down"
-            />
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/aicai_lottery_trend_blue_down"
-            />
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/aicai_lottery_trend_blue_down"
-            />
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/aicai_lottery_trend_blue_down"
-            />
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/aicai_lottery_trend_blue_down"
-            />
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/aicai_lottery_trend_blue_down"
-            />
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/aicai_lottery_trend_blue_down"
-            />-->
     </LinearLayout>
 
     <LinearLayout
@@ -270,56 +186,56 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/border_color"
-            android:text="14"/>
+            android:text=""/>
         <TextView
             android:id="@+id/value_text2"
             android:layout_width="@dimen/kj_history_itemw"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/border_color"
-            android:text="14"/>
+            android:text=""/>
         <TextView
             android:id="@+id/value_text3"
             android:layout_width="@dimen/kj_history_itemw"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/border_color"
-            android:text="14"/>
+            android:text=""/>
         <TextView
             android:id="@+id/value_text4"
             android:layout_width="@dimen/kj_history_itemw"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/border_color"
-            android:text="14"/>
+            android:text=""/>
         <TextView
             android:id="@+id/value_text5"
             android:layout_width="@dimen/kj_history_itemw"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/border_color"
-            android:text="14"/>
+            android:text=""/>
         <TextView
             android:id="@+id/value_text6"
             android:layout_width="@dimen/kj_history_itemw"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/border_color"
-            android:text="14"/>
+            android:text=""/>
         <TextView
             android:id="@+id/value_text7"
             android:layout_width="@dimen/kj_history_itemw"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/border_color"
-            android:text="14"/>
+            android:text=""/>
         <TextView
             android:id="@+id/value_text8"
             android:layout_width="@dimen/kj_history_itemw"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/border_color"
-            android:text="14"/>
+            android:text=""/>
     </LinearLayout>
 
 

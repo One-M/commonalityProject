@@ -52,7 +52,7 @@ public class BJRacecarHistoryKJPresenter extends BaseMvpPresenter<BJRacecarHisto
                        List<BJRacecarHistoryKJBean> listData = new Gson().fromJson(jsonString, type);
 
                        baseView.loadSuccess(listData);
-                       Log.d("retrofit_json: ", responseBody.string());
+                       Log.d("retrofit_json: ", jsonString);
                        Log.d("isMainThread: ", isMainThread() + "");
                    }
 
@@ -66,7 +66,6 @@ public class BJRacecarHistoryKJPresenter extends BaseMvpPresenter<BJRacecarHisto
                baseView.loadFailed();
            }
        });
-
     }
 
     private boolean isMainThread(){//是否主线程

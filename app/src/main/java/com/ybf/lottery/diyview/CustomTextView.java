@@ -43,16 +43,19 @@ public class CustomTextView extends TextView implements View.OnClickListener{
     public CustomTextView(Context context) {
         super(context);
         initView();
+        paint = getPaint();
     }
 
     public CustomTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
+        paint = getPaint();
     }
 
     public CustomTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initView();
+        paint = getPaint();
     }
 
     @Override
@@ -63,9 +66,8 @@ public class CustomTextView extends TextView implements View.OnClickListener{
     /** *//**
      * 初始化控件
      */
-    private void initView()
-    {
-        setOnClickListener(this);
+    private void initView() {
+       /* setOnClickListener(this);*/ //自身点击事件
     }
 
     /** *//**
@@ -73,7 +75,6 @@ public class CustomTextView extends TextView implements View.OnClickListener{
      */
     public void init(WindowManager windowManager)
     {
-        paint = getPaint();
         paint.setColor(getResources().getColor(R.color.manage_text_color));
         text = getText().toString();
         textLength = paint.measureText(text);
