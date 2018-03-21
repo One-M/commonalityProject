@@ -2,8 +2,11 @@ package com.ybf.lottery.function;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -41,6 +44,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,18 +82,14 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     private View mView;
     private DataAdapter dataAdapter;
     private BJRacecarHistoryKJAdapter historyKJAdapter;
+    private List<BJRacecarHistoryKJBean> historyData = new ArrayList<>();
+    private List<BJRacecarHistoryKJBean> showData = new ArrayList<>();//显示的数据
+    private Timer timer;
 
     @Override
     public BJRacecarHistoryKJContract.Presenter initPresenter() {
         return new BJRacecarHistoryKJPresenter(this);
     }
-
-//    public static BJRacecarHistoryKJFragment newInstance() {
-//        Bundle args = new Bundle();
-//        BJRacecarHistoryKJFragment fragment = new BJRacecarHistoryKJFragment();
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
     @Nullable
     @Override
@@ -113,6 +114,10 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     }
 
     private void initView(){
+
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(manager);
+
         mLeftScroll.setScrollViewListener(this);
         //中间走势图的监听器
         mContentScroll.setScrollViewListener(this);
@@ -120,9 +125,6 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         mHeadScroll.setScrollViewListener(this);
         //走势图底部的旋球滚动监听器
 //        mFooterScroll.setScrollViewListener(this);
-
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(manager);
 
     }
 
@@ -161,12 +163,28 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     }
     @Override
     public void loadSuccess(List<BJRacecarHistoryKJBean> historyKJBeanList) {
-        /**期号数据设置*/
-        bindQiHaoData(getIssueNum(historyKJBeanList));
-        bindNeiRongData(historyKJBeanList);
 
-        setStatus(STATUS_LOAD_SUCCESS);
+        /**显示的数据，在请求数据后先clear 再赋值新数据*/
+        showData.clear();
+        showData = historyKJBeanList;
+
+        /**期号数据设置*/
+        bindQiHaoData(getIssueNum(showData));
+        bindNeiRongData(showData);
+
     }
+
+//    Handler handler = new Handler(new Handler.Callback() {
+//        @Override
+//        public boolean handleMessage(Message message) {
+//            switch (message.what){
+//                case 1:
+//                    historyKJAdapter.notifyItemChanged(historyData.size());//更新单条
+//                    break;
+//            }
+//            return false;
+//        }
+//    });
 
     @Override
     public void loadFailed() {
@@ -196,10 +214,31 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         }
     }
 
+//    private void newThread(boolean newData){
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if(newData){
+//                            recyclerView.setAdapter(historyKJAdapter);
+//                        }else{
+//                            historyKJAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                });
+//            }
+//        }.start();
+//    }
+
     /**
      * 添加内容数据
      */
-    private void bindNeiRongData(List<BJRacecarHistoryKJBean> dataBean){
+//    private final int firstDataSize = 15;//分段加载初始15
+//    private int currSize = 15;
+    private void bindNeiRongData(final List<BJRacecarHistoryKJBean> dataBean){
+
         if(historyKJAdapter == null){
             historyKJAdapter = new BJRacecarHistoryKJAdapter(dataBean , getContext());
             recyclerView.setAdapter(historyKJAdapter);
@@ -207,6 +246,33 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
             historyKJAdapter.setNewData(dataBean);
             historyKJAdapter.notifyDataSetChanged();
         }
+
+        setStatus(STATUS_LOAD_SUCCESS);
+//        historyData.clear();//切换日期得到新数据前clear
+//        currSize = 15;
+//        for (int i = 0; i < (dataBean.size() > firstDataSize ? firstDataSize : dataBean.size()); i++) {
+//            historyData.add(dataBean.get(i));
+//        }
+//        if(historyKJAdapter == null){
+//            historyKJAdapter = new BJRacecarHistoryKJAdapter(historyData , getContext());
+//            recyclerView.setAdapter(historyKJAdapter);
+//        }else{
+//            historyKJAdapter.setNewData(historyData);
+//            historyKJAdapter.notifyDataSetChanged();
+//        }
+//        timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                if (currSize < dataBean.size()) {
+//                    historyData.add(dataBean.get(currSize));
+//                    currSize++;
+//                    handler.sendEmptyMessage(1);
+//                }else{
+//                    timer.purge();
+//                }
+//            }
+//        },100 , 100);
     }
 
     /***
@@ -297,6 +363,7 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         if (event.getEventDate() != null) {
             boolean trd = isMainThread();
             Log.d("onEven" , event.getEventDate() + trd);
+            /*timer.cancel();//日期切换后的更新数据前先清理*/
             initDatas(event.getEventDate());
         }
     }

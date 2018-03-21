@@ -138,7 +138,9 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
                 finish();
                 break;
             case R.id.public_txt_date:
-                calendarPopupWindow();
+                if (showPopup) {
+                    calendarPopupWindow();
+                }
                 break;
         }
     }
@@ -191,7 +193,9 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
     /**
      * 日历弹框
      */
+    private boolean showPopup = true;//是否可弹窗
     private void calendarPopupWindow(){
+        showPopup = false;
         final PopupWindow popupWindow = new PopupWindow(mCloeShowll);
         popupWindow.setWidth(getResources().getDimensionPixelSize(R.dimen.window_width));
         popupWindow.setHeight(getResources().getDimensionPixelSize(R.dimen.window_height));
@@ -210,6 +214,7 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                showPopup = true;
                 DisplayUtil.backgroundAlpha(BJRacecarActivity.this, 1f);
             }
         });
@@ -312,6 +317,7 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
             currClickDate = date;
             EventBus.getDefault().post(new HistoryKJEvent(dStr));
             mTextDate.setText(dStr);
+            showPopup = true;
             mPopupWindow.dismiss();
         }
         @Override
