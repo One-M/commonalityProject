@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -51,40 +52,55 @@
         app:constraint_referenced_ids="marquee_ll , cloe_show_ll"
         />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/border_color"
-        android:orientation="vertical"
+        android:layout_height="40dp"
+        android:background="#ffffff"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/marquee_ll">
+        app:layout_constraintTop_toBottomOf="@+id/marquee_ll"
+        app:tabGravity="center"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextColor="@color/history_dt_txt_color" />
 
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="43dp"
-            android:gravity="center"
-            android:text="历史开奖"
-            android:textColor="#0085e1"
-            android:textSize="15sp" />
+    <!--<LinearLayout-->
+        <!--android:id="@+id/linearLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:background="@drawable/border_color"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/marquee_ll">-->
 
-        <View
-            android:layout_width="100dp"
-            android:layout_height="2dp"
-            android:background="#0085e1" />
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="43dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="历史开奖"-->
+            <!--android:textColor="#0085e1"-->
+            <!--android:textSize="15sp" />-->
 
-    <FrameLayout
-        android:id="@+id/data_fragment"
+        <!--<View-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="2dp"-->
+            <!--android:background="#0085e1" />-->
+    <!--</LinearLayout>-->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout">
 
-    </FrameLayout>
+    </android.support.v4.view.ViewPager>
 
 </android.support.constraint.ConstraintLayout>

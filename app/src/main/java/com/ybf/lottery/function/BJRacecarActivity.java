@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.constraint.Group;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,11 +21,14 @@ import android.widget.TextView;
 
 import com.ybf.lottery.R;
 import com.ybf.lottery.adapter.CalendarViewAdapter;
+import com.ybf.lottery.adapter.TabsAdapter;
 import com.ybf.lottery.base.BaseMvpActivity;
 import com.ybf.lottery.diyview.CalendarCard;
 import com.ybf.lottery.diyview.CanotSlidingViewPager;
 import com.ybf.lottery.diyview.CustomTextView;
 import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
+import com.ybf.lottery.function.datastatistics.BJRacecarDataStatisticsFragment;
+import com.ybf.lottery.function.historykj.BJRacecarHistoryKJFragment;
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
 import com.ybf.lottery.utils.CustomDate;
 import com.ybf.lottery.utils.DateUtil;
@@ -53,6 +57,10 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
     ImageView backimg;
     @BindView(R.id.group)
     Group group;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
 
 
     private MyCountDown countDown;
@@ -74,16 +82,27 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         setContentView(R.layout.bj_racecar_lay);
         ButterKnife.bind(this);
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        BJRacecarHistoryKJFragment issueRecommendFragment = new BJRacecarHistoryKJFragment();
-        fragmentTransaction.add(R.id.data_fragment, issueRecommendFragment);
-        fragmentTransaction.commit();
-
+        initView();
         currClickDate = new CustomDate();
         todayDate = new CustomDate();
         initData();
     }
+
+    private void initView(){
+        String[] titles = {"历史开奖" , "数据统计" , "基本走势" , "定位走势" , "龙虎走势" , "亚冠走势"};//
+        FragmentManager manager = getSupportFragmentManager();
+        TabsAdapter tabsAdapter = new TabsAdapter(manager);
+        tabsAdapter.setTitles(titles);
+        BJRacecarDataStatisticsFragment fragment = new BJRacecarDataStatisticsFragment();
+        tabsAdapter.addFragments(new BJRacecarHistoryKJFragment() , fragment , new BJRacecarDataStatisticsFragment(), new BJRacecarDataStatisticsFragment()
+                , new BJRacecarDataStatisticsFragment(), new BJRacecarDataStatisticsFragment());
+
+        viewPager.setOffscreenPageLimit(5);//设置预加载页面的个数。
+        viewPager.setAdapter(tabsAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+    }
+
 
     private void initData(){
         basePresenter.loadData();

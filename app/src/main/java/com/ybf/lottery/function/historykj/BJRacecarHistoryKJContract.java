@@ -1,4 +1,4 @@
-package com.ybf.lottery.function;
+package com.ybf.lottery.function.historykj;
 
 import com.ybf.lottery.base.BasePresenter;
 import com.ybf.lottery.base.BaseView;

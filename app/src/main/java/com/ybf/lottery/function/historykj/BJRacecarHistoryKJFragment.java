@@ -1,31 +1,22 @@
-package com.ybf.lottery.function;
+package com.ybf.lottery.function.historykj;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ybf.lottery.R;
 import com.ybf.lottery.adapter.BJRacecarHistoryKJAdapter;
 import com.ybf.lottery.base.BaseMvpFragment;
+import com.ybf.lottery.diyview.trend.CustomHistoryKJView;
 import com.ybf.lottery.diyview.trend.HeaderHorizontalScrollView;
 import com.ybf.lottery.diyview.trend.LeftNumberCustomListView;
 import com.ybf.lottery.diyview.trend.LeftNumberSynchScrollView;
@@ -33,19 +24,15 @@ import com.ybf.lottery.diyview.trend.ScrollChangeCallback;
 import com.ybf.lottery.diyview.trend.TrendScrollViewWidget;
 import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
 import com.ybf.lottery.model.bean.BJRacecarHistoryKJBean;
-import com.ybf.lottery.model.bean.HistoryKJBean;
 import com.ybf.lottery.utils.CustomDate;
 import com.ybf.lottery.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,8 +55,10 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     @BindView(R.id.lv_number)
     LeftNumberCustomListView mListView;
     //内容区域
-    @BindView(R.id.recycleview)
-    RecyclerView recyclerView;
+//    @BindView(R.id.recycleview)
+//    RecyclerView recyclerView;
+    @BindView(R.id.custom_history_kj_view)
+    CustomHistoryKJView historyKJView;
     //加载中提示
     @BindView(R.id.data_login_ll)
     LinearLayout dataLoginll;
@@ -115,8 +104,8 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
 
     private void initView(){
 
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(manager);
+//        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+//        recyclerView.setLayoutManager(manager);
 
         mLeftScroll.setScrollViewListener(this);
         //中间走势图的监听器
@@ -239,14 +228,14 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
 //    private int currSize = 15;
     private void bindNeiRongData(final List<BJRacecarHistoryKJBean> dataBean){
 
-        if(historyKJAdapter == null){
-            historyKJAdapter = new BJRacecarHistoryKJAdapter(dataBean , getContext());
-            recyclerView.setAdapter(historyKJAdapter);
-        }else{
-            historyKJAdapter.setNewData(dataBean);
-            historyKJAdapter.notifyDataSetChanged();
-        }
-
+//        if(historyKJAdapter == null){
+//            historyKJAdapter = new BJRacecarHistoryKJAdapter(dataBean , getContext());
+//            recyclerView.setAdapter(historyKJAdapter);
+//        }else{
+//            historyKJAdapter.setNewData(dataBean);
+//            historyKJAdapter.notifyDataSetChanged();
+//        }
+        historyKJView.setShowDatas(dataBean);
         setStatus(STATUS_LOAD_SUCCESS);
 //        historyData.clear();//切换日期得到新数据前clear
 //        currSize = 15;

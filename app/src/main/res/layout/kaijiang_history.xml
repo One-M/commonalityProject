@@ -108,10 +108,11 @@
                     android:layout_height="match_parent"
                     android:scrollbars="none">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycleview"
+                    <com.ybf.lottery.diyview.trend.CustomHistoryKJView
+                        android:id="@+id/custom_history_kj_view"
+                        android:background="#ffffff"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </com.ybf.lottery.diyview.trend.TrendScrollViewWidget>
             </LinearLayout>

@@ -1,4 +1,4 @@
-package com.ybf.lottery.function;
+package com.ybf.lottery.function.historykj;
 
 import android.os.Looper;
 import android.util.Log;
