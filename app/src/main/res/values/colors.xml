@@ -25,4 +25,8 @@
     <color name="form_line_color">#DCDCDC</color>
     <color name="history_dt_txt_color">#666666</color>
 
+    <color name="statistic_title_txt_color">#999999</color>
+    <color name="statistic_title_color">#cfe2f3</color>
+    <color name="statistic_percentage_color">#F07061</color>
+
 </resources>

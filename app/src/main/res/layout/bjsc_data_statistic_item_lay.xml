@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:id="@+id/bjsc_statistic_item_lay"
+    >
+
+    <TextView
+        android:id="@+id/yg_total_points"
+        android:layout_width="@dimen/bjsc_statistic_title2_w"
+        android:layout_height="@dimen/bjsc_statistic_title2_h"
+        android:background="@drawable/bjsc_statistic_title_bg_white"
+        android:gravity="center"
+        android:text="总分大"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/yg_total_points_num"
+        android:layout_width="@dimen/bjsc_statistic_title2_w"
+        android:layout_height="@dimen/bjsc_statistic_title2_h"
+        android:gravity="center"
+        android:text="17"
+        android:background="@drawable/bjsc_statistic_title_bg_white"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintStart_toEndOf="@+id/yg_total_points"
+        app:layout_constraintTop_toTopOf="@+id/yg_total_points" />
+
+    <TextView
+        android:id="@+id/yg_total_points_prob"
+        android:layout_width="@dimen/bjsc_statistic_title2_w"
+        android:layout_height="@dimen/bjsc_statistic_title2_h"
+        android:gravity="center"
+        android:text="25%"
+        android:background="@drawable/bjsc_statistic_title_bg_white"
+        android:textSize="@dimen/text_size_12"
+        android:textColor="@color/statistic_percentage_color"
+        app:layout_constraintStart_toEndOf="@+id/yg_total_points_num"
+        app:layout_constraintTop_toTopOf="@+id/yg_total_points" />
+
+    <TextView
+        android:id="@+id/yg_theory_probability"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bjsc_statistic_title2_h"
+        android:gravity="center"
+        android:text="概率:50%,共5个号码"
+        android:background="@drawable/bjsc_statistic_title_bg_white"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/yg_total_points_prob"
+        app:layout_constraintTop_toTopOf="@+id/yg_total_points" />
+</android.support.constraint.ConstraintLayout>

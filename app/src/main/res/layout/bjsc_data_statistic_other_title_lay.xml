@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/yg_statis_title_total_points"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bjsc_statistic_title2_h"
+        android:background="@drawable/bjsc_statistic_title_bg"
+        android:gravity="center"
+        android:text="近30期"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintEnd_toStartOf="@+id/yg_total_points_num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/yg_theory_probability" />
+
+    <TextView
+        android:id="@+id/yg_total_points_num"
+        android:layout_width="@dimen/bjsc_statistic_title2_w"
+        android:layout_height="@dimen/bjsc_statistic_title2_h"
+        android:background="@drawable/bjsc_statistic_title_bg"
+        android:gravity="center"
+        android:text="出现次数"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintEnd_toStartOf="@+id/yg_total_points_prob"
+        app:layout_constraintTop_toTopOf="@+id/yg_theory_probability" />
+
+    <TextView
+        android:id="@+id/yg_total_points_prob"
+        android:layout_width="@dimen/bjsc_statistic_title2_w"
+        android:layout_height="@dimen/bjsc_statistic_title2_h"
+        android:background="@drawable/bjsc_statistic_title_bg"
+        android:gravity="center"
+        android:text="当前遗漏"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintEnd_toStartOf="@+id/yg_theory_probability"
+        app:layout_constraintTop_toTopOf="@+id/yg_theory_probability" />
+
+    <TextView
+        android:id="@+id/yg_theory_probability"
+        android:layout_width="@dimen/bjsc_statistic_title2_w"
+        android:layout_height="@dimen/bjsc_statistic_title2_h"
+        android:background="@drawable/bjsc_statistic_title_bg"
+        android:gravity="center"
+        android:text="最大遗漏"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

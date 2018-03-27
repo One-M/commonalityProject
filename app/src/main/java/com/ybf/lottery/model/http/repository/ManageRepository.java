@@ -1,11 +1,10 @@
 package com.ybf.lottery.model.http.repository;
 
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
-import com.ybf.lottery.model.bean.BJRacecarHistoryKJBean;
-import com.ybf.lottery.model.bean.HttpNoResult;
+import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSMTJBean;
+import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
+import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
 import com.ybf.lottery.model.http.api.ManageApi;
-
-import java.security.PublicKey;
 
 import io.reactivex.Flowable;
 import okhttp3.ResponseBody;
@@ -40,6 +39,33 @@ public class ManageRepository {
      */
     public Flowable<ResponseBody> bjRacecarHistoryResponseBodyLoginData(String drawDate){
         return manageApi.bjRacecarHistoryResponseBodyLoginData(drawDate);
+    }
+
+    /**
+     * 北京赛车数据统计(亚冠-龙虎)统计
+     * @param period
+     * @return
+     */
+    public Flowable<BJRacecarStatisticYDDLBean> bjRacecarStatisticYDDLLoginData(String period){
+        return manageApi.bjRacecarStatisticYDDLLoginData(period);
+    }
+
+    /**
+     * 北京赛车数据统计(双面统计)
+     * @param period
+     * @return
+     */
+    public Flowable<BJRacecarStatisticSMTJBean> bjRacearStatisticSMTJLoginData(String period){
+        return manageApi.bjRacearStatisticSMTJLoginData(period);
+    }
+
+    /**
+     * 北京赛车数据统计(和值龙虎)
+     * @param period
+     * @return
+     */
+    public Flowable<BJRacecarStatisticSumBean> bjRacecarStatisticSumLoginData(String period){
+        return manageApi.bjRacecarStatisticSumLoginData(period);
     }
 
 }

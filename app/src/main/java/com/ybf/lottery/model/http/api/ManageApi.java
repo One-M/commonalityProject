@@ -1,15 +1,13 @@
 package com.ybf.lottery.model.http.api;
 
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
-import com.ybf.lottery.model.bean.BJRacecarHistoryKJBean;
-import com.ybf.lottery.model.bean.HttpNoResult;
+import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSMTJBean;
+import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
+import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
 
 import io.reactivex.Flowable;
 import okhttp3.ResponseBody;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -37,4 +35,27 @@ public interface ManageApi {
     @GET("trend-api/pk10/findPk10History")
     Flowable<ResponseBody> bjRacecarHistoryResponseBodyLoginData(@Query("drawDate") String drawDate);
 
+    /**
+     * 北京赛车数据统计(亚冠-龙虎)统计
+     * @param period
+     * @return
+     */
+    @GET("trend-api/pk10/findStatistical")
+    Flowable<BJRacecarStatisticYDDLBean> bjRacecarStatisticYDDLLoginData(@Query("period") String period);
+
+    /**
+     * 北京赛车数据统计(双面统计)
+     * @param period
+     * @return
+     */
+    @GET("trend-api/pk10/findSmTrend")
+    Flowable<BJRacecarStatisticSMTJBean> bjRacearStatisticSMTJLoginData(@Query("period") String period);
+
+    /**
+     * 北京赛车数据统计(和值龙虎)
+     * @param period
+     * @return
+     */
+    @GET("trend-api/pk10/findSumTrend")
+    Flowable<BJRacecarStatisticSumBean> bjRacecarStatisticSumLoginData(@Query("period") String period);
 }

@@ -1,6 +1,8 @@
 package com.ybf.lottery.function;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -27,12 +29,16 @@ import com.ybf.lottery.diyview.CalendarCard;
 import com.ybf.lottery.diyview.CanotSlidingViewPager;
 import com.ybf.lottery.diyview.CustomTextView;
 import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
+import com.ybf.lottery.eventBusInfo.StatisticKJEvent;
 import com.ybf.lottery.function.datastatistics.BJRacecarDataStatisticsFragment;
+import com.ybf.lottery.function.datastatistics.OtherFragment;
 import com.ybf.lottery.function.historykj.BJRacecarHistoryKJFragment;
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
 import com.ybf.lottery.utils.CustomDate;
 import com.ybf.lottery.utils.DateUtil;
 import com.ybf.lottery.utils.DisplayUtil;
+import com.ybf.lottery.utils.ToastUtils;
+
 import org.greenrobot.eventbus.EventBus;
 
 
@@ -61,6 +67,8 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
     TabLayout tabLayout;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+    @BindView(R.id.public_txt_issue)
+    TextView mTextIssue;
 
 
     private MyCountDown countDown;
@@ -93,13 +101,38 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         FragmentManager manager = getSupportFragmentManager();
         TabsAdapter tabsAdapter = new TabsAdapter(manager);
         tabsAdapter.setTitles(titles);
-        BJRacecarDataStatisticsFragment fragment = new BJRacecarDataStatisticsFragment();
-        tabsAdapter.addFragments(new BJRacecarHistoryKJFragment() , fragment , new BJRacecarDataStatisticsFragment(), new BJRacecarDataStatisticsFragment()
-                , new BJRacecarDataStatisticsFragment(), new BJRacecarDataStatisticsFragment());
+        tabsAdapter.addFragments(new BJRacecarHistoryKJFragment() , new BJRacecarDataStatisticsFragment() , new OtherFragment(), new OtherFragment()
+                , new OtherFragment(), new OtherFragment());
 
         viewPager.setOffscreenPageLimit(5);//设置预加载页面的个数。
         viewPager.setAdapter(tabsAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {//滑动过程监听，左滑过程中是当前页面的index，滑动成功变为目标页面
+                                                                                                      //右滑过程中是目标页面的index，滑动取消(失败)变为原页面
+            }
+
+            @Override
+            public void onPageSelected(int position) { //position目的页面,页面滑动成功了，在手指抬起的时候会执行方法
+                Log.d("scrollposition: " , position+"");
+                if (position == 0) {
+                    mTextDate.setText(getDateString(currClickDate));
+                    mTextDate.setVisibility(View.VISIBLE);
+                }else if (position == 1) {
+                    mTextDate.setText("近30期");
+                    mTextDate.setVisibility(View.VISIBLE);
+                }else{
+                    mTextDate.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {//这个方法在手指操作屏幕时发生变化；有三个值：0（end）、1（press）、2（up）
+
+            }
+        });
 
     }
 
@@ -127,6 +160,7 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         mMarquee.startScroll();
 
         mTextDate.setText(getDateString(currClickDate));
+        mTextDate.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
 
         mCloeShowll.setOnClickListener(this);
         backimg.setOnClickListener(this);
@@ -157,11 +191,112 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
                 finish();
                 break;
             case R.id.public_txt_date:
-                if (showPopup) {
-                    calendarPopupWindow();
+                if (viewPager.getCurrentItem() == 0) {
+                    if (showPopup) {
+                        calendarPopupWindow();
+                    }
+                }else{
+                    issuePopupVindow();
                 }
                 break;
         }
+    }
+
+    /**期数弹框*/
+    private int issueChoose = 0;//选中期数位置
+    private boolean showIssuePopu = true;//是否弹框(期数选择)
+    private void issuePopupVindow(){
+        showIssuePopu = false;
+        View contentView = LayoutInflater.from(BJRacecarActivity.this).inflate(R.layout.bjsc_statistic_issue_check_popup_lay, null);
+        PopupWindow popupWindow = new PopupWindow(this);
+
+        TextView issuePopup1 = contentView.findViewById(R.id.bjsc_issue_popup_item1);
+        TextView issuePopup2 = contentView.findViewById(R.id.bjsc_issue_popup_item2);
+        TextView issuePopup3 = contentView.findViewById(R.id.bjsc_issue_popup_item3);
+        TextView issuePopup4 = contentView.findViewById(R.id.bjsc_issue_popup_item4);
+        TextView issuePopup5 = contentView.findViewById(R.id.bjsc_issue_popup_item5);
+        issuePopup1.setBackgroundColor(getResources().getColor(issueChoose == 0 ? R.color.colorPrimary : R.color.white));
+        issuePopup1.setTextColor(getResources().getColor(issueChoose == 0 ? R.color.white : R.color.history_kj_tab_color));
+        issuePopup2.setBackgroundColor(getResources().getColor(issueChoose == 1 ? R.color.colorPrimary : R.color.white));
+        issuePopup2.setTextColor(getResources().getColor(issueChoose == 1 ? R.color.white : R.color.history_kj_tab_color));
+        issuePopup3.setBackgroundColor(getResources().getColor(issueChoose == 2 ? R.color.colorPrimary : R.color.white));
+        issuePopup3.setTextColor(getResources().getColor(issueChoose == 2 ? R.color.white : R.color.history_kj_tab_color));
+        issuePopup4.setBackgroundColor(getResources().getColor(issueChoose == 3 ? R.color.colorPrimary : R.color.white));
+        issuePopup4.setTextColor(getResources().getColor(issueChoose == 3 ? R.color.white : R.color.history_kj_tab_color));
+        issuePopup5.setBackgroundColor(getResources().getColor(issueChoose == 4 ? R.color.colorPrimary : R.color.white));
+        issuePopup5.setTextColor(getResources().getColor(issueChoose == 4 ? R.color.white : R.color.history_kj_tab_color));
+
+        popupWindow.setWidth(getResources().getDimensionPixelSize(R.dimen.bjsc_statistic_issue_check_w));
+        popupWindow.setHeight(getResources().getDimensionPixelSize(R.dimen.bjsc_statistic_issue_check_h));
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+//        DisplayUtil.backgroundAlpha(this, 0.7f);
+        popupWindow.setFocusable(true);
+
+        popupWindow.setContentView(contentView);
+        popupWindow.showAsDropDown(mTextDate);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                showIssuePopu = true;
+                DisplayUtil.backgroundAlpha(BJRacecarActivity.this, 1f);
+            }
+        });
+        issuePopup1.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 0;
+                mTextDate.setText("近30期");
+                EventBus.getDefault().post(new StatisticKJEvent(30));
+                popupWindow.dismiss();
+            }
+        });
+        issuePopup2.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 1;
+                mTextDate.setText("近50期");
+                EventBus.getDefault().post(new StatisticKJEvent(50));
+                popupWindow.dismiss();
+            }
+        });
+        issuePopup3.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 2;
+                mTextDate.setText("近100期");
+                EventBus.getDefault().post(new StatisticKJEvent(100));
+                popupWindow.dismiss();
+            }
+        });
+        issuePopup4.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 3;
+                mTextDate.setText("近150期");
+                EventBus.getDefault().post(new StatisticKJEvent(150));
+                popupWindow.dismiss();
+            }
+        });
+        issuePopup5.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 4;
+                mTextDate.setText("近300期");
+                EventBus.getDefault().post(new StatisticKJEvent(300));
+                popupWindow.dismiss();
+            }
+        });
     }
 
     class MyCountDown extends CountDownTimer{
@@ -212,7 +347,7 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
     /**
      * 日历弹框
      */
-    private boolean showPopup = true;//是否可弹窗
+    private boolean showPopup = true;//是否可弹窗(日期选择)
     private void calendarPopupWindow(){
         showPopup = false;
         final PopupWindow popupWindow = new PopupWindow(mCloeShowll);

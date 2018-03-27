@@ -1,5 +1,6 @@
 package com.ybf.lottery.function.historykj;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -120,7 +121,7 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     private final int STATUS_LOADING = 0;//加载中
     private final int STATUS_LOAD_SUCCESS = 1;//加载成功
     private final int STATUS_LOAD_FAILED = 2;//加载失败
-    private final int STATUS_SEREVER_ERROR = 3;//加载失败
+    private final int STATUS_SEREVER_ERROR = 3;//接口异常
 
     private void setStatus(int status){
         switch (status){
@@ -347,11 +348,11 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         }
     }
 
+    @SuppressLint("LongLogTag")
     @Subscribe() // threadMode 设置 onEven的执行线程
     public void onEven(HistoryKJEvent event){
         if (event.getEventDate() != null) {
-            boolean trd = isMainThread();
-            Log.d("onEven" , event.getEventDate() + trd);
+            Log.d("BJRacecarHistoryKJFragment_onEven" , event.getEventDate());
             /*timer.cancel();//日期切换后的更新数据前先清理*/
             initDatas(event.getEventDate());
         }

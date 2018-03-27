@@ -61,6 +61,17 @@
             android:text=" "
             android:textColor="#FFFFFF"
             />
+        <TextView
+            android:id="@+id/public_txt_issue"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:text=" "
+            android:textColor="#FFFFFF"
+            />
     </RelativeLayout>
 
 </LinearLayout>

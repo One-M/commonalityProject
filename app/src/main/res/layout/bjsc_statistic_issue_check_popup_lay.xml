@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/bjsc_statistic_issue_check_w"
+    android:layout_height="@dimen/bjsc_statistic_issue_check_h"
+    android:background="#ffffff"
+    android:layout_gravity="center">
+
+
+    <TextView
+        android:id="@+id/bjsc_issue_popup_item5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bjsc_statistic_title1_h"
+        android:gravity="center"
+        android:text="近300期"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bjsc_issue_popup_item4" />
+
+    <TextView
+        android:id="@+id/bjsc_issue_popup_item4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bjsc_statistic_title1_h"
+        android:gravity="center"
+        android:text="近150期"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bjsc_issue_popup_item3" />
+
+    <TextView
+        android:id="@+id/bjsc_issue_popup_item3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bjsc_statistic_title1_h"
+        android:gravity="center"
+        android:text="近100期"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bjsc_issue_popup_item2" />
+
+    <TextView
+        android:id="@+id/bjsc_issue_popup_item2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bjsc_statistic_title1_h"
+        android:gravity="center"
+        android:text="近50期"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bjsc_issue_popup_item1" />
+
+    <TextView
+        android:id="@+id/bjsc_issue_popup_item1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bjsc_statistic_title1_h"
+        android:gravity="center"
+        android:text="近30期"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
