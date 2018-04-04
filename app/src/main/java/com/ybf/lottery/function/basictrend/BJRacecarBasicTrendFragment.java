@@ -1,5 +1,6 @@
 package com.ybf.lottery.function.basictrend;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ import com.ybf.lottery.diyview.trend.ScrollChangeCallback;
 import com.ybf.lottery.diyview.trend.TrendScrollViewWidget;
 import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendBean;
 import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendStatisticBean;
+import com.ybf.lottery.utils.DisplayUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -934,7 +937,29 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.public_img_date:
+                Log.d("filtratePopupVindow ","点击了弹窗");
+                filtratePopupVindow();
                 break;
         }
+    }
+    private void filtratePopupVindow(){
+        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.bjsc_basic_trend_filtrate, null);
+        PopupWindow popupWindow = new PopupWindow(getContext());
+
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+
+        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        popupWindow.setContentView(contentView);
+        popupWindow.showAsDropDown(rightImg);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                DisplayUtil.backgroundAlpha(getActivity(), 1f);
+            }
+        });
     }
 }
