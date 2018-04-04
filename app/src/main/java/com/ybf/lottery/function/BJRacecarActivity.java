@@ -30,6 +30,7 @@ import com.ybf.lottery.diyview.CanotSlidingViewPager;
 import com.ybf.lottery.diyview.CustomTextView;
 import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
 import com.ybf.lottery.eventBusInfo.StatisticKJEvent;
+import com.ybf.lottery.function.basictrend.BJRacecarBasicTrendFragment;
 import com.ybf.lottery.function.datastatistics.BJRacecarDataStatisticsFragment;
 import com.ybf.lottery.function.datastatistics.OtherFragment;
 import com.ybf.lottery.function.historykj.BJRacecarHistoryKJFragment;
@@ -101,7 +102,7 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         FragmentManager manager = getSupportFragmentManager();
         TabsAdapter tabsAdapter = new TabsAdapter(manager);
         tabsAdapter.setTitles(titles);
-        tabsAdapter.addFragments(new BJRacecarHistoryKJFragment() , new BJRacecarDataStatisticsFragment() , new OtherFragment(), new OtherFragment()
+        tabsAdapter.addFragments(new BJRacecarHistoryKJFragment() , new BJRacecarDataStatisticsFragment() , new BJRacecarBasicTrendFragment(), new OtherFragment()
                 , new OtherFragment(), new OtherFragment());
 
         viewPager.setOffscreenPageLimit(5);//设置预加载页面的个数。
@@ -116,12 +117,11 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
 
             @Override
             public void onPageSelected(int position) { //position目的页面,页面滑动成功了，在手指抬起的时候会执行方法
-                Log.d("scrollposition: " , position+"");
                 if (position == 0) {
                     mTextDate.setText(getDateString(currClickDate));
                     mTextDate.setVisibility(View.VISIBLE);
                 }else if (position == 1) {
-                    mTextDate.setText("近30期");
+                    setIssueText(issueChoose);
                     mTextDate.setVisibility(View.VISIBLE);
                 }else{
                     mTextDate.setVisibility(View.GONE);
@@ -135,7 +135,6 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         });
 
     }
-
 
     private void initData(){
         basePresenter.loadData();
@@ -183,6 +182,11 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.cloe_show_ll:
+
+               /* int num = 2147483647;
+                num += 2;
+                Log.d("testQQQ" , num + "");*/
+
                 group.setVisibility(View.GONE);
                 countDown.cancel();
                 break;
@@ -202,6 +206,26 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    private void setIssueText(int issueType){
+        switch (issueType){
+            case 0:
+                mTextDate.setText("近30期");
+                break;
+            case 1:
+                mTextDate.setText("近50期");
+                break;
+            case 2:
+                mTextDate.setText("近100期");
+                break;
+            case 3:
+                mTextDate.setText("近150期");
+                break;
+            case 4:
+                mTextDate.setText("近300期");
+                break;
+        }
+    }
     /**期数弹框*/
     private int issueChoose = 0;//选中期数位置
     private boolean showIssuePopu = true;//是否弹框(期数选择)
@@ -243,56 +267,51 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
             }
         });
         issuePopup1.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 showIssuePopu = true;
                 issueChoose = 0;
-                mTextDate.setText("近30期");
+                setIssueText(issueChoose);
                 EventBus.getDefault().post(new StatisticKJEvent(30));
                 popupWindow.dismiss();
             }
         });
         issuePopup2.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 showIssuePopu = true;
                 issueChoose = 1;
-                mTextDate.setText("近50期");
+                setIssueText(issueChoose);
                 EventBus.getDefault().post(new StatisticKJEvent(50));
                 popupWindow.dismiss();
             }
         });
         issuePopup3.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 showIssuePopu = true;
                 issueChoose = 2;
-                mTextDate.setText("近100期");
+                setIssueText(issueChoose);
                 EventBus.getDefault().post(new StatisticKJEvent(100));
                 popupWindow.dismiss();
             }
         });
         issuePopup4.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 showIssuePopu = true;
                 issueChoose = 3;
-                mTextDate.setText("近150期");
+                setIssueText(issueChoose);
                 EventBus.getDefault().post(new StatisticKJEvent(150));
                 popupWindow.dismiss();
             }
         });
         issuePopup5.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 showIssuePopu = true;
                 issueChoose = 4;
-                mTextDate.setText("近300期");
+                setIssueText(issueChoose);
                 EventBus.getDefault().post(new StatisticKJEvent(300));
                 popupWindow.dismiss();
             }

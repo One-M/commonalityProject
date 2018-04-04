@@ -1,9 +1,14 @@
 package com.ybf.lottery.function.historykj;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,12 +16,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ybf.lottery.R;
 import com.ybf.lottery.adapter.BJRacecarHistoryKJAdapter;
+import com.ybf.lottery.adapter.CalendarViewAdapter;
+import com.ybf.lottery.adapter.IssueDataAdapter;
 import com.ybf.lottery.base.BaseMvpFragment;
+import com.ybf.lottery.diyview.CalendarCard;
+import com.ybf.lottery.diyview.CanotSlidingViewPager;
+import com.ybf.lottery.diyview.CustomTextView;
 import com.ybf.lottery.diyview.trend.CustomHistoryKJView;
 import com.ybf.lottery.diyview.trend.HeaderHorizontalScrollView;
 import com.ybf.lottery.diyview.trend.LeftNumberCustomListView;
@@ -24,9 +36,11 @@ import com.ybf.lottery.diyview.trend.LeftNumberSynchScrollView;
 import com.ybf.lottery.diyview.trend.ScrollChangeCallback;
 import com.ybf.lottery.diyview.trend.TrendScrollViewWidget;
 import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
+import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
 import com.ybf.lottery.model.bean.BJRacecarHistoryKJBean;
 import com.ybf.lottery.utils.CustomDate;
 import com.ybf.lottery.utils.DateUtil;
+import com.ybf.lottery.utils.DisplayUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,7 +57,7 @@ import butterknife.ButterKnife;
  * Use:历史开奖页
  */
 
-public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistoryKJContract.Presenter> implements BJRacecarHistoryKJContract.IView, ScrollChangeCallback {
+public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistoryKJContract.Presenter> implements BJRacecarHistoryKJContract.IView, ScrollChangeCallback, View.OnClickListener {
 
     //容器区域
     @BindView(R.id.scroll_left)
@@ -55,9 +69,6 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     //数据区域
     @BindView(R.id.lv_number)
     LeftNumberCustomListView mListView;
-    //内容区域
-//    @BindView(R.id.recycleview)
-//    RecyclerView recyclerView;
     @BindView(R.id.custom_history_kj_view)
     CustomHistoryKJView historyKJView;
     //加载中提示
@@ -68,13 +79,28 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     //数据显示
     @BindView(R.id.data_details_ll)
     LinearLayout dataDetailsll;
+    @BindView(R.id.custom_ll)
+    LinearLayout customll;
+    @BindView(R.id.marquee)
+    CustomTextView mMarquee;
+    @BindView(R.id.cloe_show_ll)
+    LinearLayout mCloeShowll;
+    @BindView(R.id.public_txt_date)
+    TextView mTextDate;
 
     private View mView;
-    private DataAdapter dataAdapter;
+    private IssueDataAdapter issueDataAdapter;
     private BJRacecarHistoryKJAdapter historyKJAdapter;
     private List<BJRacecarHistoryKJBean> historyData = new ArrayList<>();
     private List<BJRacecarHistoryKJBean> showData = new ArrayList<>();//显示的数据
     private Timer timer;
+
+    private String issue; //期号
+    private int surplusIssue;//剩余期数
+    private MyCountDown countDown;
+    private CustomDate currClickDate;//记录选中的date
+    private CustomDate todayDate;//当天日期
+
 
     @Override
     public BJRacecarHistoryKJContract.Presenter initPresenter() {
@@ -89,11 +115,14 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         ButterKnife.bind(this , mView);
         EventBus.getDefault().register(this);
 
+        currClickDate = new CustomDate();
+        todayDate = new CustomDate();
+
         initView();
         CustomDate cuDate = new CustomDate();
         String cyString = DateUtil.getDateFormattingString(cuDate.getYear() , cuDate.getMonth() , cuDate.getDay());
         initDatas(cyString);
-
+        initTimeData();
        return mView;
     }
 
@@ -105,16 +134,14 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
 
     private void initView(){
 
-//        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-//        recyclerView.setLayoutManager(manager);
-
         mLeftScroll.setScrollViewListener(this);
         //中间走势图的监听器
         mContentScroll.setScrollViewListener(this);
         //走势图顶部的监听器
         mHeadScroll.setScrollViewListener(this);
-        //走势图底部的旋球滚动监听器
-//        mFooterScroll.setScrollViewListener(this);
+
+        mTextDate.setText(getDateString(currClickDate));
+        mTextDate.setVisibility(View.VISIBLE);
 
     }
 
@@ -151,6 +178,9 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         setStatus(STATUS_LOADING);
         mPresenter.loadData(dateStr);
     }
+    private void initTimeData(){
+        mPresenter.loadTimeData();
+    }
     @Override
     public void loadSuccess(List<BJRacecarHistoryKJBean> historyKJBeanList) {
 
@@ -164,18 +194,6 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
 
     }
 
-//    Handler handler = new Handler(new Handler.Callback() {
-//        @Override
-//        public boolean handleMessage(Message message) {
-//            switch (message.what){
-//                case 1:
-//                    historyKJAdapter.notifyItemChanged(historyData.size());//更新单条
-//                    break;
-//            }
-//            return false;
-//        }
-//    });
-
     @Override
     public void loadFailed() {
         Log.d("retrofit==> " , "failed");
@@ -187,82 +205,39 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         setStatus(STATUS_SEREVER_ERROR);
     }
 
+    @Override
+    public void loadTimeSuccess(BJRacecarCountDownBean countDownBean) {
+        setTimeData(countDownBean);
+    }
+
+    @Override
+    public void loadTimeFailed(BJRacecarCountDownBean failedData) {
+        Log.d("qwer==> " , failedData.getCode() + "");
+    }
+
     /**
-     * 测试期号的数据绑定显示
+     * 期号的数据显示
      */
     private void bindQiHaoData(List<String> numList) {
-        if (dataAdapter == null) {
-            dataAdapter = new DataAdapter(R.layout.items);
-            dataAdapter.bindData(numList);
-            mListView.setAdapter(dataAdapter);
+        if (issueDataAdapter == null) {
+            issueDataAdapter = new IssueDataAdapter(R.layout.items , getContext());
+            issueDataAdapter.bindData(numList);
+            mListView.setAdapter(issueDataAdapter);
         }else{
-            dataAdapter.bindData(numList);
-            dataAdapter.notifyDataSetChanged();
+            issueDataAdapter.bindData(numList);
+            issueDataAdapter.notifyDataSetChanged();
             //复位
             mLeftScroll.scrollTo(0, 0);
             mHeadScroll.scrollTo(0,0);
         }
     }
 
-//    private void newThread(boolean newData){
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        if(newData){
-//                            recyclerView.setAdapter(historyKJAdapter);
-//                        }else{
-//                            historyKJAdapter.notifyDataSetChanged();
-//                        }
-//                    }
-//                });
-//            }
-//        }.start();
-//    }
-
     /**
      * 添加内容数据
      */
-//    private final int firstDataSize = 15;//分段加载初始15
-//    private int currSize = 15;
     private void bindNeiRongData(final List<BJRacecarHistoryKJBean> dataBean){
-
-//        if(historyKJAdapter == null){
-//            historyKJAdapter = new BJRacecarHistoryKJAdapter(dataBean , getContext());
-//            recyclerView.setAdapter(historyKJAdapter);
-//        }else{
-//            historyKJAdapter.setNewData(dataBean);
-//            historyKJAdapter.notifyDataSetChanged();
-//        }
         historyKJView.setShowDatas(dataBean);
         setStatus(STATUS_LOAD_SUCCESS);
-//        historyData.clear();//切换日期得到新数据前clear
-//        currSize = 15;
-//        for (int i = 0; i < (dataBean.size() > firstDataSize ? firstDataSize : dataBean.size()); i++) {
-//            historyData.add(dataBean.get(i));
-//        }
-//        if(historyKJAdapter == null){
-//            historyKJAdapter = new BJRacecarHistoryKJAdapter(historyData , getContext());
-//            recyclerView.setAdapter(historyKJAdapter);
-//        }else{
-//            historyKJAdapter.setNewData(historyData);
-//            historyKJAdapter.notifyDataSetChanged();
-//        }
-//        timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                if (currSize < dataBean.size()) {
-//                    historyData.add(dataBean.get(currSize));
-//                    currSize++;
-//                    handler.sendEmptyMessage(1);
-//                }else{
-//                    timer.purge();
-//                }
-//            }
-//        },100 , 100);
     }
 
     /***
@@ -304,65 +279,279 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         }
         return qihaoList;
     }
-    /***
-     * 期号
-     */
-    private class DataAdapter extends BaseAdapter {
-        private  List listData=null;
-        private int layoutId;
-        public DataAdapter(int layoutID){
-            this.layoutId=layoutID;
-        }
-        protected  void bindData(List data){
-            this.listData=data;
-        }
-
-        @Override
-        public int getCount() {
-            return listData.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return listData.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
-            }
-            final TextView tv_content = (TextView) convertView.findViewById(R.id.tv_content);
-            tv_content.setText(listData.get(position).toString());
-            if (position%2 == 0){
-                tv_content.setBackgroundDrawable(getResources().getDrawable(R.drawable.border_color));
-            }else{
-                tv_content.setBackgroundDrawable(getResources().getDrawable(R.drawable.border_b_color));
-            }
-            return convertView;
-        }
-    }
 
     @SuppressLint("LongLogTag")
     @Subscribe() // threadMode 设置 onEven的执行线程
     public void onEven(HistoryKJEvent event){
-        if (event.getEventDate() != null) {
-            Log.d("BJRacecarHistoryKJFragment_onEven" , event.getEventDate());
-            /*timer.cancel();//日期切换后的更新数据前先清理*/
-            initDatas(event.getEventDate());
+        if (event.getEventDate().equals("-1")) {
+            if (customll.getVisibility() == View.GONE) {
+                initTimeData();
+            }
         }
     }
 
-    /**
-     * 判断当前线程是否是主线程
-     * @return true 主
-     */
-    public boolean isMainThread() {
-        return Looper.getMainLooper().getThread() == Thread.currentThread();
+    private void setTimeData(BJRacecarCountDownBean countDownBean){
+
+        customll.setVisibility(View.VISIBLE);
+
+        long endTime = countDownBean.getInfo().getSaleEndTime();
+        long serverTime = countDownBean.getInfo().getServerTime();
+        long time = endTime - serverTime;
+
+        String timeStr = formatLongToTimeStr(time);
+
+        issue = countDownBean.getInfo().getIssue();
+        surplusIssue = 179 - countDownBean.getIssue();
+
+        countDown = new MyCountDown(time , 1000);
+        countDown.start();
+
+        mMarquee.setText("第" + issue + "期开奖倒计时:" + timeStr + " 每日售179期,今日剩余" + surplusIssue + "期");
+        mMarquee.init(getActivity().getWindowManager());
+        mMarquee.startScroll();
+
+        mTextDate.setVisibility(View.VISIBLE);
+        mTextDate.setText(getDateString(currClickDate));
+        mTextDate.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+
+        mCloeShowll.setOnClickListener(this);
+        mTextDate.setOnClickListener(this);
+
+        Log.d("qwer==> " , countDownBean.getCode() + " success" + time);
     }
+    /**
+     * long ==> 分秒显示,
+     * @param l
+     * @return
+     */
+    private String formatLongToTimeStr(long l){
+        int minute = 0;//分
+        int second = 0;//秒
+        second = (int) (l/1000);
+        if (second >= 60) {
+            minute = second/60;//取整
+            second = second%60;//取余
+        }
+
+        String m = "";
+        String s = "";
+        m = minute < 10 ? "0" + minute : "" + minute;
+        s = second < 10 ? "0" + second : "" + second;
+
+        String strTime = m + "分" + s + "秒";
+        return strTime;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.cloe_show_ll:
+                customll.setVisibility(View.GONE);
+                countDown.cancel();
+                break;
+            case R.id.public_txt_date:
+                if (showPopup) {
+                    calendarPopupWindow();
+                }
+                break;
+        }
+    }
+
+    class MyCountDown extends CountDownTimer {
+
+        public MyCountDown(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long l) {
+            String timeStr = formatLongToTimeStr(l);
+            mMarquee.setText("第" + issue + "期开奖倒计时:" + timeStr + " 每日售179期,今日剩余" + surplusIssue + "期");
+            mMarquee.init(getActivity().getWindowManager());
+        }
+
+        @Override
+        public void onFinish() {
+            mMarquee.setText("开奖啦！");
+            mMarquee.init(getActivity().getWindowManager());
+            countDown.cancel();
+            initTimeData();
+        }
+    }
+    private String getDateString(CustomDate customDate){
+        return customDate.getYear() + "-" + customDate.getMonth() + "-" + customDate.getDay();
+    }
+
+    /**
+     * 日历弹框
+     */
+    private boolean showPopup = true;//是否可弹窗(日期选择)
+    private void calendarPopupWindow(){
+        showPopup = false;
+        final PopupWindow popupWindow = new PopupWindow(mCloeShowll);
+        popupWindow.setWidth(getResources().getDimensionPixelSize(R.dimen.window_width));
+        popupWindow.setHeight(getResources().getDimensionPixelSize(R.dimen.window_height));
+
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+        DisplayUtil.backgroundAlpha(getContext(), 0.7f);
+        popupWindow.setFocusable(true);
+
+        CalendarAct calendarAct = new CalendarAct(getContext() , popupWindow);
+        // 设置所在布局
+        popupWindow.setContentView(calendarAct.getLayout());
+        // 设置弹框出现的位置，在v的正下方横轴偏移textview的宽度，为了对齐~纵轴不偏移
+        popupWindow.showAsDropDown(mTextDate);
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                showPopup = true;
+                DisplayUtil.backgroundAlpha(getContext(), 1f);
+            }
+        });
+        calendarAct.preImgBtn_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarAct.mViewPager.setCurrentItem(calendarAct.mViewPager.getCurrentItem() - 1);
+            }
+        });
+        calendarAct.nextImgBtn_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (calendarAct.isScorllnext) {//不在当前月 有下月
+                    calendarAct.mViewPager.setCurrentItem(calendarAct.mViewPager.getCurrentItem() + 1);
+                }
+            }
+        });
+    }
+
+    /**
+     * 自定义日历弹框类
+     */
+    class CalendarAct implements CalendarCard.OnCellClickListener {
+
+        public boolean isScorllnext = false;//是否可左滑(下月)
+        private Context context;
+        private CalendarViewAdapter adapter;
+        private CalendarViewAdapter calendarViewAdapter;
+        private CalendarCard[] mShowViews;
+
+        private LinearLayout layout;
+        private CanotSlidingViewPager mViewPager;
+        private ImageButton preImgBtn;
+        private ImageButton nextImgBtn;
+        private TextView monthText;
+        private LinearLayout preImgBtn_ll;
+        private LinearLayout nextImgBtn_ll;
+
+        private int LEFT = -1;
+        private int NO_SILDE = 0;
+        private int RIGHT = 1;
+        private int direction = NO_SILDE;
+        private PopupWindow mPopupWindow;
+        private int mCurrentIndex = 100;
+
+        public CalendarAct(Context context , PopupWindow popupWindow){
+            this.context = context;
+            this.mPopupWindow = popupWindow;
+            getCalendarCard();
+        }
+
+        private void getCalendarCard(){
+            // 找到布局文件
+            layout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.calendar_lay, null);
+
+            mViewPager = (CanotSlidingViewPager) layout.findViewById(R.id.vp_calendar);
+            preImgBtn = (ImageButton) layout.findViewById(R.id.btnPreMonth);
+            nextImgBtn = (ImageButton) layout.findViewById(R.id.btnNextMonth);
+            monthText = (TextView) layout.findViewById(R.id.tvCurrentMonth);
+            preImgBtn_ll = (LinearLayout) layout.findViewById(R.id.btnPreMonth_ll);
+            nextImgBtn_ll = (LinearLayout) layout.findViewById(R.id.btnNextMonth_ll);
+
+            CalendarCard[] views = new CalendarCard[3];//上月 当月 下月
+            for (int i = 0; i < 3; i++) {
+                //这里需要标记的年月日和显示的年月要区分
+                CustomDate customYM = new CustomDate();
+                customYM.setYear(currClickDate.getYear());
+                customYM.setMonth(currClickDate.getMonth());
+
+                views[i] = new CalendarCard(context, this ,customYM , currClickDate);
+            }
+            setPagerScorll(currClickDate);
+            adapter = new CalendarViewAdapter<>(views);
+            setViewPager();
+        }
+        private void setViewPager() {
+            mViewPager.setAdapter(adapter);
+            mViewPager.setCurrentItem(mCurrentIndex);
+            mViewPager.setScrollble(isScorllnext);//禁止左滑(下月)
+            mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageSelected(int position) {
+                    measureDirection(position);
+                    updateCalendarView(position);
+                    mViewPager.setScrollble(isScorllnext);
+                }
+                @Override
+                public void onPageScrolled(int arg0, float arg1, int arg2) {}
+                @Override
+                public void onPageScrollStateChanged(int arg0) {}
+            });
+        }
+        @Override
+        public void clickDate(CustomDate date) {
+            String dStr = DateUtil.getDateFormattingString(date.getYear() , date.getMonth() , date.getDay());
+            Log.d("date: " , dStr);
+            currClickDate = date;
+
+            initDatas(dStr);
+
+            mTextDate.setText(dStr);
+            showPopup = true;
+            mPopupWindow.dismiss();
+        }
+        @Override
+        public void changeDate(CustomDate date) {
+            monthText.setText(date.year + "年" + date.month + "月");
+            setPagerScorll(date);
+        }
+
+        /**
+         * 是否可左滑（下月）状态更新
+         * @param currScollData
+         */
+        private void setPagerScorll(CustomDate currScollData){
+            isScorllnext = todayDate.getMonth() != currScollData.getMonth() ;
+        }
+        /**
+         * 计算方向
+         *
+         * @param arg0
+         */
+        private void measureDirection(int arg0) {
+
+            if (arg0 > mCurrentIndex) {
+                direction = RIGHT;
+
+            } else if (arg0 < mCurrentIndex) {
+                direction = LEFT;
+            }
+            mCurrentIndex = arg0;
+        }
+        // 更新日历视图
+        private void updateCalendarView(int arg0) {
+            mShowViews = (CalendarCard[]) adapter.getAllItems();
+            if (direction == RIGHT) {
+                mShowViews[arg0 % mShowViews.length].rightSlide(currClickDate);
+            } else if (direction == LEFT) {
+                mShowViews[arg0 % mShowViews.length].leftSlide(currClickDate);
+            }
+            direction = NO_SILDE;
+        }
+        public LinearLayout getLayout(){
+            return layout;
+        }
+    }
+
 }

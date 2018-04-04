@@ -2,6 +2,7 @@ package com.ybf.lottery.function.historykj;
 
 import com.ybf.lottery.base.BasePresenter;
 import com.ybf.lottery.base.BaseView;
+import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
 import com.ybf.lottery.model.bean.BJRacecarHistoryKJBean;
 
 import java.util.List;
@@ -17,8 +18,12 @@ public interface BJRacecarHistoryKJContract {
         void loadSuccess(List<BJRacecarHistoryKJBean> historyKJBeanList);
         void loadFailed();
         void sereverError();
+
+        void loadTimeSuccess(BJRacecarCountDownBean countDownBean);
+        void loadTimeFailed(BJRacecarCountDownBean failedData);
     }
     interface Presenter extends BasePresenter<IView> {
         void loadData(String drawDate);
+        void loadTimeData();
     }
 }

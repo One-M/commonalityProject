@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ybf.lottery.base.BaseMvpPresenter;
+import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
 import com.ybf.lottery.model.bean.BJRacecarHistoryKJBean;
 import com.ybf.lottery.model.http.repository.ManageRepository;
 import com.ybf.lottery.utils.MySubscriber;
@@ -66,6 +67,21 @@ public class BJRacecarHistoryKJPresenter extends BaseMvpPresenter<BJRacecarHisto
                baseView.loadFailed();
            }
        });
+    }
+
+    @Override
+    public void loadTimeData() {
+        Flowable<BJRacecarCountDownBean> flowable = manageRepository.bjRacecarCountDownLoginData("PK10");
+        addSubscribe(flowable, new MySubscriber<BJRacecarCountDownBean>() {
+            @Override
+            public void onNext(BJRacecarCountDownBean countDownBean) {
+                if (countDownBean.getCode() == 200) {
+                    baseView.loadTimeSuccess(countDownBean);
+                }else{
+                    baseView.loadTimeFailed(countDownBean);
+                }
+            }
+        });
     }
 
     private boolean isMainThread(){//是否主线程

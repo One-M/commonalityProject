@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/public_header" />
+
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestsroll"
         android:layout_width="match_parent"

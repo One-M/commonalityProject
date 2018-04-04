@@ -1,6 +1,7 @@
 package com.ybf.lottery.model.http.api;
 
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
+import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSMTJBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
@@ -58,4 +59,12 @@ public interface ManageApi {
      */
     @GET("trend-api/pk10/findSumTrend")
     Flowable<BJRacecarStatisticSumBean> bjRacecarStatisticSumLoginData(@Query("period") String period);
+
+    /**
+     * 北京赛车基本走势
+     * @param period
+     * @return
+     */
+    @GET("trend-api/pk10/findBaseTrend")
+    Flowable<BasicTrendBean> bjscBasicTrendLoginData(@Query("period") String period);
 }

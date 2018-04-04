@@ -11,7 +11,7 @@ import io.reactivex.Flowable;
 
 /**
  * Created by XQyi on 2018/3/24.
- * Use:
+ * Use:北京赛车数据统计的Presenter
  */
 
 public class BJRacecarDataStatisticsPresenter extends BaseMvpPresenter<BJRacecarDataStatisticsContract.IView> implements BJRacecarDataStatisticsContract.Presenter {

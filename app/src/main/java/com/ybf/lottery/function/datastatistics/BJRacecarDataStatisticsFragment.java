@@ -1,6 +1,8 @@
 package com.ybf.lottery.function.datastatistics;
 
 import android.annotation.SuppressLint;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,6 +28,7 @@ import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.SMTJBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.StatisticalBean;
+import com.ybf.lottery.utils.DisplayUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,6 +47,8 @@ import butterknife.ButterKnife;
 
 public class BJRacecarDataStatisticsFragment extends BaseMvpFragment<BJRacecarDataStatisticsContract.Presenter> implements BJRacecarDataStatisticsContract.IView, View.OnClickListener {
 
+    @BindView(R.id.public_txt_date)
+    TextView mTextDate;
     /**请求期数*/
     private int currPeriod = 30;
     //亚冠统计
@@ -281,6 +287,10 @@ public class BJRacecarDataStatisticsFragment extends BaseMvpFragment<BJRacecarDa
     }
 
     private void initView(){
+        mTextDate.setText("近30期");
+        mTextDate.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+        mTextDate.setOnClickListener(this);
+
         LinearLayoutManager ygtjManager = new LinearLayoutManager(getContext());
         ygtjManager.setSmoothScrollbarEnabled(true);
         ygtjManager.setAutoMeasureEnabled(true);
@@ -381,6 +391,9 @@ public class BJRacecarDataStatisticsFragment extends BaseMvpFragment<BJRacecarDa
 
     //亚冠总分
     private void setYGData(BJRacecarStatisticYDDLBean.DataBean.SumBean sumBean){
+        if(sumBean == null){
+            return;
+        }
         List<StatisticalBean> sumData = new ArrayList<>();
 
         StatisticalBean sBeanDa = new StatisticalBean();
@@ -1216,6 +1229,11 @@ public class BJRacecarDataStatisticsFragment extends BaseMvpFragment<BJRacecarDa
                 smzsAdapter.setNewData(getSMTJShowList(smListShowData , 1));
                 smzsAdapter.notifyDataSetChanged();
                 break;
+            case R.id.public_txt_date:
+                if (showIssuePopu) {
+                    issuePopupVindow();
+                }
+                break;
         }
     }
     @SuppressLint({"LongLogTag", "SetTextI18n"})
@@ -1228,5 +1246,117 @@ public class BJRacecarDataStatisticsFragment extends BaseMvpFragment<BJRacecarDa
             currPeriod = statisticKJEvent.getEventIssue();
             initData();
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setIssueText(int issueType){
+        switch (issueType){
+            case 0:
+                mTextDate.setText("近30期");
+                break;
+            case 1:
+                mTextDate.setText("近50期");
+                break;
+            case 2:
+                mTextDate.setText("近100期");
+                break;
+            case 3:
+                mTextDate.setText("近150期");
+                break;
+            case 4:
+                mTextDate.setText("近300期");
+                break;
+        }
+    }
+    /**期数弹框*/
+    private int issueChoose = 0;//选中期数位置
+    private boolean showIssuePopu = true;//是否弹框(期数选择)
+    private void issuePopupVindow(){
+        showIssuePopu = false;
+        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.bjsc_statistic_issue_check_popup_lay, null);
+        PopupWindow popupWindow = new PopupWindow(getContext());
+
+        TextView issuePopup1 = contentView.findViewById(R.id.bjsc_issue_popup_item1);
+        TextView issuePopup2 = contentView.findViewById(R.id.bjsc_issue_popup_item2);
+        TextView issuePopup3 = contentView.findViewById(R.id.bjsc_issue_popup_item3);
+        TextView issuePopup4 = contentView.findViewById(R.id.bjsc_issue_popup_item4);
+        TextView issuePopup5 = contentView.findViewById(R.id.bjsc_issue_popup_item5);
+        issuePopup1.setBackgroundColor(getResources().getColor(issueChoose == 0 ? R.color.colorPrimary : R.color.white));
+        issuePopup1.setTextColor(getResources().getColor(issueChoose == 0 ? R.color.white : R.color.history_kj_tab_color));
+        issuePopup2.setBackgroundColor(getResources().getColor(issueChoose == 1 ? R.color.colorPrimary : R.color.white));
+        issuePopup2.setTextColor(getResources().getColor(issueChoose == 1 ? R.color.white : R.color.history_kj_tab_color));
+        issuePopup3.setBackgroundColor(getResources().getColor(issueChoose == 2 ? R.color.colorPrimary : R.color.white));
+        issuePopup3.setTextColor(getResources().getColor(issueChoose == 2 ? R.color.white : R.color.history_kj_tab_color));
+        issuePopup4.setBackgroundColor(getResources().getColor(issueChoose == 3 ? R.color.colorPrimary : R.color.white));
+        issuePopup4.setTextColor(getResources().getColor(issueChoose == 3 ? R.color.white : R.color.history_kj_tab_color));
+        issuePopup5.setBackgroundColor(getResources().getColor(issueChoose == 4 ? R.color.colorPrimary : R.color.white));
+        issuePopup5.setTextColor(getResources().getColor(issueChoose == 4 ? R.color.white : R.color.history_kj_tab_color));
+
+        popupWindow.setWidth(getResources().getDimensionPixelSize(R.dimen.bjsc_statistic_issue_check_w));
+        popupWindow.setHeight(getResources().getDimensionPixelSize(R.dimen.bjsc_statistic_issue_check_h));
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+//        DisplayUtil.backgroundAlpha(this, 0.7f);
+        popupWindow.setFocusable(true);
+
+        popupWindow.setContentView(contentView);
+        popupWindow.showAsDropDown(mTextDate);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                showIssuePopu = true;
+                DisplayUtil.backgroundAlpha(getActivity(), 1f);
+            }
+        });
+        issuePopup1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 0;
+                setIssueText(issueChoose);
+                EventBus.getDefault().post(new StatisticKJEvent(30));
+                popupWindow.dismiss();
+            }
+        });
+        issuePopup2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 1;
+                setIssueText(issueChoose);
+                EventBus.getDefault().post(new StatisticKJEvent(50));
+                popupWindow.dismiss();
+            }
+        });
+        issuePopup3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 2;
+                setIssueText(issueChoose);
+                EventBus.getDefault().post(new StatisticKJEvent(100));
+                popupWindow.dismiss();
+            }
+        });
+        issuePopup4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 3;
+                setIssueText(issueChoose);
+                EventBus.getDefault().post(new StatisticKJEvent(150));
+                popupWindow.dismiss();
+            }
+        });
+        issuePopup5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showIssuePopu = true;
+                issueChoose = 4;
+                setIssueText(issueChoose);
+                EventBus.getDefault().post(new StatisticKJEvent(300));
+                popupWindow.dismiss();
+            }
+        });
     }
 }

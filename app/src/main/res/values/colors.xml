@@ -29,4 +29,10 @@
     <color name="statistic_title_color">#cfe2f3</color>
     <color name="statistic_percentage_color">#F07061</color>
 
+    <color name="basic_trend_line_color1">#4187CC</color>
+    <color name="basic_trend_line_color2">#77A066</color>
+    <color name="basic_trend_line_color3">#EC5526</color>
+    <color name="basic_trend_line_color4">#8E912C</color>
+    <color name="basic_trend_line_color5">#748997</color>
+
 </resources>

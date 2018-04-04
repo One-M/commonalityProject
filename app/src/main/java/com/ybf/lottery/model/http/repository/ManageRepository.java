@@ -1,6 +1,7 @@
 package com.ybf.lottery.model.http.repository;
 
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
+import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSMTJBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
@@ -68,4 +69,12 @@ public class ManageRepository {
         return manageApi.bjRacecarStatisticSumLoginData(period);
     }
 
+    /**
+     * 北京赛车基本走势
+     * @param period
+     * @return
+     */
+    public Flowable<BasicTrendBean> bjscBasicTrendLoginData(String period){
+        return manageApi.bjscBasicTrendLoginData(period);
+    }
 }

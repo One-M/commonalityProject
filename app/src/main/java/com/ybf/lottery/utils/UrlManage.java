@@ -7,7 +7,7 @@ package com.ybf.lottery.utils;
 
 public class UrlManage {
 
-//    public final static String url = "http://www.1332255.com/";
-    public final static String url = "http://192.168.74.127:8302/";
+    public final static String url = "http://kj.13322.com/";
+//    public final static String url = "http://192.168.74.127:8302/";
 
 }

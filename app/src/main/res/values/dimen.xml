@@ -110,8 +110,13 @@
     <dimen name="bjsc_statistic_title4_h">425dp</dimen>
     <dimen name="bjsc_statistic_title5_h">50dp</dimen>
     <dimen name="bjsc_statistic_title6_h">40dp</dimen>
+    <dimen name="bjsc_statistic_title7_h">20dp</dimen>
     <dimen name="bjsc_statistic_issue_check_w">80dp</dimen>
     <dimen name="bjsc_statistic_issue_check_h">150dp</dimen>
+    <!--BJSC-->
+    <dimen name="bjsc_title_basic_trend_sum_w">4000dp</dimen>
+    <dimen name="bjsc_title_kjnum_w">250dp</dimen>
+    <dimen name="bjsc_title_1to10_w">400dp</dimen>
 
     <dimen name="test_5">25</dimen>
     <dimen name="test_25">425</dimen>

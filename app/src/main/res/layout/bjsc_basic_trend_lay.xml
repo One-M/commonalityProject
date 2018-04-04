@@ -4,40 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10">
+
     <include layout="@layout/public_header" />
-    <LinearLayout
-        android:id="@+id/custom_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:id="@+id/marquee_ll"
-            android:layout_width="0dp"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.ybf.lottery.diyview.CustomTextView
-                android:id="@+id/marquee"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#0085e1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/cloe_show_ll"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/cloe_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/close_x_icon"/>
-        </LinearLayout>
-    </LinearLayout>
     <LinearLayout
         android:id="@+id/data_login_ll"
         android:layout_width="match_parent"
@@ -57,10 +25,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/data_details_ll"
+        android:id="@+id/data_basic_trend_details_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
         android:orientation="vertical">
 
         <LinearLayout
@@ -84,7 +51,7 @@
                 android:orientation="horizontal">
 
                 <com.ybf.lottery.diyview.trend.HeaderHorizontalScrollView
-                    android:id="@+id/trend_header_scroll"
+                    android:id="@+id/basic_trend_header_scroll"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/kj_qihao_itemh"
                     android:scrollbars="none">
@@ -94,62 +61,74 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <include layout="@layout/bjsc_historykj_header_lay"/>
+                        <include layout="@layout/bjsc_basic_trend_header_lay"/>
 
                     </LinearLayout>
                 </com.ybf.lottery.diyview.trend.HeaderHorizontalScrollView>
             </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <com.ybf.lottery.diyview.trend.LeftNumberSynchScrollView
-                    android:id="@+id/scroll_left"
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:scrollbars="none">
-
-                    <LinearLayout
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <com.ybf.lottery.diyview.trend.LeftNumberCustomListView
-                            android:id="@+id/lv_number"
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
-                </com.ybf.lottery.diyview.trend.LeftNumberSynchScrollView>
-            </LinearLayout>
-
+            android:layout_weight="1"
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <com.ybf.lottery.diyview.trend.TrendScrollViewWidget
-                    android:id="@+id/scroll_content"
+                <LinearLayout
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.ybf.lottery.diyview.trend.LeftNumberSynchScrollView
+                        android:id="@+id/basic_trend_issue_scroll_left"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.ybf.lottery.diyview.trend.LeftNumberCustomListView
+                                android:id="@+id/lv_basic_trend_issue"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                    </com.ybf.lottery.diyview.trend.LeftNumberSynchScrollView>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scrollbars="none">
+                    android:orientation="horizontal">
 
-                    <com.ybf.lottery.diyview.trend.CustomHistoryKJView
-                        android:id="@+id/custom_history_kj_view"
-                        android:background="#ffffff"
+                    <com.ybf.lottery.diyview.trend.TrendScrollViewWidget
+                        android:id="@+id/basic_trend_scroll_content"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:scrollbars="none">
 
-                </com.ybf.lottery.diyview.trend.TrendScrollViewWidget>
+                        <com.ybf.lottery.diyview.trend.CustomTrendView
+                            android:id="@+id/custom_basic_trend_view"
+                            android:background="#ffffff"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </com.ybf.lottery.diyview.trend.TrendScrollViewWidget>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/bjsc_basic_trend_statistic_lay"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 

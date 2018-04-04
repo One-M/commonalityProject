@@ -11,6 +11,7 @@ import com.ybf.lottery.base.BaseMvpFragment;
 import com.ybf.lottery.diyview.trend.ScrollChangeCallback;
 import com.ybf.lottery.function.historykj.BJRacecarHistoryKJContract;
 import com.ybf.lottery.function.historykj.BJRacecarHistoryKJPresenter;
+import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
 import com.ybf.lottery.model.bean.BJRacecarHistoryKJBean;
 
 import java.util.List;
@@ -62,6 +63,16 @@ public class OtherFragment extends BaseMvpFragment<BJRacecarHistoryKJContract.Pr
 
     @Override
     public void sereverError() {
+
+    }
+
+    @Override
+    public void loadTimeSuccess(BJRacecarCountDownBean countDownBean) {
+
+    }
+
+    @Override
+    public void loadTimeFailed(BJRacecarCountDownBean failedData) {
 
     }
 }
