@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.ybf.lottery.R;
 import com.ybf.lottery.adapter.IssueDataAdapter;
@@ -33,7 +37,7 @@ import butterknife.ButterKnife;
  * Use:北京赛车基本走势的fragment
  */
 
-public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicTrendPresenter> implements BJRacecarBasicTrendContract.IView, ScrollChangeCallback {
+public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicTrendPresenter> implements BJRacecarBasicTrendContract.IView, ScrollChangeCallback, View.OnClickListener {
 
     @BindView(R.id.basic_trend_issue_scroll_left)
     LeftNumberSynchScrollView mLeftScroll;
@@ -41,13 +45,22 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
     HeaderHorizontalScrollView mHeadScroll;
     @BindView(R.id.basic_trend_scroll_content)
     TrendScrollViewWidget mContentScroll;
-
     @BindView(R.id.lv_basic_trend_issue)
     LeftNumberCustomListView issueListView;
     @BindView(R.id.custom_basic_trend_view)
     CustomTrendView customTrendView;
     @BindView(R.id.basic_trend_statistic_recycle)
     RecyclerView statisticRecyclerView;
+    @BindView(R.id.public_img_date)
+    ImageView rightImg;
+    @BindView(R.id.data_login_ll)
+    LinearLayout data_login_ll;
+    @BindView(R.id.data_basic_trend_details_ll)
+    LinearLayout data_ll;
+    @BindView(R.id.login_progress)
+    ProgressBar loginProgress;
+    @BindView(R.id.load_text)
+    TextView loadText;
 
     private IssueDataAdapter issueDataAdapter;
 
@@ -65,6 +78,38 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         initData("30");
         return mView;
     }
+
+    private final int STATUS_LOADING = 0;//加载中
+    private final int STATUS_LOAD_SUCCESS = 1;//加载成功
+    private final int STATUS_LOAD_FAILED = 2;//加载失败
+    private final int STATUS_SEREVER_ERROR = 3;//接口异常
+
+    private void setStatus(int statu){
+        switch (statu){
+            case STATUS_LOADING:
+                data_ll.setVisibility(View.GONE);
+                data_login_ll.setVisibility(View.VISIBLE);
+                loginProgress.setVisibility(View.VISIBLE);
+                loadText.setText("加载中...");
+                break;
+            case STATUS_LOAD_SUCCESS:
+                data_ll.setVisibility(View.VISIBLE);
+                data_login_ll.setVisibility(View.GONE);
+                break;
+            case STATUS_LOAD_FAILED:
+                data_ll.setVisibility(View.GONE);
+                data_login_ll.setVisibility(View.VISIBLE);
+                loginProgress.setVisibility(View.GONE);
+                loadText.setText("加载失败");
+                break;
+            case STATUS_SEREVER_ERROR:
+                data_ll.setVisibility(View.GONE);
+                data_login_ll.setVisibility(View.VISIBLE);
+                loginProgress.setVisibility(View.GONE);
+                loadText.setText("暂无数据");
+                break;
+        }
+    }
     private void initView(){
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext() , LinearLayoutManager.HORIZONTAL ,false);
@@ -73,9 +118,12 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         mLeftScroll.setScrollViewListener(this);
         mHeadScroll.setScrollViewListener(this);
         mContentScroll.setScrollViewListener(this);
+        rightImg.setVisibility(View.VISIBLE);
+        rightImg.setOnClickListener(this);
     }
 
     private void initData(String period){
+        setStatus(STATUS_LOADING);
         mPresenter.loadData(period);
     }
 
@@ -85,6 +133,7 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         if (basicTrendBean == null) {
             return;
         }
+        setStatus(STATUS_LOAD_SUCCESS);
         List<BasicTrendBean.ZsBean> zsList = basicTrendBean.getZs();
         //期号显示
         bindQiHaoData(getIssueList(zsList));
@@ -93,7 +142,6 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
 
         BasicTrendBean.TjBean tj = basicTrendBean.getTj();
         setStatisticData(tj);
-
     }
     /**数据统计数据显示*/
     private void setStatisticData(BasicTrendBean.TjBean tjBean){
@@ -830,11 +878,13 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
     @Override
     public void loginFailed(BasicTrendBean basicTrendBean) {
         Log.d("loginFailed ",basicTrendBean.getCode()+"");
+        setStatus(STATUS_LOAD_FAILED);
     }
 
     @Override
     public void loginError() {
         Log.d("loginError ","接口异常");
+        setStatus(STATUS_SEREVER_ERROR);
     }
 
     /** 期号的数据显示*/
@@ -878,5 +928,13 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         mContentScroll.scrollTo(mContentScroll.getScrollX(), top);
         //有走势图头部...
         mHeadScroll.scrollTo(mContentScroll.getScrollX(),0);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.public_img_date:
+                break;
+        }
     }
 }
