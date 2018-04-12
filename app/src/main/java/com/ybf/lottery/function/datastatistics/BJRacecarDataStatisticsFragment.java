@@ -254,6 +254,10 @@ public class BJRacecarDataStatisticsFragment extends BaseMvpFragment<BJRacecarDa
     TextView yg_statis_title_total_points;
     @BindView(R.id.yg_type_total_points)
     TextView yg_type_total_points;
+    @BindView(R.id.public_img_back)
+    ImageView mBackImg;
+    @BindView(R.id.public_txt_title)
+    TextView titleTxt;
 
     private YGStatisticAdapter ygStatisticAdapter;
     private YGStatisticAdapter dxAdapter;
@@ -261,11 +265,30 @@ public class BJRacecarDataStatisticsFragment extends BaseMvpFragment<BJRacecarDa
     private YGStatisticAdapter lhAdapter;
     private View mView;
     private SMZSAdapter smzsAdapter;
-
+    private static String STATISTIC_TYPE = "StatisticType";//fragment 入口传参 key
+    private int statisticType;
 
     @Override
     public BJRacecarDataStatisticsContract.Presenter initPresenter() {
         return new BJRacecarDataStatisticsPresenter(this);
+    }
+
+    public static BJRacecarDataStatisticsFragment newInstance(int statisticType) {
+
+        Bundle args = new Bundle();
+        args.putInt(STATISTIC_TYPE , statisticType);
+
+        BJRacecarDataStatisticsFragment fragment = new BJRacecarDataStatisticsFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            statisticType = getArguments().getInt(STATISTIC_TYPE);
+        }
     }
 
     @Nullable
@@ -287,6 +310,14 @@ public class BJRacecarDataStatisticsFragment extends BaseMvpFragment<BJRacecarDa
     }
 
     private void initView(){
+        if (statisticType == 1) {
+            mBackImg.setVisibility(View.VISIBLE);
+            mBackImg.setOnClickListener(this);
+        }else{
+            mBackImg.setVisibility(View.GONE);
+        }
+        titleTxt.setText("数据统计");
+
         mTextDate.setText("近30期");
         mTextDate.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
         mTextDate.setOnClickListener(this);
@@ -1233,6 +1264,9 @@ public class BJRacecarDataStatisticsFragment extends BaseMvpFragment<BJRacecarDa
                 if (showIssuePopu) {
                     issuePopupVindow();
                 }
+                break;
+            case R.id.public_img_back:
+                getActivity().finish();
                 break;
         }
     }

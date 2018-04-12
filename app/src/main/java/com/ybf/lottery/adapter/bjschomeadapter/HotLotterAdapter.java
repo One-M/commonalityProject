@@ -1,6 +1,7 @@
 package com.ybf.lottery.adapter.bjschomeadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ybf.lottery.R;
+import com.ybf.lottery.activity.BasicTrendActivity;
+import com.ybf.lottery.activity.HistoryKJActivity;
+import com.ybf.lottery.activity.StatisticActivity;
 import com.ybf.lottery.model.bean.homebean.HotLotteryBean;
 
 import java.util.List;
@@ -62,10 +66,27 @@ public class HotLotterAdapter extends BaseAdapter{
         mViewHolder.hot_lottery_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, mViewHolder.hot_lottery_name.getText(), Toast.LENGTH_SHORT).show();
+                setOnClick(position);
             }
         });
         return convertView;
+    }
+
+    private void setOnClick(int position){
+        switch (position){
+            case 0://历史开奖
+                mContext.startActivity(new Intent(mContext , HistoryKJActivity.class));
+                break;
+            case 1://数据统计
+                mContext.startActivity(new Intent(mContext , StatisticActivity.class));
+                break;
+            case 2://基本走势
+                mContext.startActivity(new Intent(mContext , BasicTrendActivity.class));
+                break;
+            default:
+                Toast.makeText(mContext, "敬请期待", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
     private void setData( HotLotteryHolder holder , int position){
         switch (position){

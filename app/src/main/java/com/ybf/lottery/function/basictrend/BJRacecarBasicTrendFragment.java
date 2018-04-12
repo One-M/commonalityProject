@@ -64,12 +64,36 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
     ProgressBar loginProgress;
     @BindView(R.id.load_text)
     TextView loadText;
+    @BindView(R.id.public_img_back)
+    ImageView mBackImg;
+    @BindView(R.id.public_txt_title)
+    TextView titleTxt;
 
     private IssueDataAdapter issueDataAdapter;
+    private static String BASICTREND_TYPE = "BasicTrendType";//fragment 入口传参 key
+    private int basicTrendType;
 
     @Override
     public BJRacecarBasicTrendPresenter initPresenter() {
         return new BJRacecarBasicTrendPresenter(this);
+    }
+
+    public static BJRacecarBasicTrendFragment newInstance(int basicTrendType) {
+
+        Bundle args = new Bundle();
+        args.putInt(BASICTREND_TYPE , basicTrendType);
+
+        BJRacecarBasicTrendFragment fragment = new BJRacecarBasicTrendFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            basicTrendType = getArguments().getInt(BASICTREND_TYPE);
+        }
     }
 
     @Nullable
@@ -114,6 +138,13 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         }
     }
     private void initView(){
+        if (basicTrendType == 1) {
+            mBackImg.setVisibility(View.VISIBLE);
+            mBackImg.setOnClickListener(this);
+        }else{
+            mBackImg.setVisibility(View.GONE);
+        }
+        titleTxt.setText("基本走势");
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext() , LinearLayoutManager.HORIZONTAL ,false);
         statisticRecyclerView.setLayoutManager(manager);
@@ -939,6 +970,9 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
             case R.id.public_img_date:
                 Log.d("filtratePopupVindow ","点击了弹窗");
                 filtratePopupVindow();
+                break;
+            case R.id.public_img_back:
+                getActivity().finish();
                 break;
         }
     }

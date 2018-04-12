@@ -1,6 +1,7 @@
 package com.ybf.lottery.function.homefunction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
@@ -66,6 +67,7 @@ public class HomeFragment extends BaseMvpFragment<HomeContract.Presenter> implem
 
     private String issue;
     private MyCountDown countDown;
+    private Context mContext;
 
     @Override
     public HomeContract.Presenter initPresenter() {
@@ -84,9 +86,12 @@ public class HomeFragment extends BaseMvpFragment<HomeContract.Presenter> implem
         return mView;
     }
 
-    private void initView(){
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
     }
+
     private void initTimeData(){
         mPresenter.loadTimeData();
     }
@@ -99,7 +104,7 @@ public class HomeFragment extends BaseMvpFragment<HomeContract.Presenter> implem
             hotLotteryList.add(hotLotteryBean);
         }
 
-        HotLotterAdapter hotLotterAdapter = new HotLotterAdapter(getContext(), hotLotteryList);
+        HotLotterAdapter hotLotterAdapter = new HotLotterAdapter(mContext, hotLotteryList);
         hotLotterGrid.setAdapter(hotLotterAdapter);
     }
 

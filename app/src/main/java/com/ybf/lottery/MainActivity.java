@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.ybf.lottery.base.BaseActivity;
 import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
@@ -14,6 +16,7 @@ import com.ybf.lottery.function.datastatistics.BJRacecarDataStatisticsFragment;
 import com.ybf.lottery.function.homefunction.HomeFragment;
 import com.ybf.lottery.function.historykj.BJRacecarHistoryKJFragment;
 import com.ybf.lottery.utils.FragmentUtils;
+import com.ybf.lottery.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -39,6 +42,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.bottom_bar_jbzs)
     RadioButton jbzs;
 
+    // 退出程序...时间
+    private long mExitApp;
     private List<Fragment> fragments = new ArrayList<>();
     private final int HOME_FRAGMENT = 0;     //首页
     private final int LSKJ_FRAGMENT = 1;    //历史开奖
@@ -66,9 +71,9 @@ public class MainActivity extends BaseActivity {
     /**初始化fragment模块*/
     private void initFragment(){
         homeFragment = new HomeFragment();
-        bjRacecarHistoryKJFragment = new BJRacecarHistoryKJFragment();
-        bjRacecarDataStatisticsFragment = new BJRacecarDataStatisticsFragment();
-        bjRacecarBasicTrendFragment = new BJRacecarBasicTrendFragment();
+        bjRacecarHistoryKJFragment = BJRacecarHistoryKJFragment.newInstance(0);
+        bjRacecarDataStatisticsFragment = BJRacecarDataStatisticsFragment.newInstance(0);
+        bjRacecarBasicTrendFragment = BJRacecarBasicTrendFragment.newInstance(0);
 
         fragments.add(homeFragment);
         fragments.add(bjRacecarHistoryKJFragment);
@@ -141,5 +146,19 @@ public class MainActivity extends BaseActivity {
                 break;
         }
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitApp) > 2000) {
+                Toast.makeText(this, "再按一次退出APP", Toast.LENGTH_SHORT).show();
+                mExitApp = System.currentTimeMillis();
+            } else {
+                System.exit(0);// 退出APP
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -1,6 +1,7 @@
 package com.ybf.lottery.function.historykj;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,11 +18,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ybf.lottery.R;
+import com.ybf.lottery.activity.HistoryKJActivity;
 import com.ybf.lottery.adapter.BJRacecarHistoryKJAdapter;
 import com.ybf.lottery.adapter.CalendarViewAdapter;
 import com.ybf.lottery.adapter.IssueDataAdapter;
@@ -50,6 +53,7 @@ import java.util.List;
 import java.util.Timer;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 /**
@@ -87,6 +91,10 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     LinearLayout mCloeShowll;
     @BindView(R.id.public_txt_date)
     TextView mTextDate;
+    @BindView(R.id.public_img_back)
+    ImageView mBackImg;
+    @BindView(R.id.public_txt_title)
+    TextView titleTxt;
 
     private View mView;
     private IssueDataAdapter issueDataAdapter;
@@ -101,16 +109,45 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     private CustomDate currClickDate;//记录选中的date
     private CustomDate todayDate;//当天日期
 
+    private Activity mActivity;
+    private Context mContext;
+    private static String ENTRANCE_TYPE = "entranceType";//fragment 入口传参 key
+    private int entranceType;//入口标记，传参标记入口type 导航栏入口传0 其它传l（ps：非导航栏入口 需要显示头部返回按钮）
 
     @Override
     public BJRacecarHistoryKJContract.Presenter initPresenter() {
         return new BJRacecarHistoryKJPresenter(this);
     }
 
+    public static BJRacecarHistoryKJFragment newInstance(int entranceType) {
+
+        Bundle args = new Bundle();
+        args.putInt(ENTRANCE_TYPE , entranceType);
+
+        BJRacecarHistoryKJFragment fragment = new BJRacecarHistoryKJFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (Activity) context;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            entranceType = getArguments().getInt(ENTRANCE_TYPE);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.kaijiang_history, container, false);
+        mContext = mActivity;
 
         ButterKnife.bind(this , mView);
         EventBus.getDefault().register(this);
@@ -133,6 +170,13 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
     }
 
     private void initView(){
+        if (entranceType == 1) {
+            mBackImg.setVisibility(View.VISIBLE);
+            mBackImg.setOnClickListener(this);
+        }else{
+            mBackImg.setVisibility(View.GONE);
+        }
+        titleTxt.setText("历史开奖");
 
         mLeftScroll.setScrollViewListener(this);
         //中间走势图的监听器
@@ -307,7 +351,7 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         countDown.start();
 
         mMarquee.setText("第" + issue + "期开奖倒计时:" + timeStr + " 每日售179期,今日剩余" + surplusIssue + "期");
-        mMarquee.init(getActivity().getWindowManager());
+        mMarquee.init(mActivity.getWindowManager());
         mMarquee.startScroll();
 
         mTextDate.setVisibility(View.VISIBLE);
@@ -354,6 +398,9 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
                     calendarPopupWindow();
                 }
                 break;
+            case R.id.public_img_back:
+                mActivity.finish();
+                break;
         }
     }
 
@@ -367,13 +414,13 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         public void onTick(long l) {
             String timeStr = formatLongToTimeStr(l);
             mMarquee.setText("第" + issue + "期开奖倒计时:" + timeStr + " 每日售179期,今日剩余" + surplusIssue + "期");
-            mMarquee.init(getActivity().getWindowManager());
+            mMarquee.init(mActivity.getWindowManager());
         }
 
         @Override
         public void onFinish() {
             mMarquee.setText("开奖啦！");
-            mMarquee.init(getActivity().getWindowManager());
+            mMarquee.init(mActivity.getWindowManager());
             countDown.cancel();
             initTimeData();
         }

@@ -24,6 +24,12 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity android:name="com.ybf.lottery.activity.HistoryKJActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.StatisticActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.BasicTrendActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 
