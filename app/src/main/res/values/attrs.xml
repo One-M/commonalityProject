@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorTextView">
+        <attr name="ctvText" format="string" />
+        <attr name="ctvBackground" format="color"/>
+        <attr name="ctvTextSize" format="dimension"/>
+        <attr name="ctvTextColor" format="color"/>
+        <attr name="ctvCornerSize" format="integer"/>
+    </declare-styleable>
+</resources>

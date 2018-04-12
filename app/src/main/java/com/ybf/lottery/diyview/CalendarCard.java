@@ -88,7 +88,7 @@ public class CalendarCard extends View {
         mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCirclePaint.setStyle(Paint.Style.FILL);
-        mCirclePaint.setColor(Color.parseColor("#0085e1"));
+        mCirclePaint.setColor(context.getResources().getColor(R.color.colorPrimary));
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
 
         initDate();

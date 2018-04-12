@@ -1,5 +1,6 @@
 package com.ybf.lottery.base;
 
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,6 +9,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.Window;
 import android.widget.ProgressBar;
+
+import com.gyf.barlibrary.ImmersionBar;
+import com.ybf.lottery.R;
 import com.ybf.lottery.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -28,6 +32,8 @@ public abstract class BaseActivity extends SupportActivity implements BaseView{
      * 你就只用传当前list的最上层的activity对象就可以了
      */
     public static List<BaseActivity> activities = new ArrayList<>();
+    private ImmersionBar immersionBar;
+    private boolean isImmersionBarEnabled = true;//是否使用base类的沉浸式(ps:默认true使用，子类中设置为false后可以自行设置不同颜色bar，记得destroy防止泄露)
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,8 +41,28 @@ public abstract class BaseActivity extends SupportActivity implements BaseView{
         activities.add(this);
         //强制竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
+        if (isImmersionBarEnabled) {
+            initImmersionBar();
+        }
 
+    }
+    //沉浸式设置
+    protected void initImmersionBar(){
+        immersionBar = ImmersionBar.with(this);
+        immersionBar.init();
+    }
+    /**
+     * 是否可以使用沉浸式
+     * Is immersion bar enabled boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isImmersionBarEnabled() {
+        return isImmersionBarEnabled;
+    }
+    public  void setIsImmersionBarEnabled(boolean isImmersionBarEnabled){
+        this.isImmersionBarEnabled=isImmersionBarEnabled;
+    }
     /**
      * Toast 提示用户
      * @param msg 提示内容String
@@ -110,5 +136,8 @@ public abstract class BaseActivity extends SupportActivity implements BaseView{
     protected void onDestroy() {
         activities.remove(this);
         super.onDestroy();
+        if (immersionBar != null) {
+            immersionBar.destroy();//必须调用该方法，防止内存泄漏，不调用该方法，如果界面bar发生改变，在不关闭app的情况下 退出此界面再进入将记忆最后一次bar改变的状态
+        }
     }
 }

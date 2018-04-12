@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0085e1</color>
+    <color name="colorPrimary">#F60D18</color>
+    <color name="colorPrimaryStart">#F6390D</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="line">#F5F5F5</color>
@@ -34,5 +35,10 @@
     <color name="basic_trend_line_color3">#EC5526</color>
     <color name="basic_trend_line_color4">#8E912C</color>
     <color name="basic_trend_line_color5">#748997</color>
+
+    <color name="black">#FF000000</color>
+    <color name="tabhost">#0eae7e</color>
+    <color name="bjsc_home_kj_context_color">#FA0410</color>
+    <color name="bjsc_home_kj_stroke_color">#F71C26</color>
 
 </resources>

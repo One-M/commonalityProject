@@ -9,7 +9,6 @@ import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.constraint.Group;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -32,13 +31,12 @@ import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
 import com.ybf.lottery.eventBusInfo.StatisticKJEvent;
 import com.ybf.lottery.function.basictrend.BJRacecarBasicTrendFragment;
 import com.ybf.lottery.function.datastatistics.BJRacecarDataStatisticsFragment;
-import com.ybf.lottery.function.datastatistics.OtherFragment;
+import com.ybf.lottery.function.homefunction.HomeFragment;
 import com.ybf.lottery.function.historykj.BJRacecarHistoryKJFragment;
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
 import com.ybf.lottery.utils.CustomDate;
 import com.ybf.lottery.utils.DateUtil;
 import com.ybf.lottery.utils.DisplayUtil;
-import com.ybf.lottery.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -102,8 +100,8 @@ public class BJRacecarActivity extends BaseMvpActivity<BJRacecarContract.Present
         FragmentManager manager = getSupportFragmentManager();
         TabsAdapter tabsAdapter = new TabsAdapter(manager);
         tabsAdapter.setTitles(titles);
-        tabsAdapter.addFragments(new BJRacecarHistoryKJFragment() , new BJRacecarDataStatisticsFragment() , new BJRacecarBasicTrendFragment(), new OtherFragment()
-                , new OtherFragment(), new OtherFragment());
+        tabsAdapter.addFragments(new BJRacecarHistoryKJFragment() , new BJRacecarDataStatisticsFragment() , new BJRacecarBasicTrendFragment(), new HomeFragment()
+                , new HomeFragment(), new HomeFragment());
 
         viewPager.setOffscreenPageLimit(5);//设置预加载页面的个数。
         viewPager.setAdapter(tabsAdapter);

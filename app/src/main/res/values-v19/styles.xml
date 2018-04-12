@@ -1,0 +1,44 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
+    </style>
+
+    <style name="AppThemeDark.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="AppTheme.ColorPrimaryStatusBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBarFootBallDetails">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.TranslucentNavigation">
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="TitleTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="isFitsSystemWindows">
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+    <style name="toolbar">
+        <item name="android:layout_marginTop">15dp</item>
+    </style>
+
+
+</resources>

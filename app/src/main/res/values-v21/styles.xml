@@ -1,0 +1,65 @@
+<resources>
+
+    <!---->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
+        <!--
+        <item_share name="android:colorControlHighlight">@color/colorPrimaryDark</item_share>-->
+    </style>
+
+    <style name="AppThemeDark.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
+        <!--
+        <item_share name="android:colorControlHighlight">@color/colorPrimaryDark</item_share>-->
+    </style>
+
+    <style name="AppTheme.ColorPrimaryStatusBar">
+
+    </style>
+
+
+    <style name="AppTheme.NoActionBarFootBallDetails">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
+    </style>
+
+
+    <style name="AppTheme.BlackStatusBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.BlackStatusBar.ColorGreen">
+        <item name="android:colorControlHighlight">@color/tabhost</item>
+        <item name="android:colorAccent">@color/tabhost</item>
+        <item name="android:colorPrimary">@color/tabhost</item>
+    </style>
+
+
+    <style name="RippleBackgroudBorderless">
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+
+    <style name="isFitsSystemWindows">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="toolbar">
+        <item name="android:layout_marginTop">0dp</item>
+    </style>
+
+</resources>

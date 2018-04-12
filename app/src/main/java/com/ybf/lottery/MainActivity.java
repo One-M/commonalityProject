@@ -11,7 +11,7 @@ import com.ybf.lottery.base.BaseActivity;
 import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
 import com.ybf.lottery.function.basictrend.BJRacecarBasicTrendFragment;
 import com.ybf.lottery.function.datastatistics.BJRacecarDataStatisticsFragment;
-import com.ybf.lottery.function.datastatistics.OtherFragment;
+import com.ybf.lottery.function.homefunction.HomeFragment;
 import com.ybf.lottery.function.historykj.BJRacecarHistoryKJFragment;
 import com.ybf.lottery.utils.FragmentUtils;
 
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
     private FragmentManager fragmentManager;
     private Fragment currentFragment;
     private BJRacecarHistoryKJFragment bjRacecarHistoryKJFragment;
-    private OtherFragment otherFragment;
+    private HomeFragment homeFragment;
     private BJRacecarDataStatisticsFragment bjRacecarDataStatisticsFragment;
     private BJRacecarBasicTrendFragment bjRacecarBasicTrendFragment;
 
@@ -65,12 +65,12 @@ public class MainActivity extends BaseActivity {
 
     /**初始化fragment模块*/
     private void initFragment(){
-        otherFragment = new OtherFragment();
+        homeFragment = new HomeFragment();
         bjRacecarHistoryKJFragment = new BJRacecarHistoryKJFragment();
         bjRacecarDataStatisticsFragment = new BJRacecarDataStatisticsFragment();
         bjRacecarBasicTrendFragment = new BJRacecarBasicTrendFragment();
 
-        fragments.add(otherFragment);
+        fragments.add(homeFragment);
         fragments.add(bjRacecarHistoryKJFragment);
         fragments.add(bjRacecarDataStatisticsFragment);
         fragments.add(bjRacecarBasicTrendFragment);

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yxqstyle="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/bjsc_kj_item_bg"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/bjsc_home_kj_context_color"
+                android:padding="3dp"
+                android:layout_marginRight="6dp">
+
+                <TextView
+                    android:id="@+id/kj_issue"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_13"
+                    android:text=""/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/kj_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:textSize="@dimen/text_size_12"
+                android:text="2018-04-10 15:26" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:gravity="center">
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText="1"
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_16" />
+          <!--  <TextView
+                android:id="@+id/home_kj_num1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:textSize="@dimen/text_size_15"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText="1"
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_18" />
+           <!-- <TextView
+                android:id="@+id/home_kj_num2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText=" "
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_18" />
+         <!--   <TextView
+                android:id="@+id/home_kj_num3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText=" "
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_18" />
+           <!-- <TextView
+                android:id="@+id/home_kj_num4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num5"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText=" "
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_18" />
+           <!-- <TextView
+                android:id="@+id/home_kj_num5"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num6"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText=" "
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_18" />
+            <!--<TextView
+                android:id="@+id/home_kj_num6"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num7"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText=" "
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_18" />
+            <!--<TextView
+                android:id="@+id/home_kj_num7"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num8"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText=" "
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_18" />
+           <!-- <TextView
+                android:id="@+id/home_kj_num8"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num9"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText=" "
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_18" />
+            <!--<TextView
+                android:id="@+id/home_kj_num9"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+            <com.ybf.lottery.diyview.ColorTextView
+                android:id="@+id/home_kj_num10"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                yxqstyle:ctvCornerSize="10"
+                yxqstyle:ctvText=" "
+                yxqstyle:ctvTextColor="@color/white"
+                yxqstyle:ctvTextSize="@dimen/text_size_18" />
+         <!--   <TextView
+                android:id="@+id/home_kj_num10"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/bjsc_kj_num_bg"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/white"
+                android:text="2"/>-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="10dp">
+            <TextView
+                android:id="@+id/home_kj_sx1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textColor="@color/bjsc_home_kj_context_color"
+                android:background="@drawable/bjsc_kj_content_bg"
+                android:textSize="@dimen/text_size_15"
+                android:text="龙"/>
+            <TextView
+                android:id="@+id/home_kj_sx2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textColor="@color/bjsc_home_kj_context_color"
+                android:background="@drawable/bjsc_kj_content_bg"
+                android:layout_marginLeft="8dp"
+                android:textSize="@dimen/text_size_15"
+                android:text="龙"/>
+            <TextView
+                android:id="@+id/home_kj_sx3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textColor="@color/bjsc_home_kj_context_color"
+                android:background="@drawable/bjsc_kj_content_bg"
+                android:layout_marginLeft="8dp"
+                android:textSize="@dimen/text_size_15"
+                android:text="龙"/>
+            <TextView
+                android:id="@+id/home_kj_sx4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textColor="@color/bjsc_home_kj_context_color"
+                android:background="@drawable/bjsc_kj_content_bg"
+                android:layout_marginLeft="8dp"
+                android:textSize="@dimen/text_size_15"
+                android:text="龙"/>
+            <TextView
+                android:id="@+id/home_kj_sx5"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textColor="@color/bjsc_home_kj_context_color"
+                android:background="@drawable/bjsc_kj_content_bg"
+                android:layout_marginLeft="8dp"
+                android:textSize="@dimen/text_size_15"
+                android:text="龙"/>
+            <TextView
+                android:id="@+id/home_kj_sx6"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textColor="@color/bjsc_home_kj_context_color"
+                android:background="@drawable/bjsc_kj_content_bg"
+                android:layout_marginLeft="8dp"
+                android:textSize="@dimen/text_size_15"
+                android:text="龙"/>
+            <TextView
+                android:id="@+id/home_kj_sx7"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textColor="@color/bjsc_home_kj_context_color"
+                android:background="@drawable/bjsc_kj_content_bg"
+                android:layout_marginLeft="8dp"
+                android:textSize="@dimen/text_size_15"
+                android:text="龙"/>
+            <TextView
+                android:id="@+id/home_kj_sx8"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textColor="@color/bjsc_home_kj_context_color"
+                android:background="@drawable/bjsc_kj_content_bg"
+                android:layout_marginLeft="8dp"
+                android:textSize="@dimen/text_size_15"
+                android:text="龙"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

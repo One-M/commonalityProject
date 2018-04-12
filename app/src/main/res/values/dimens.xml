@@ -89,6 +89,9 @@
     <dimen name="window_width">280dp</dimen>
     <dimen name="window_height">300dp</dimen>
 
+    <dimen name="status_bar_offset">0dp</dimen>
+    <dimen name="header_height">44dp</dimen>
+
     <!--历史开奖中宽高-->
     <dimen name="trend_ball_wh">16.66666666666667dp</dimen>
     <dimen name="item_wh">33.33333333333333dp</dimen>
@@ -117,6 +120,7 @@
     <dimen name="bjsc_title_basic_trend_sum_w">4000dp</dimen>
     <dimen name="bjsc_title_kjnum_w">250dp</dimen>
     <dimen name="bjsc_title_1to10_w">400dp</dimen>
+    <dimen name="tab_home_h">50dp</dimen>
 
     <dimen name="test_5">25</dimen>
     <dimen name="test_25">425</dimen>

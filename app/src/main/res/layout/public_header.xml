@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/header_layout"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:background="@color/colorPrimary"
+    android:layout_height="@dimen/header_height"
+    android:background="@drawable/bjsc_head_gradient_color"
     android:orientation="vertical"
-    android:paddingTop="0dp">
+    android:paddingTop="@dimen/status_bar_offset">
 
     <RelativeLayout
         android:layout_width="match_parent"
