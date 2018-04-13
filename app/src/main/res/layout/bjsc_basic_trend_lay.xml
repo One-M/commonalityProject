@@ -114,7 +114,7 @@
                         android:layout_height="match_parent"
                         android:scrollbars="none">
 
-                        <com.ybf.lottery.diyview.trend.CustomTrendView
+                        <com.ybf.lottery.diyview.trend.CustomTrendLineView
                             android:id="@+id/custom_basic_trend_view"
                             android:background="#ffffff"
                             android:layout_width="match_parent"

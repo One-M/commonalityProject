@@ -19,10 +19,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="@dimen/bjsc_title_basic_trend_sum_w"
+        android:id="@+id/trend_header_ll"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         >
         <LinearLayout
+            android:id="@+id/trend_header_1"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -109,8 +111,8 @@
             <include layout="@layout/bjsc_1to10_lay"/>
 
         </LinearLayout>
-        
         <LinearLayout
+            android:id="@+id/trend_header_2"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -129,6 +131,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/trend_header_3"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -145,6 +148,7 @@
             <include layout="@layout/bjsc_1to10_lay"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/trend_header_4"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -161,6 +165,7 @@
             <include layout="@layout/bjsc_1to10_lay"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/trend_header_5"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -177,6 +182,7 @@
             <include layout="@layout/bjsc_1to10_lay"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/trend_header_6"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -193,6 +199,7 @@
             <include layout="@layout/bjsc_1to10_lay"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/trend_header_7"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -209,6 +216,7 @@
             <include layout="@layout/bjsc_1to10_lay"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/trend_header_8"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -225,6 +233,7 @@
             <include layout="@layout/bjsc_1to10_lay"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/trend_header_9"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -241,6 +250,7 @@
             <include layout="@layout/bjsc_1to10_lay"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/trend_header_10"
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -255,6 +265,29 @@
                     android:text="第十名"/>
             </LinearLayout>
             <include layout="@layout/bjsc_1to10_lay"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/trend_header_dt"
+            android:layout_width="@dimen/trend_header_dt_w"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/kj_half_header_itemh"
+                android:background="@drawable/border_b_color"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="龙虎"/>
+
+            </LinearLayout>
+            <include layout="@layout/bjsc_trend_dragon_tiger_lay"/>
         </LinearLayout>
         
     </LinearLayout>

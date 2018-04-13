@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.ybf.lottery.R;
 import com.ybf.lottery.activity.BasicTrendActivity;
+import com.ybf.lottery.activity.DragonTigerTrendActivity;
 import com.ybf.lottery.activity.HistoryKJActivity;
 import com.ybf.lottery.activity.StatisticActivity;
 import com.ybf.lottery.model.bean.homebean.HotLotteryBean;
@@ -82,6 +83,9 @@ public class HotLotterAdapter extends BaseAdapter{
                 break;
             case 2://基本走势
                 mContext.startActivity(new Intent(mContext , BasicTrendActivity.class));
+                break;
+            case 4://龙虎走势
+                mContext.startActivity(new Intent(mContext , DragonTigerTrendActivity.class));
                 break;
             default:
                 Toast.makeText(mContext, "敬请期待", Toast.LENGTH_SHORT).show();

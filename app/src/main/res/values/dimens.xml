@@ -121,6 +121,8 @@
     <dimen name="bjsc_title_kjnum_w">250dp</dimen>
     <dimen name="bjsc_title_1to10_w">400dp</dimen>
     <dimen name="tab_home_h">50dp</dimen>
+    <dimen name="trend_header_dt_w">80dp</dimen>
+    <dimen name="trend_dt_header_w">880dp</dimen>
 
     <dimen name="test_5">25</dimen>
     <dimen name="test_25">425</dimen>

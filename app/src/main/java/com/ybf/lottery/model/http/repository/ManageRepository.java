@@ -5,6 +5,7 @@ import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSMTJBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
+import com.ybf.lottery.model.bean.dragontigertrendbean.DragonTigerTrendBean;
 import com.ybf.lottery.model.http.api.ManageApi;
 
 import io.reactivex.Flowable;
@@ -76,5 +77,15 @@ public class ManageRepository {
      */
     public Flowable<BasicTrendBean> bjscBasicTrendLoginData(String period){
         return manageApi.bjscBasicTrendLoginData(period);
+    }
+
+    /**
+     * 北京赛车龙虎走势
+     * @param period
+     * @param fType
+     * @return
+     */
+    public Flowable<DragonTigerTrendBean> bjscDTTrendLoginData(String period , String fType){
+        return manageApi.bjscDTThrendLoginData(period , fType);
     }
 }

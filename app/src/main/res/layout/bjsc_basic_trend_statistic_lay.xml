@@ -86,7 +86,7 @@
         android:scrollbars="none">
 
         <LinearLayout
-            android:layout_width="@dimen/bjsc_title_basic_trend_sum_w"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -95,6 +95,7 @@
                 android:layout_height="wrap_content"
                 >
                 <LinearLayout
+                    android:id="@+id/stitistic_header_1"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -182,6 +183,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/stitistic_header_2"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -200,6 +202,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/stitistic_header_3"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -216,6 +219,7 @@
                     <include layout="@layout/bjsc_1to10_lay2"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/stitistic_header_4"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -232,6 +236,7 @@
                     <include layout="@layout/bjsc_1to10_lay2"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/stitistic_header_5"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -248,6 +253,7 @@
                     <include layout="@layout/bjsc_1to10_lay2"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/stitistic_header_6"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -264,6 +270,7 @@
                     <include layout="@layout/bjsc_1to10_lay2"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/stitistic_header_7"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -280,6 +287,7 @@
                     <include layout="@layout/bjsc_1to10_lay2"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/stitistic_header_8"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -296,6 +304,7 @@
                     <include layout="@layout/bjsc_1to10_lay2"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/stitistic_header_9"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -312,6 +321,7 @@
                     <include layout="@layout/bjsc_1to10_lay2"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/stitistic_header_10"
                     android:layout_width="@dimen/bjsc_title_1to10_w"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -326,6 +336,30 @@
                             android:text="第十名"/>
                     </LinearLayout>
                     <include layout="@layout/bjsc_1to10_lay2"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/statistic_header_dt"
+                    android:layout_width="@dimen/trend_header_dt_w"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bjsc_statistic_title7_h"
+                        android:background="@drawable/border_b_color"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="龙虎"/>
+
+                    </LinearLayout>
+                    <include layout="@layout/bjsc_statistic_dragon_tiger_lay"/>
                 </LinearLayout>
 
             </LinearLayout>

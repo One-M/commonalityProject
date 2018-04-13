@@ -19,7 +19,7 @@ import com.ybf.lottery.R;
 import com.ybf.lottery.adapter.IssueDataAdapter;
 import com.ybf.lottery.adapter.bjscbasictrendadapter.BasicTrendAdapter;
 import com.ybf.lottery.base.BaseMvpFragment;
-import com.ybf.lottery.diyview.trend.CustomTrendView;
+import com.ybf.lottery.diyview.trend.CustomTrendLineView;
 import com.ybf.lottery.diyview.trend.HeaderHorizontalScrollView;
 import com.ybf.lottery.diyview.trend.LeftNumberCustomListView;
 import com.ybf.lottery.diyview.trend.LeftNumberSynchScrollView;
@@ -27,6 +27,7 @@ import com.ybf.lottery.diyview.trend.ScrollChangeCallback;
 import com.ybf.lottery.diyview.trend.TrendScrollViewWidget;
 import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendBean;
 import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendStatisticBean;
+import com.ybf.lottery.model.bean.dragontigertrendbean.TrendShowBean;
 import com.ybf.lottery.utils.DisplayUtil;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
     @BindView(R.id.lv_basic_trend_issue)
     LeftNumberCustomListView issueListView;
     @BindView(R.id.custom_basic_trend_view)
-    CustomTrendView customTrendView;
+    CustomTrendLineView customTrendView;
     @BindView(R.id.basic_trend_statistic_recycle)
     RecyclerView statisticRecyclerView;
     @BindView(R.id.public_img_date)
@@ -172,10 +173,141 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         //期号显示
         bindQiHaoData(getIssueList(zsList));
         //走势号码区域
-        customTrendView.setShowDatas(zsList);
+        customTrendView.setShowDatas(getTrendNumData(basicTrendBean) , 0);
 
         BasicTrendBean.TjBean tj = basicTrendBean.getTj();
         setStatisticData(tj);
+    }
+    /**
+     * 走势区域数据封装
+     * @param dtTrendBean
+     */
+    private List<TrendShowBean> getTrendNumData(BasicTrendBean dtTrendBean){
+        List<TrendShowBean> dtShowDataList = new ArrayList<>();
+
+        List<BasicTrendBean.ZsBean> zs = dtTrendBean.getZs();
+        for (int i = 0; i < zs.size(); i++) {
+            TrendShowBean showBean = new TrendShowBean();
+            showBean.setDRAWCODE(zs.get(i).getDRAWCODE());
+            showBean.setZsData(getSingleData(zs.get(i)));
+            dtShowDataList.add(showBean);
+        }
+        return dtShowDataList;
+    }
+    /**1-10显示数据封装*/
+    private List<Integer> getSingleData(BasicTrendBean.ZsBean zsData){
+        List<Integer> zsList = new ArrayList<>();
+        //N11
+        zsList.add(zsData.getN11());
+        zsList.add(zsData.getN12());
+        zsList.add(zsData.getN13());
+        zsList.add(zsData.getN14());
+        zsList.add(zsData.getN15());
+        zsList.add(zsData.getN16());
+        zsList.add(zsData.getN17());
+        zsList.add(zsData.getN18());
+        zsList.add(zsData.getN19());
+        zsList.add(zsData.getN110());
+        //N21
+        zsList.add(zsData.getN21());
+        zsList.add(zsData.getN22());
+        zsList.add(zsData.getN23());
+        zsList.add(zsData.getN24());
+        zsList.add(zsData.getN25());
+        zsList.add(zsData.getN26());
+        zsList.add(zsData.getN27());
+        zsList.add(zsData.getN28());
+        zsList.add(zsData.getN29());
+        zsList.add(zsData.getN210());
+        //31
+        zsList.add(zsData.getN31());
+        zsList.add(zsData.getN32());
+        zsList.add(zsData.getN33());
+        zsList.add(zsData.getN34());
+        zsList.add(zsData.getN35());
+        zsList.add(zsData.getN36());
+        zsList.add(zsData.getN37());
+        zsList.add(zsData.getN38());
+        zsList.add(zsData.getN39());
+        zsList.add(zsData.getN310());
+        //41
+        zsList.add(zsData.getN41());
+        zsList.add(zsData.getN42());
+        zsList.add(zsData.getN43());
+        zsList.add(zsData.getN44());
+        zsList.add(zsData.getN45());
+        zsList.add(zsData.getN46());
+        zsList.add(zsData.getN47());
+        zsList.add(zsData.getN48());
+        zsList.add(zsData.getN49());
+        zsList.add(zsData.getN410());
+        //51
+        zsList.add(zsData.getN51());
+        zsList.add(zsData.getN52());
+        zsList.add(zsData.getN53());
+        zsList.add(zsData.getN54());
+        zsList.add(zsData.getN55());
+        zsList.add(zsData.getN56());
+        zsList.add(zsData.getN57());
+        zsList.add(zsData.getN58());
+        zsList.add(zsData.getN59());
+        zsList.add(zsData.getN510());
+        //61
+        zsList.add(zsData.getN61());
+        zsList.add(zsData.getN62());
+        zsList.add(zsData.getN63());
+        zsList.add(zsData.getN64());
+        zsList.add(zsData.getN65());
+        zsList.add(zsData.getN66());
+        zsList.add(zsData.getN67());
+        zsList.add(zsData.getN68());
+        zsList.add(zsData.getN69());
+        zsList.add(zsData.getN610());
+        //71
+        zsList.add(zsData.getN71());
+        zsList.add(zsData.getN72());
+        zsList.add(zsData.getN73());
+        zsList.add(zsData.getN74());
+        zsList.add(zsData.getN75());
+        zsList.add(zsData.getN76());
+        zsList.add(zsData.getN77());
+        zsList.add(zsData.getN78());
+        zsList.add(zsData.getN79());
+        zsList.add(zsData.getN710());
+        //81
+        zsList.add(zsData.getN81());
+        zsList.add(zsData.getN82());
+        zsList.add(zsData.getN83());
+        zsList.add(zsData.getN84());
+        zsList.add(zsData.getN85());
+        zsList.add(zsData.getN86());
+        zsList.add(zsData.getN87());
+        zsList.add(zsData.getN88());
+        zsList.add(zsData.getN89());
+        zsList.add(zsData.getN810());
+        //91
+        zsList.add(zsData.getN91());
+        zsList.add(zsData.getN92());
+        zsList.add(zsData.getN93());
+        zsList.add(zsData.getN94());
+        zsList.add(zsData.getN95());
+        zsList.add(zsData.getN96());
+        zsList.add(zsData.getN97());
+        zsList.add(zsData.getN98());
+        zsList.add(zsData.getN99());
+        zsList.add(zsData.getN910());
+        //101
+        zsList.add(zsData.getN101());
+        zsList.add(zsData.getN102());
+        zsList.add(zsData.getN103());
+        zsList.add(zsData.getN104());
+        zsList.add(zsData.getN105());
+        zsList.add(zsData.getN106());
+        zsList.add(zsData.getN107());
+        zsList.add(zsData.getN108());
+        zsList.add(zsData.getN109());
+        zsList.add(zsData.getN1010());
+        return zsList;
     }
     /**数据统计数据显示*/
     private void setStatisticData(BasicTrendBean.TjBean tjBean){

@@ -30,6 +30,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.ybf.lottery.activity.BasicTrendActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.DragonTigerTrendActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

@@ -5,6 +5,7 @@ import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSMTJBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
+import com.ybf.lottery.model.bean.dragontigertrendbean.DragonTigerTrendBean;
 
 import io.reactivex.Flowable;
 import okhttp3.ResponseBody;
@@ -38,7 +39,7 @@ public interface ManageApi {
 
     /**
      * 北京赛车数据统计(亚冠-龙虎)统计
-     * @param period
+     * @param period 统计期数
      * @return
      */
     @GET("trend-api/pk10/findStatistical")
@@ -46,7 +47,7 @@ public interface ManageApi {
 
     /**
      * 北京赛车数据统计(双面统计)
-     * @param period
+     * @param period 统计期数
      * @return
      */
     @GET("trend-api/pk10/findSmTrend")
@@ -54,7 +55,7 @@ public interface ManageApi {
 
     /**
      * 北京赛车数据统计(和值龙虎)
-     * @param period
+     * @param period 统计期数
      * @return
      */
     @GET("trend-api/pk10/findSumTrend")
@@ -67,4 +68,14 @@ public interface ManageApi {
      */
     @GET("trend-api/pk10/findBaseTrend")
     Flowable<BasicTrendBean> bjscBasicTrendLoginData(@Query("period") String period);
+
+    /**
+     * 北京赛车龙虎走势
+     * @param period 统计期数
+     * @param fType 名次
+     * @return
+     */
+    @GET("trend-api/pk10/findDragonTigerTrend")
+    Flowable<DragonTigerTrendBean> bjscDTThrendLoginData(@Query("period") String period ,
+                                                         @Query("fType") String fType);
 }
