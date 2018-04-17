@@ -16,6 +16,7 @@ import com.ybf.lottery.R;
 import com.ybf.lottery.adapter.IssueDataAdapter;
 import com.ybf.lottery.adapter.bjscbasictrendadapter.BasicTrendAdapter;
 import com.ybf.lottery.base.BaseMvpFragment;
+import com.ybf.lottery.diyview.TrendFiltrateDialog;
 import com.ybf.lottery.diyview.trend.CustomTrendLineView;
 import com.ybf.lottery.diyview.trend.HeaderHorizontalScrollView;
 import com.ybf.lottery.diyview.trend.LeftNumberCustomListView;
@@ -23,6 +24,7 @@ import com.ybf.lottery.diyview.trend.LeftNumberSynchScrollView;
 import com.ybf.lottery.diyview.trend.ScrollChangeCallback;
 import com.ybf.lottery.diyview.trend.TrendScrollViewWidget;
 import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendStatisticBean;
+import com.ybf.lottery.model.bean.dragontigertrendbean.LengthwaysDataBean;
 import com.ybf.lottery.model.bean.dragontigertrendbean.TrendShowBean;
 import com.ybf.lottery.model.bean.dragontigertrendbean.DragonTigerTrendBean;
 
@@ -44,6 +46,8 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
     ImageView mBackImg;
     @BindView(R.id.public_txt_title)
     TextView titleTxt;
+    @BindView(R.id.public_img_date)
+    ImageView filterIcon;
     @BindView(R.id.trend_header_dt)
     LinearLayout header_dt;
     @BindViews({R.id.trend_header_2 , R.id.trend_header_3, R.id.trend_header_4, R.id.trend_header_5, R.id.trend_header_6,
@@ -74,15 +78,47 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
     CustomTrendLineView customTrendView;
     @BindView(R.id.basic_trend_statistic_recycle)
     RecyclerView statisticRecyclerView;
-    @BindView(R.id.public_img_date)
-    ImageView rightImg;
     @BindView(R.id.trend_header_ll)
     LinearLayout headerll;
 
     private static String DTTREND_TYPE = "DTTrendType";//fragment 入口传参 key
     private int dtTrendType;
-    private String fType = "1";
+    private String mFType = "1";
+    private String TODAYKJ = "30";
+    private String ISSUENUM_THIRTY = "30";
+    private String ISSUENUM_FIFTY = "50";
+    private String ISSUENUM_ONE_HUNDRED = "100";
+    private String mPeriod = TODAYKJ;
     private IssueDataAdapter issueDataAdapter;
+
+    private int checkQSnum = 1;//选择期数(今日开奖:0 ;近30期:1;近50期:2;近100期:3) 默认30期
+    private boolean omitType = true;//是否显示遗漏(默认显示)
+    private boolean trendLineType = true;//是否显示折线(默认显示)
+    private boolean lengways = false;//是否显示遗漏分层(默认不显示)
+    private boolean cutOffLine = false;//是否显示分割线(默认不显示)
+    //纵向数据(列)
+    private List<LengthwaysDataBean> lwData1  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData2  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData3  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData4  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData5  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData6  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData7  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData8  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData9  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData10 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData11 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData12 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData13 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData14 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData15 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData16 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData17 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData18 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData19 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData20 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData21 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData22 = new ArrayList<>();
 
     @Override
     public BJRacecarDragonTigerTrendPresenter initPresenter() {
@@ -108,7 +144,7 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
         View mView = inflater.inflate(R.layout.bjsc_basic_trend_lay, container, false);
         ButterKnife.bind(this , mView);
         initView();
-        initData("30");
+        initData(mPeriod);
         return mView;
     }
     private void initView(){
@@ -128,6 +164,9 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
         }
         LinearLayoutManager manager = new LinearLayoutManager(getContext() , LinearLayoutManager.HORIZONTAL ,false);
         statisticRecyclerView.setLayoutManager(manager);
+
+        filterIcon.setVisibility(View.VISIBLE);
+        filterIcon.setOnClickListener(this);
         //显示龙虎
         header_dt.setVisibility(View.VISIBLE);
         statisticHeaderDt.setVisibility(View.VISIBLE);
@@ -138,7 +177,7 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
 
     private void initData(String period){
         setStatus(STATUS_LOADING);
-        mPresenter.loadData(period , fType);
+        mPresenter.loadData(period , mFType);
     }
     private final int STATUS_LOADING = 0;//加载中
     private final int STATUS_LOAD_SUCCESS = 1;//加载成功
@@ -180,7 +219,7 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
         //期号设置
         bindQiHaoData(getIssueList(dragonTigerTrendBean.getZs()));
         //走势号码区域
-        customTrendView.setShowDatas(getTrendNumData(dragonTigerTrendBean) , 1);
+        customTrendView.setShowDatas(getTrendNumData(dragonTigerTrendBean) ,getLYData(dragonTigerTrendBean) , 1 , omitType , trendLineType ,lengways, cutOffLine);
 
         DragonTigerTrendBean.TjBean tj = dragonTigerTrendBean.getTj();
         setStatisticData(tj);
@@ -192,7 +231,6 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
      */
     private List<TrendShowBean> getTrendNumData(DragonTigerTrendBean dtTrendBean){
         List<TrendShowBean> dtShowDataList = new ArrayList<>();
-
         List<DragonTigerTrendBean.ZsBean> zs = dtTrendBean.getZs();
         for (int i = 0; i < zs.size(); i++) {
             TrendShowBean showBean = new TrendShowBean();
@@ -228,6 +266,136 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
         zsList.add(zsBean.getTIGER());
         return zsList;
     }
+
+    /**获得遗漏状态的数据*/
+    private List<List<LengthwaysDataBean>> getLYData(DragonTigerTrendBean dtTrendBean){
+        List<List<LengthwaysDataBean>> allLengwaysList = new ArrayList<>();
+
+        List<List<LengthwaysDataBean>> lengthwaysData = getLengthwaysData(dtTrendBean);
+        for (int i = 0; i < lengthwaysData.size(); i++) {
+            boolean showYL = true;
+            List<LengthwaysDataBean> lengthwaysDataBeans = new ArrayList<>();
+            for (int j = 0; j < lengthwaysData.get(i).size(); j++) {
+                LengthwaysDataBean currItemData = lengthwaysData.get(i).get(j);
+                if (showYL) {
+                    if (currItemData.getNumData() == 0) {
+                        showYL = false;
+                    }
+                }
+                LengthwaysDataBean lengthwaysDataBean = new LengthwaysDataBean();
+                lengthwaysDataBean.setNumData(currItemData.getNumData());
+                lengthwaysDataBean.setShowYl(showYL);
+                lengthwaysDataBeans.add(lengthwaysDataBean);
+            }
+            allLengwaysList.add(lengthwaysDataBeans);
+        }
+        return allLengwaysList;
+    }
+
+    /**纵向数据封装(遗漏分层处理)*/
+    private List<List<LengthwaysDataBean>> getLengthwaysData(DragonTigerTrendBean dtTrendBean){
+        List<List<LengthwaysDataBean>> lengthwaysDataList = new ArrayList<>();
+
+        List<DragonTigerTrendBean.ZsBean> zsBean = dtTrendBean.getZs();
+        for (int i = 0; i < zsBean.size(); i++) {
+            getLengthwaysAllData(zsBean.get(i));
+        }
+        lengthwaysDataList.add(lwData1 );
+        lengthwaysDataList.add(lwData2 );
+        lengthwaysDataList.add(lwData3 );
+        lengthwaysDataList.add(lwData4 );
+        lengthwaysDataList.add(lwData5 );
+        lengthwaysDataList.add(lwData6 );
+        lengthwaysDataList.add(lwData7 );
+        lengthwaysDataList.add(lwData8 );
+        lengthwaysDataList.add(lwData9 );
+        lengthwaysDataList.add(lwData10);
+        lengthwaysDataList.add(lwData11);
+        lengthwaysDataList.add(lwData12);
+        lengthwaysDataList.add(lwData13);
+        lengthwaysDataList.add(lwData14);
+        lengthwaysDataList.add(lwData15);
+        lengthwaysDataList.add(lwData16);
+        lengthwaysDataList.add(lwData17);
+        lengthwaysDataList.add(lwData18);
+        lengthwaysDataList.add(lwData19);
+        lengthwaysDataList.add(lwData20);
+        lengthwaysDataList.add(lwData21);
+        lengthwaysDataList.add(lwData22);
+
+        return lengthwaysDataList;
+    }
+
+    private void getLengthwaysAllData(DragonTigerTrendBean.ZsBean zsBean){
+        LengthwaysDataBean lengthData1 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData2 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData3 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData4 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData5 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData6 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData7 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData8 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData9 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData10 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData11 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData12 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData13 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData14 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData15 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData16 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData17 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData18 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData19 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData20 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData21 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData22 = new LengthwaysDataBean();
+        lengthData1 .setNumData(zsBean.getF01());
+        lengthData2 .setNumData(zsBean.getF02());
+        lengthData3 .setNumData(zsBean.getF03());
+        lengthData4 .setNumData(zsBean.getF04());
+        lengthData5 .setNumData(zsBean.getF05());
+        lengthData6 .setNumData(zsBean.getF06());
+        lengthData7 .setNumData(zsBean.getF07());
+        lengthData8 .setNumData(zsBean.getF08());
+        lengthData9 .setNumData(zsBean.getF09());
+        lengthData10.setNumData(zsBean.getF10());
+        lengthData11.setNumData(zsBean.getS01());
+        lengthData12.setNumData(zsBean.getS02());
+        lengthData13.setNumData(zsBean.getS03());
+        lengthData14.setNumData(zsBean.getS04());
+        lengthData15.setNumData(zsBean.getS05());
+        lengthData16.setNumData(zsBean.getS06());
+        lengthData17.setNumData(zsBean.getS07());
+        lengthData18.setNumData(zsBean.getS08());
+        lengthData19.setNumData(zsBean.getS09());
+        lengthData20.setNumData(zsBean.getS10());
+        lengthData21.setNumData(zsBean.getDRAGON());
+        lengthData22.setNumData(zsBean.getTIGER());
+
+        lwData1.add( lengthData1 );
+        lwData2.add( lengthData2 );
+        lwData3.add( lengthData3 );
+        lwData4.add( lengthData4 );
+        lwData5.add( lengthData5 );
+        lwData6.add( lengthData6 );
+        lwData7.add( lengthData7 );
+        lwData8.add( lengthData8 );
+        lwData9.add( lengthData9 );
+        lwData10.add(lengthData10);
+        lwData11.add(lengthData11);
+        lwData12.add(lengthData12);
+        lwData13.add(lengthData13);
+        lwData14.add(lengthData14);
+        lwData15.add(lengthData15);
+        lwData16.add(lengthData16);
+        lwData17.add(lengthData17);
+        lwData18.add(lengthData18);
+        lwData19.add(lengthData19);
+        lwData20.add(lengthData20);
+        lwData21.add(lengthData21);
+        lwData22.add(lengthData22);
+    }
+
 
     /**数据统计数据显示*/
     private void setStatisticData(DragonTigerTrendBean.TjBean tjBean){
@@ -445,8 +613,165 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
             case R.id.public_img_back:
                 getActivity().finish();
                 break;
+            case R.id.public_img_date:
+                showDialog();
+                break;
         }
     }
+
+    private void showDialog(){
+        TrendFiltrateDialog filtrateDialog = new TrendFiltrateDialog(getActivity() ,checkQSnum , omitType , trendLineType ,lengways, cutOffLine);
+
+        filtrateDialog.setNoOnclickListener(new TrendFiltrateDialog.onNoOnclickListener() {
+            @Override
+            public void onNoClick() {
+                filtrateDialog.dismiss();
+            }
+        });
+        filtrateDialog.setOkOnclickListener(new TrendFiltrateDialog.onOkOnclickListener() {
+            @Override
+            public void onOkClick(int currQSnum, boolean booType1, boolean booType2, boolean booType3, boolean booType4) {
+                checkQSnum = currQSnum;//确定时保留所选
+
+                omitType = booType1;
+                trendLineType = booType2;
+                lengways = booType3;
+                cutOffLine = booType4;
+
+                initData(getPeriod(checkQSnum));
+                filtrateDialog.dismiss();
+            }
+        });
+
+        filtrateDialog.setCanceledOnTouchOutside(true);//设置空白处点击 dialog消失
+        filtrateDialog.show();
+    }
+//    private void filtrateDialog(){
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity() , R.style.AlertDialog);
+//        LayoutInflater inflater = LayoutInflater.from(getActivity());
+//
+//        View dialogView = inflater.inflate(R.layout.bjsc_basic_trend_filtrate, null);
+//        radioButton1 = (RadioButton)dialogView.findViewById(R.id.radioButton1);
+//        radioButton2 = (RadioButton)dialogView.findViewById(R.id.radioButton2);
+//        radioButton3 = (RadioButton)dialogView.findViewById(R.id.radioButton3);
+//        radioButton4 = (RadioButton)dialogView.findViewById(R.id.radioButton4);
+//        radioButtonA = (RadioButton)dialogView.findViewById(R.id.radioButtonA);
+//        radioButtonB = (RadioButton)dialogView.findViewById(R.id.radioButtonB);
+//        radioButtonC = (RadioButton)dialogView.findViewById(R.id.radioButtonC);
+//        radioButtonD = (RadioButton)dialogView.findViewById(R.id.radioButtonD);
+//        checkQX = (TextView)dialogView.findViewById(R.id.check_qx);
+//        checkOK = (TextView)dialogView.findViewById(R.id.check_ok);
+//        final AlertDialog dialog = builder.create();
+//        dialog.setCanceledOnTouchOutside(true);//设置空白处点击 dialog消失
+//
+//        //弹框时选中的为上次记录的状态
+//        currQSnum = checkQSnum;
+//        setQScheck(currQSnum);
+//        radioButtonA.setChecked(!omitType);
+//        radioButtonB.setChecked(!trendLineType);
+//        radioButtonC.setChecked(lengways);
+//        radioButtonD.setChecked(cutOffLine);
+//
+//        radioButton1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                currQSnum = 0;
+//                setQScheck(currQSnum);
+//            }
+//        });
+//        radioButton2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                currQSnum = 1;
+//                setQScheck(currQSnum);
+//            }
+//        });
+//        radioButton3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                currQSnum = 2;
+//                setQScheck(currQSnum);
+//            }
+//        });
+//        radioButton4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                currQSnum = 3;
+//                setQScheck(currQSnum);
+//            }
+//        });
+//
+//        radioButtonA.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                omitType = !omitType;
+//                radioButtonA.setChecked(!omitType);
+//            }
+//        });
+//        radioButtonB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                trendLineType = !trendLineType;
+//                radioButtonB.setChecked(!trendLineType);
+//            }
+//        });
+//        radioButtonC.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                lengways = !lengways;
+//                radioButtonC.setChecked(lengways);
+//            }
+//        });
+//        radioButtonD.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                cutOffLine = !cutOffLine;
+//                radioButtonD.setChecked(cutOffLine);
+//            }
+//        });
+//
+//        checkQX.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+//        checkOK.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                checkQSnum = currQSnum;//确定时保留所选
+//                initData(getPeriod(checkQSnum));
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        dialog.show();
+//        dialog.getWindow().setContentView(dialogView);
+//        /**修改dialog宽度,布局设置的宽度在添加style属性后无效*/
+//        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+//        lp.width = (int) (getActivity().getWindowManager()
+//                .getDefaultDisplay().getWidth() * 0.85);//设置dialog的宽度(屏幕总宽度的85%)
+//        dialog.getWindow().setAttributes(lp);
+//    }
+
+    private String getPeriod(int cheakNum){
+        switch (cheakNum){
+            case 0:
+                mPeriod = TODAYKJ;
+                break;
+            case 1:
+                mPeriod = ISSUENUM_THIRTY;
+                break;
+            case 2:
+                mPeriod = ISSUENUM_FIFTY;
+                break;
+            case 3:
+                mPeriod = ISSUENUM_ONE_HUNDRED;
+                break;
+        }
+        return mPeriod;
+    }
+
     @Override
     public void changeXScroll(int left) {
         //顶部和底部容器滑动的回调;

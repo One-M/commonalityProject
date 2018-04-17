@@ -19,6 +19,7 @@ import com.ybf.lottery.R;
 import com.ybf.lottery.adapter.IssueDataAdapter;
 import com.ybf.lottery.adapter.bjscbasictrendadapter.BasicTrendAdapter;
 import com.ybf.lottery.base.BaseMvpFragment;
+import com.ybf.lottery.diyview.TrendFiltrateDialog;
 import com.ybf.lottery.diyview.trend.CustomTrendLineView;
 import com.ybf.lottery.diyview.trend.HeaderHorizontalScrollView;
 import com.ybf.lottery.diyview.trend.LeftNumberCustomListView;
@@ -27,6 +28,7 @@ import com.ybf.lottery.diyview.trend.ScrollChangeCallback;
 import com.ybf.lottery.diyview.trend.TrendScrollViewWidget;
 import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendBean;
 import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendStatisticBean;
+import com.ybf.lottery.model.bean.dragontigertrendbean.LengthwaysDataBean;
 import com.ybf.lottery.model.bean.dragontigertrendbean.TrendShowBean;
 import com.ybf.lottery.utils.DisplayUtil;
 
@@ -74,6 +76,117 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
     private static String BASICTREND_TYPE = "BasicTrendType";//fragment 入口传参 key
     private int basicTrendType;
 
+    private String TODAYKJ = "30";
+    private String ISSUENUM_THIRTY = "30";
+    private String ISSUENUM_FIFTY = "50";
+    private String ISSUENUM_ONE_HUNDRED = "100";
+    private String mPeriod = TODAYKJ;
+    private int checkQSnum = 1;//选择期数(今日开奖:0 ;近30期:1;近50期:2;近100期:3) 默认30期
+    private boolean omitType = true;//是否显示遗漏(默认显示)
+    private boolean trendLineType = true;//是否显示折线(默认显示)
+    private boolean lengways = false;//是否显示遗漏分层(默认不显示)
+    private boolean cutOffLine = false;//是否显示分割线(默认不显示)
+    //纵向数据(列)
+    private List<LengthwaysDataBean> lwData1  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData2  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData3  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData4  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData5  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData6  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData7  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData8  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData9  = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData10 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData11 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData12 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData13 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData14 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData15 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData16 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData17 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData18 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData19 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData20 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData21 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData22 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData23 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData24 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData25 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData26 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData27 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData28 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData29 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData30 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData31 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData32 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData33 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData34 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData35 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData36 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData37 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData38 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData39 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData40 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData41 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData42 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData43 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData44 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData45 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData46 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData47 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData48 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData49 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData50 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData51 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData52 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData53 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData54 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData55 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData56 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData57 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData58 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData59 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData60 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData61 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData62 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData63 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData64 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData65 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData66 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData67 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData68 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData69 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData70 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData71 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData72 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData73 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData74 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData75 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData76 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData77 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData78 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData79 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData80 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData81 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData82 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData83 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData84 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData85 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData86 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData87 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData88 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData89 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData90 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData91 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData92 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData93 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData94 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData95 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData96 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData97 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData98 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData99 = new ArrayList<>();
+    private List<LengthwaysDataBean> lwData100 = new ArrayList<>();
     @Override
     public BJRacecarBasicTrendPresenter initPresenter() {
         return new BJRacecarBasicTrendPresenter(this);
@@ -103,7 +216,7 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         View mView = inflater.inflate(R.layout.bjsc_basic_trend_lay, container, false);
         ButterKnife.bind(this , mView);
         initView();
-        initData("30");
+        initData(mPeriod);
         return mView;
     }
 
@@ -173,7 +286,7 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         //期号显示
         bindQiHaoData(getIssueList(zsList));
         //走势号码区域
-        customTrendView.setShowDatas(getTrendNumData(basicTrendBean) , 0);
+        customTrendView.setShowDatas(getTrendNumData(basicTrendBean) ,getLYData(basicTrendBean) , 0 , omitType , trendLineType ,lengways, cutOffLine);
 
         BasicTrendBean.TjBean tj = basicTrendBean.getTj();
         setStatisticData(tj);
@@ -309,6 +422,476 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         zsList.add(zsData.getN1010());
         return zsList;
     }
+
+    /**获得遗漏状态的数据*/
+    private List<List<LengthwaysDataBean>> getLYData(BasicTrendBean dtTrendBean){
+        List<List<LengthwaysDataBean>> allLengwaysList = new ArrayList<>();
+
+        List<List<LengthwaysDataBean>> lengthwaysData = getLengthwaysData(dtTrendBean);
+        for (int i = 0; i < lengthwaysData.size(); i++) {
+            boolean showYL = true;
+            List<LengthwaysDataBean> lengthwaysDataBeans = new ArrayList<>();
+            for (int j = 0; j < lengthwaysData.get(i).size(); j++) {
+                LengthwaysDataBean currItemData = lengthwaysData.get(i).get(j);
+                if (showYL) {
+                    if (currItemData.getNumData() == 0) {
+                        showYL = false;
+                    }
+                }
+                LengthwaysDataBean lengthwaysDataBean = new LengthwaysDataBean();
+                lengthwaysDataBean.setNumData(currItemData.getNumData());
+                lengthwaysDataBean.setShowYl(showYL);
+                lengthwaysDataBeans.add(lengthwaysDataBean);
+            }
+            allLengwaysList.add(lengthwaysDataBeans);
+        }
+        return allLengwaysList;
+    }
+    /**纵向数据封装(遗漏分层处理)*/
+    private List<List<LengthwaysDataBean>> getLengthwaysData(BasicTrendBean dtTrendBean){
+        List<List<LengthwaysDataBean>> lengthwaysDataList = new ArrayList<>();
+
+        List<BasicTrendBean.ZsBean> zsBean = dtTrendBean.getZs();
+        for (int i = 0; i < zsBean.size(); i++) {
+            getLengthwaysAllData(zsBean.get(i));
+        }
+        lengthwaysDataList.add(lwData1 );
+        lengthwaysDataList.add(lwData2 );
+        lengthwaysDataList.add(lwData3 );
+        lengthwaysDataList.add(lwData4 );
+        lengthwaysDataList.add(lwData5 );
+        lengthwaysDataList.add(lwData6 );
+        lengthwaysDataList.add(lwData7 );
+        lengthwaysDataList.add(lwData8 );
+        lengthwaysDataList.add(lwData9 );
+
+        lengthwaysDataList.add(lwData10);
+        lengthwaysDataList.add(lwData11);
+        lengthwaysDataList.add(lwData12);
+        lengthwaysDataList.add(lwData13);
+        lengthwaysDataList.add(lwData14);
+        lengthwaysDataList.add(lwData15);
+        lengthwaysDataList.add(lwData16);
+        lengthwaysDataList.add(lwData17);
+        lengthwaysDataList.add(lwData18);
+        lengthwaysDataList.add(lwData19);
+
+        lengthwaysDataList.add(lwData20);
+        lengthwaysDataList.add(lwData21);
+        lengthwaysDataList.add(lwData22);
+        lengthwaysDataList.add(lwData23);
+        lengthwaysDataList.add(lwData24);
+        lengthwaysDataList.add(lwData25);
+        lengthwaysDataList.add(lwData26);
+        lengthwaysDataList.add(lwData27);
+        lengthwaysDataList.add(lwData28);
+        lengthwaysDataList.add(lwData29);
+
+        lengthwaysDataList.add(lwData30);
+        lengthwaysDataList.add(lwData31);
+        lengthwaysDataList.add(lwData32);
+        lengthwaysDataList.add(lwData33);
+        lengthwaysDataList.add(lwData34);
+        lengthwaysDataList.add(lwData35);
+        lengthwaysDataList.add(lwData36);
+        lengthwaysDataList.add(lwData37);
+        lengthwaysDataList.add(lwData38);
+        lengthwaysDataList.add(lwData39);
+
+        lengthwaysDataList.add(lwData40);
+        lengthwaysDataList.add(lwData41);
+        lengthwaysDataList.add(lwData42);
+        lengthwaysDataList.add(lwData43);
+        lengthwaysDataList.add(lwData44);
+        lengthwaysDataList.add(lwData45);
+        lengthwaysDataList.add(lwData46);
+        lengthwaysDataList.add(lwData47);
+        lengthwaysDataList.add(lwData48);
+        lengthwaysDataList.add(lwData49);
+
+        lengthwaysDataList.add(lwData50);
+        lengthwaysDataList.add(lwData51);
+        lengthwaysDataList.add(lwData52);
+        lengthwaysDataList.add(lwData53);
+        lengthwaysDataList.add(lwData54);
+        lengthwaysDataList.add(lwData55);
+        lengthwaysDataList.add(lwData56);
+        lengthwaysDataList.add(lwData57);
+        lengthwaysDataList.add(lwData58);
+        lengthwaysDataList.add(lwData59);
+
+        lengthwaysDataList.add(lwData60);
+        lengthwaysDataList.add(lwData61);
+        lengthwaysDataList.add(lwData62);
+        lengthwaysDataList.add(lwData63);
+        lengthwaysDataList.add(lwData64);
+        lengthwaysDataList.add(lwData65);
+        lengthwaysDataList.add(lwData66);
+        lengthwaysDataList.add(lwData67);
+        lengthwaysDataList.add(lwData68);
+        lengthwaysDataList.add(lwData69);
+
+        lengthwaysDataList.add(lwData70);
+        lengthwaysDataList.add(lwData71);
+        lengthwaysDataList.add(lwData72);
+        lengthwaysDataList.add(lwData73);
+        lengthwaysDataList.add(lwData74);
+        lengthwaysDataList.add(lwData75);
+        lengthwaysDataList.add(lwData76);
+        lengthwaysDataList.add(lwData77);
+        lengthwaysDataList.add(lwData78);
+        lengthwaysDataList.add(lwData79);
+
+        lengthwaysDataList.add(lwData80);
+        lengthwaysDataList.add(lwData81);
+        lengthwaysDataList.add(lwData82);
+        lengthwaysDataList.add(lwData83);
+        lengthwaysDataList.add(lwData84);
+        lengthwaysDataList.add(lwData85);
+        lengthwaysDataList.add(lwData86);
+        lengthwaysDataList.add(lwData87);
+        lengthwaysDataList.add(lwData88);
+        lengthwaysDataList.add(lwData89);
+
+        lengthwaysDataList.add(lwData90);
+        lengthwaysDataList.add(lwData91);
+        lengthwaysDataList.add(lwData92);
+        lengthwaysDataList.add(lwData93);
+        lengthwaysDataList.add(lwData94);
+        lengthwaysDataList.add(lwData95);
+        lengthwaysDataList.add(lwData96);
+        lengthwaysDataList.add(lwData97);
+        lengthwaysDataList.add(lwData98);
+        lengthwaysDataList.add(lwData99);
+
+        lengthwaysDataList.add(lwData100);
+
+        return lengthwaysDataList;
+    }
+    private void getLengthwaysAllData(BasicTrendBean.ZsBean zsBean){
+        LengthwaysDataBean lengthData1 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData2 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData3 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData4 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData5 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData6 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData7 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData8 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData9 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData10 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData11 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData12 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData13 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData14 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData15 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData16 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData17 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData18 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData19 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData20 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData21 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData22 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData23 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData24 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData25 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData26 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData27 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData28 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData29 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData30 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData31 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData32 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData33 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData34 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData35 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData36 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData37 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData38 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData39 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData40 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData41 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData42 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData43 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData44 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData45 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData46 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData47 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData48 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData49 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData50 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData51 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData52 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData53 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData54 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData55 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData56 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData57 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData58 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData59 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData60 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData61 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData62 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData63 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData64 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData65 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData66 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData67 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData68 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData69 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData70 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData71 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData72 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData73 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData74 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData75 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData76 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData77 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData78 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData79 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData80 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData81 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData82 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData83 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData84 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData85 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData86 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData87 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData88 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData89 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData90 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData91 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData92 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData93 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData94 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData95 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData96 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData97 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData98 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData99 = new LengthwaysDataBean();
+        LengthwaysDataBean lengthData100 = new LengthwaysDataBean();
+
+        lengthData1 .setNumData(zsBean.getN11 ());
+        lengthData2 .setNumData(zsBean.getN12 ());
+        lengthData3 .setNumData(zsBean.getN13 ());
+        lengthData4 .setNumData(zsBean.getN14 ());
+        lengthData5 .setNumData(zsBean.getN15 ());
+        lengthData6 .setNumData(zsBean.getN16 ());
+        lengthData7 .setNumData(zsBean.getN17 ());
+        lengthData8 .setNumData(zsBean.getN18 ());
+        lengthData9 .setNumData(zsBean.getN19 ());
+        lengthData10.setNumData(zsBean.getN110());
+
+        lengthData11.setNumData(zsBean.getN21 ());
+        lengthData12.setNumData(zsBean.getN22 ());
+        lengthData13.setNumData(zsBean.getN23 ());
+        lengthData14.setNumData(zsBean.getN24 ());
+        lengthData15.setNumData(zsBean.getN25 ());
+        lengthData16.setNumData(zsBean.getN26 ());
+        lengthData17.setNumData(zsBean.getN27 ());
+        lengthData18.setNumData(zsBean.getN28 ());
+        lengthData19.setNumData(zsBean.getN29 ());
+        lengthData20.setNumData(zsBean.getN210());
+
+        lengthData21.setNumData(zsBean.getN31 ());
+        lengthData22.setNumData(zsBean.getN32 ());
+        lengthData23.setNumData(zsBean.getN33 ());
+        lengthData24.setNumData(zsBean.getN34 ());
+        lengthData25.setNumData(zsBean.getN35 ());
+        lengthData26.setNumData(zsBean.getN36 ());
+        lengthData27.setNumData(zsBean.getN37 ());
+        lengthData28.setNumData(zsBean.getN38 ());
+        lengthData29.setNumData(zsBean.getN39 ());
+        lengthData30.setNumData(zsBean.getN310());
+
+        lengthData31.setNumData(zsBean.getN41 ());
+        lengthData32.setNumData(zsBean.getN42 ());
+        lengthData33.setNumData(zsBean.getN43 ());
+        lengthData34.setNumData(zsBean.getN44 ());
+        lengthData35.setNumData(zsBean.getN45 ());
+        lengthData36.setNumData(zsBean.getN46 ());
+        lengthData37.setNumData(zsBean.getN47 ());
+        lengthData38.setNumData(zsBean.getN48 ());
+        lengthData39.setNumData(zsBean.getN49 ());
+        lengthData40.setNumData(zsBean.getN410());
+
+        lengthData41.setNumData(zsBean.getN51 ());
+        lengthData42.setNumData(zsBean.getN52 ());
+        lengthData43.setNumData(zsBean.getN53 ());
+        lengthData44.setNumData(zsBean.getN54 ());
+        lengthData45.setNumData(zsBean.getN55 ());
+        lengthData46.setNumData(zsBean.getN56 ());
+        lengthData47.setNumData(zsBean.getN57 ());
+        lengthData48.setNumData(zsBean.getN58 ());
+        lengthData49.setNumData(zsBean.getN59 ());
+        lengthData50.setNumData(zsBean.getN510());
+
+        lengthData51.setNumData(zsBean.getN61 ());
+        lengthData52.setNumData(zsBean.getN62 ());
+        lengthData53.setNumData(zsBean.getN63 ());
+        lengthData54.setNumData(zsBean.getN64 ());
+        lengthData55.setNumData(zsBean.getN65 ());
+        lengthData56.setNumData(zsBean.getN66 ());
+        lengthData57.setNumData(zsBean.getN67 ());
+        lengthData58.setNumData(zsBean.getN68 ());
+        lengthData59.setNumData(zsBean.getN69 ());
+        lengthData60.setNumData(zsBean.getN610());
+
+        lengthData61.setNumData(zsBean.getN71 ());
+        lengthData62.setNumData(zsBean.getN72 ());
+        lengthData63.setNumData(zsBean.getN73 ());
+        lengthData64.setNumData(zsBean.getN74 ());
+        lengthData65.setNumData(zsBean.getN75 ());
+        lengthData66.setNumData(zsBean.getN76 ());
+        lengthData67.setNumData(zsBean.getN77 ());
+        lengthData68.setNumData(zsBean.getN78 ());
+        lengthData69.setNumData(zsBean.getN79 ());
+        lengthData70.setNumData(zsBean.getN710());
+
+        lengthData71.setNumData(zsBean.getN81 ());
+        lengthData72.setNumData(zsBean.getN82 ());
+        lengthData73.setNumData(zsBean.getN83 ());
+        lengthData74.setNumData(zsBean.getN84 ());
+        lengthData75.setNumData(zsBean.getN85 ());
+        lengthData76.setNumData(zsBean.getN86 ());
+        lengthData77.setNumData(zsBean.getN87 ());
+        lengthData78.setNumData(zsBean.getN88 ());
+        lengthData79.setNumData(zsBean.getN89 ());
+        lengthData80.setNumData(zsBean.getN810());
+
+        lengthData81.setNumData(zsBean.getN91 ());
+        lengthData82.setNumData(zsBean.getN92 ());
+        lengthData83.setNumData(zsBean.getN93 ());
+        lengthData84.setNumData(zsBean.getN94 ());
+        lengthData85.setNumData(zsBean.getN95 ());
+        lengthData86.setNumData(zsBean.getN96 ());
+        lengthData87.setNumData(zsBean.getN97 ());
+        lengthData88.setNumData(zsBean.getN98 ());
+        lengthData89.setNumData(zsBean.getN99 ());
+        lengthData90.setNumData(zsBean.getN910());
+
+        lengthData91.setNumData(zsBean.getN101 ());
+        lengthData92.setNumData(zsBean.getN102 ());
+        lengthData93.setNumData(zsBean.getN103 ());
+        lengthData94.setNumData(zsBean.getN104 ());
+        lengthData95.setNumData(zsBean.getN105 ());
+        lengthData96.setNumData(zsBean.getN106 ());
+        lengthData97.setNumData(zsBean.getN107 ());
+        lengthData98.setNumData(zsBean.getN108 ());
+        lengthData99.setNumData(zsBean.getN109 ());
+        lengthData100.setNumData(zsBean.getN1010());
+
+        lwData1.add( lengthData1 );
+        lwData2.add( lengthData2 );
+        lwData3.add( lengthData3 );
+        lwData4.add( lengthData4 );
+        lwData5.add( lengthData5 );
+        lwData6.add( lengthData6 );
+        lwData7.add( lengthData7 );
+        lwData8.add( lengthData8 );
+        lwData9.add( lengthData9 );
+
+        lwData10.add(lengthData10);
+        lwData11.add(lengthData11);
+        lwData12.add(lengthData12);
+        lwData13.add(lengthData13);
+        lwData14.add(lengthData14);
+        lwData15.add(lengthData15);
+        lwData16.add(lengthData16);
+        lwData17.add(lengthData17);
+        lwData18.add(lengthData18);
+        lwData19.add(lengthData19);
+
+        lwData20.add(lengthData20);
+        lwData21.add(lengthData21);
+        lwData22.add(lengthData22);
+        lwData23.add(lengthData23);
+        lwData24.add(lengthData24);
+        lwData25.add(lengthData25);
+        lwData26.add(lengthData26);
+        lwData27.add(lengthData27);
+        lwData28.add(lengthData28);
+        lwData29.add(lengthData29);
+
+        lwData30.add(lengthData30);
+        lwData31.add(lengthData31);
+        lwData32.add(lengthData32);
+        lwData33.add(lengthData33);
+        lwData34.add(lengthData34);
+        lwData35.add(lengthData35);
+        lwData36.add(lengthData36);
+        lwData37.add(lengthData37);
+        lwData38.add(lengthData38);
+        lwData39.add(lengthData39);
+
+        lwData40.add(lengthData40);
+        lwData41.add(lengthData41);
+        lwData42.add(lengthData42);
+        lwData43.add(lengthData43);
+        lwData44.add(lengthData44);
+        lwData45.add(lengthData45);
+        lwData46.add(lengthData46);
+        lwData47.add(lengthData47);
+        lwData48.add(lengthData48);
+        lwData49.add(lengthData49);
+
+        lwData50.add(lengthData50);
+        lwData51.add(lengthData51);
+        lwData52.add(lengthData52);
+        lwData53.add(lengthData53);
+        lwData54.add(lengthData54);
+        lwData55.add(lengthData55);
+        lwData56.add(lengthData56);
+        lwData57.add(lengthData57);
+        lwData58.add(lengthData58);
+        lwData59.add(lengthData59);
+
+        lwData60.add(lengthData60);
+        lwData61.add(lengthData61);
+        lwData62.add(lengthData62);
+        lwData63.add(lengthData63);
+        lwData64.add(lengthData64);
+        lwData65.add(lengthData65);
+        lwData66.add(lengthData66);
+        lwData67.add(lengthData67);
+        lwData68.add(lengthData68);
+        lwData69.add(lengthData69);
+
+        lwData70.add(lengthData70);
+        lwData71.add(lengthData71);
+        lwData72.add(lengthData72);
+        lwData73.add(lengthData73);
+        lwData74.add(lengthData74);
+        lwData75.add(lengthData75);
+        lwData76.add(lengthData76);
+        lwData77.add(lengthData77);
+        lwData78.add(lengthData78);
+        lwData79.add(lengthData79);
+
+        lwData80.add(lengthData80);
+        lwData81.add(lengthData81);
+        lwData82.add(lengthData82);
+        lwData83.add(lengthData83);
+        lwData84.add(lengthData84);
+        lwData85.add(lengthData85);
+        lwData86.add(lengthData86);
+        lwData87.add(lengthData87);
+        lwData88.add(lengthData88);
+        lwData89.add(lengthData89);
+
+        lwData90.add(lengthData90);
+        lwData91.add(lengthData91);
+        lwData92.add(lengthData92);
+        lwData93.add(lengthData93);
+        lwData94.add(lengthData94);
+        lwData95.add(lengthData95);
+        lwData96.add(lengthData96);
+        lwData97.add(lengthData97);
+        lwData98.add(lengthData98);
+        lwData99.add(lengthData99);
+
+        lwData100.add(lengthData100);
+    }
+
     /**数据统计数据显示*/
     private void setStatisticData(BasicTrendBean.TjBean tjBean){
         BasicTrendBean.TjBean.tjDataBean occ = tjBean.getOcc();//出现次数
@@ -1101,31 +1684,76 @@ public class BJRacecarBasicTrendFragment extends BaseMvpFragment<BJRacecarBasicT
         switch (view.getId()){
             case R.id.public_img_date:
                 Log.d("filtratePopupVindow ","点击了弹窗");
-                filtratePopupVindow();
+                showDialog();
                 break;
             case R.id.public_img_back:
                 getActivity().finish();
                 break;
         }
     }
-    private void filtratePopupVindow(){
-        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.bjsc_basic_trend_filtrate, null);
-        PopupWindow popupWindow = new PopupWindow(getContext());
+    private void showDialog(){
+        TrendFiltrateDialog filtrateDialog = new TrendFiltrateDialog(getActivity() ,checkQSnum , omitType , trendLineType ,lengways, cutOffLine);
 
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setFocusable(true);
-
-        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        popupWindow.setContentView(contentView);
-        popupWindow.showAsDropDown(rightImg);
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+        filtrateDialog.setNoOnclickListener(new TrendFiltrateDialog.onNoOnclickListener() {
             @Override
-            public void onDismiss() {
-                DisplayUtil.backgroundAlpha(getActivity(), 1f);
+            public void onNoClick() {
+                filtrateDialog.dismiss();
             }
         });
+        filtrateDialog.setOkOnclickListener(new TrendFiltrateDialog.onOkOnclickListener() {
+            @Override
+            public void onOkClick(int currQSnum, boolean booType1, boolean booType2, boolean booType3, boolean booType4) {
+                checkQSnum = currQSnum;//确定时保留所选
+
+                omitType = booType1;
+                trendLineType = booType2;
+                lengways = booType3;
+                cutOffLine = booType4;
+
+                initData(getPeriod(checkQSnum));
+                filtrateDialog.dismiss();
+            }
+        });
+
+        filtrateDialog.setCanceledOnTouchOutside(true);//设置空白处点击 dialog消失
+        filtrateDialog.show();
     }
+    private String getPeriod(int cheakNum){
+        switch (cheakNum){
+            case 0:
+                mPeriod = TODAYKJ;
+                break;
+            case 1:
+                mPeriod = ISSUENUM_THIRTY;
+                break;
+            case 2:
+                mPeriod = ISSUENUM_FIFTY;
+                break;
+            case 3:
+                mPeriod = ISSUENUM_ONE_HUNDRED;
+                break;
+        }
+        return mPeriod;
+    }
+
+//    private void filtratePopupVindow(){
+//        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.bjsc_basic_trend_filtrate, null);
+//        PopupWindow popupWindow = new PopupWindow(getContext());
+//
+//        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+//        popupWindow.setOutsideTouchable(true);
+//        popupWindow.setFocusable(true);
+//
+//        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+//        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+//        popupWindow.setContentView(contentView);
+//        popupWindow.showAsDropDown(rightImg);
+//        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                DisplayUtil.backgroundAlpha(getActivity(), 1f);
+//            }
+//        });
+//    }
 }

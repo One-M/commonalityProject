@@ -123,6 +123,7 @@
     <dimen name="tab_home_h">50dp</dimen>
     <dimen name="trend_header_dt_w">80dp</dimen>
     <dimen name="trend_dt_header_w">880dp</dimen>
+    <dimen name="filter_dialog_w">350dp</dimen>
 
     <dimen name="test_5">25</dimen>
     <dimen name="test_25">425</dimen>

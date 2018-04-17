@@ -1,16 +1,13 @@
 package com.ybf.lottery.diyview.trend;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 
 import com.ybf.lottery.R;
@@ -245,7 +242,7 @@ public class CustomTrendView extends View{
                     canvas.drawOval(rf2 , mPaintBg);
                     mPaintText.setColor(getResources().getColor(R.color.white));
                 }else{
-                    mPaintText.setColor(getResources().getColor(R.color.history_dt_txt_color));
+                    mPaintText.setColor(getResources().getColor(R.color.txt_color666));
                 }
                 //文字(居中处理)
                 Paint.FontMetrics fontMetrics=mPaintText.getFontMetrics();

@@ -24,9 +24,10 @@
     <color name="manage_text_color">#F63F3F</color>
     <color name="history_kj_tab_color">#222222</color>
     <color name="form_line_color">#DCDCDC</color>
-    <color name="history_dt_txt_color">#666666</color>
+    <color name="txt_color666">#666666</color>
+    <color name="txt_color333">#333333</color>
 
-    <color name="statistic_title_txt_color">#999999</color>
+    <color name="txt_color999">#999999</color>
     <color name="statistic_title_color">#cfe2f3</color>
     <color name="statistic_percentage_color">#F07061</color>
 
@@ -41,4 +42,6 @@
     <color name="bjsc_home_kj_context_color">#FA0410</color>
     <color name="bjsc_home_kj_stroke_color">#F71C26</color>
 
+    <color name="filter_uncheck_bg">#F4F4F4</color>
+    <color name="bjsc_ylfc_color">#9595C5</color>
 </resources>

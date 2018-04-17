@@ -1,8 +1,6 @@
 package com.ybf.lottery.diyview.trend;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -180,7 +178,7 @@ public class CustomHistoryKJView extends View{
      * @param canvas
      */
     private void drawDragonTiger(Canvas canvas){
-        mPaintText.setColor(getResources().getColor(R.color.history_dt_txt_color));
+        mPaintText.setColor(getResources().getColor(R.color.txt_color666));
         for (int i = 0; i < showDatas.size(); i++) {
             BJRacecarHistoryKJBean kjDTData = showDatas.get(i);
             List<String> dtDataList = new ArrayList<>();

@@ -1,201 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
+    android:layout_width="@dimen/filter_dialog_w"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bead_bg"
+    android:orientation="vertical"
     android:layout_gravity="center">
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/history_dt_txt_color"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_size_18"
-            android:text="筛选"/>
-
-        <TextView
             android:id="@+id/textView7"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="统计期数"
+            android:textColor="@color/txt_color333"
+            android:textSize="@dimen/text_size_16"
+            android:text="期数选择"
             />
 
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:background="@color/line"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingLeft="15dp">
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            >
 
             <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_height="wrap_content"
+                android:id="@+id/radioButton1"
+                android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:button="@null"
-                android:padding="8dp"
                 android:gravity="center"
+                android:textColor="@drawable/filter_dialog_txtcolor"
+                android:background="@drawable/filter_dialog_radio_bg"
                 android:text="今日开奖"
                 />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:button="@null"
-                android:padding="8dp"
-                android:gravity="center"
-                android:text="近30期"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingLeft="15dp">
 
             <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_height="wrap_content"
+                android:id="@+id/radioButton2"
+                android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:button="@null"
-                android:padding="8dp"
                 android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:textColor="@drawable/filter_dialog_txtcolor"
+                android:background="@drawable/filter_dialog_radio_bg"
+                android:text="近30期"
+                />
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:textColor="@drawable/filter_dialog_txtcolor"
+                android:background="@drawable/filter_dialog_radio_bg"
                 android:text="近50期"
                 />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp">
+
             <RadioButton
                 android:id="@+id/radioButton4"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:button="@null"
-                android:padding="8dp"
                 android:gravity="center"
-                android:text="近100期"
-                />
+                android:textColor="@drawable/filter_dialog_txtcolor"
+                android:background="@drawable/filter_dialog_radio_bg"
+                android:text="近100期" />
+
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:visibility="invisible" />
         </LinearLayout>
         <TextView
             android:id="@+id/textViewds7"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="查看"
+            android:textColor="@color/txt_color333"
+            android:textSize="@dimen/text_size_16"
+            android:text="查看选择"
             />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:background="@color/line"
             />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingLeft="15dp">
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp">
 
             <RadioButton
                 android:id="@+id/radioButtonA"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:button="@null"
-                android:padding="8dp"
                 android:gravity="center"
+                android:textColor="@drawable/filter_dialog_txtcolor"
+                android:background="@drawable/filter_dialog_radio_bg"
                 android:text="不带遗漏"
                 />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
             <RadioButton
                 android:id="@+id/radioButtonB"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:button="@null"
-                android:padding="8dp"
                 android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:textColor="@drawable/filter_dialog_txtcolor"
+                android:background="@drawable/filter_dialog_radio_bg"
                 android:text="不带折线"
                 />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingLeft="15dp">
-
             <RadioButton
                 android:id="@+id/radioButtonC"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:button="@null"
-                android:padding="8dp"
-                android:gravity="center"
-                android:text="遗漏分层"
-                />
-            <View
-                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <RadioButton
-                android:id="@+id/radioButtonD"
-                android:layout_height="wrap_content"
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:button="@null"
-                android:padding="8dp"
                 android:gravity="center"
-                android:text="分割线"
+                android:layout_marginStart="10dp"
+                android:textColor="@drawable/filter_dialog_txtcolor"
+                android:background="@drawable/filter_dialog_radio_bg"
+                android:text="遗漏分层"
                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:gravity="center">
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="30dp"
-                android:background="@color/history_dt_txt_color"
+            <RadioButton
+                android:id="@+id/radioButtonD"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:button="@null"
                 android:gravity="center"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/text_size_12"
-                android:text="确定"/>
+                android:textColor="@drawable/filter_dialog_txtcolor"
+                android:background="@drawable/filter_dialog_radio_bg"
+                android:text="分割线"
+                />
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                />
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/check_qx"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/txt_color666"
+            android:text="取消"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line"
+            />
+        <TextView
+            android:id="@+id/check_ok"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/colorPrimary"
+            android:text="确定"/>
+    </LinearLayout>
+
 </LinearLayout>

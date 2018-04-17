@@ -48,7 +48,7 @@
             android:paddingRight="12dp"
             android:paddingTop="3dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/cpi_company"
+            android:src="@mipmap/icon_shaixuan"
             android:visibility="gone"/>
 
         <TextView

@@ -64,7 +64,7 @@
         app:tabIndicatorColor="@color/colorPrimary"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/colorPrimary"
-        app:tabTextColor="@color/history_dt_txt_color" />
+        app:tabTextColor="@color/txt_color666" />
 
     <!--<LinearLayout-->
         <!--android:id="@+id/linearLayout"-->
