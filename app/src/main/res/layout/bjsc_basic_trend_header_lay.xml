@@ -29,13 +29,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/kj_half_header_itemh"
                 android:background="@drawable/border_b_color"
                 >
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -43,71 +41,6 @@
                     android:text="冠军"/>
 
             </LinearLayout>
-          <!--  <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/kj_half_header_itemh">
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="1"/>
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="2"/>
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="3"
-                    />
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="4"/>
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="5"/>
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="6"/>
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="7"/>
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="8"/>
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="9"/>
-                <TextView
-                    android:layout_width="@dimen/kj_history_itemw"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/border_b_color"
-                    android:text="10"/>
-            </LinearLayout>-->
             <include layout="@layout/bjsc_1to10_lay"/>
 
         </LinearLayout>
@@ -116,7 +49,6 @@
             android:layout_width="@dimen/bjsc_title_1to10_w"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/kj_half_header_itemh"
@@ -290,6 +222,53 @@
             <include layout="@layout/bjsc_trend_dragon_tiger_lay"/>
         </LinearLayout>
         
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/winner_runner_sum_value_header_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/kj_half_header_itemh"
+                android:background="@drawable/border_b_color"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="冠亚和值分布"/>
+
+            </LinearLayout>
+            <include layout="@layout/bjsc_3to19_lay"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/kj_half_header_itemh"
+                android:background="@drawable/border_b_color"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="冠亚和值形态"/>
+
+            </LinearLayout>
+            <include layout="@layout/bjsc_trend_dxds_lay"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

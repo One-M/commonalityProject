@@ -16,6 +16,7 @@ import com.ybf.lottery.function.datastatistics.BJRacecarDataStatisticsFragment;
 import com.ybf.lottery.function.dragontigertrend.BJRacecarDragonTigerTrendFragment;
 import com.ybf.lottery.function.homefunction.HomeFragment;
 import com.ybf.lottery.function.historykj.BJRacecarHistoryKJFragment;
+import com.ybf.lottery.function.winnerrunnersumvalue.BJRacecarWinnerRunnerSumValueFragment;
 import com.ybf.lottery.utils.FragmentUtils;
 import com.ybf.lottery.utils.ToastUtils;
 
@@ -57,7 +58,7 @@ public class MainActivity extends BaseActivity {
     private HomeFragment homeFragment;
     private BJRacecarHistoryKJFragment bjRacecarHistoryKJFragment;
     private BJRacecarDragonTigerTrendFragment dragonTigerTrendFragment;
-    private BJRacecarBasicTrendFragment bjRacecarBasicTrendFragment;
+    private BJRacecarWinnerRunnerSumValueFragment bjRacecarWinnerRunnerSumValueFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,12 +75,12 @@ public class MainActivity extends BaseActivity {
         homeFragment = new HomeFragment();
         bjRacecarHistoryKJFragment = BJRacecarHistoryKJFragment.newInstance(0);
         dragonTigerTrendFragment = BJRacecarDragonTigerTrendFragment.newInstance(0);
-        bjRacecarBasicTrendFragment = BJRacecarBasicTrendFragment.newInstance(0);
+        bjRacecarWinnerRunnerSumValueFragment = BJRacecarWinnerRunnerSumValueFragment.newInstance(0);
 
         fragments.add(homeFragment);
         fragments.add(bjRacecarHistoryKJFragment);
         fragments.add(dragonTigerTrendFragment);
-        fragments.add(bjRacecarBasicTrendFragment);
+        fragments.add(bjRacecarWinnerRunnerSumValueFragment);
 
         sy.setChecked(showFragmentIndex == HOME_FRAGMENT);
         lskj.setChecked(showFragmentIndex == LSKJ_FRAGMENT);

@@ -95,271 +95,253 @@
                 android:layout_height="wrap_content"
                 >
                 <LinearLayout
-                    android:id="@+id/stitistic_header_1"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
+                    android:id="@+id/statistic_basic_headerll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_1"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color"
+                            >
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="冠军"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_2"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="亚军"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_3"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="第三名"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_4"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="第四名"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_5"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="第五名"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_6"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="第六名"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_7"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="第七名"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_8"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="第八名"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_9"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="第九名"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/stitistic_header_10"
+                        android:layout_width="@dimen/bjsc_title_1to10_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="第十名"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_1to10_lay2"/>
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color"
+                        android:id="@+id/statistic_header_dt"
+                        android:layout_width="@dimen/trend_header_dt_w"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="gone"
                         >
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="冠军"/>
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color"
+                            >
 
-                    </LinearLayout>
-                    <!--  <LinearLayout
-                          android:layout_width="match_parent"
-                          android:layout_height="@dimen/kj_half_header_itemh">
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="1"/>
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="2"/>
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="3"
-                              />
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="4"/>
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="5"/>
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="6"/>
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="7"/>
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="8"/>
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="9"/>
-                          <TextView
-                              android:layout_width="@dimen/kj_history_itemw"
-                              android:layout_height="match_parent"
-                              android:gravity="center"
-                              android:background="@drawable/border_b_color"
-                              android:text="10"/>
-                      </LinearLayout>-->
-                    <include layout="@layout/bjsc_1to10_lay2"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="龙虎"/>
 
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/stitistic_header_2"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="亚军"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_statistic_dragon_tiger_lay"/>
                     </LinearLayout>
-                    <include layout="@layout/bjsc_1to10_lay2"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/stitistic_header_3"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="第三名"/>
-                    </LinearLayout>
-                    <include layout="@layout/bjsc_1to10_lay2"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/stitistic_header_4"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="第四名"/>
-                    </LinearLayout>
-                    <include layout="@layout/bjsc_1to10_lay2"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/stitistic_header_5"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="第五名"/>
-                    </LinearLayout>
-                    <include layout="@layout/bjsc_1to10_lay2"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/stitistic_header_6"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="第六名"/>
-                    </LinearLayout>
-                    <include layout="@layout/bjsc_1to10_lay2"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/stitistic_header_7"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="第七名"/>
-                    </LinearLayout>
-                    <include layout="@layout/bjsc_1to10_lay2"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/stitistic_header_8"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="第八名"/>
-                    </LinearLayout>
-                    <include layout="@layout/bjsc_1to10_lay2"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/stitistic_header_9"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="第九名"/>
-                    </LinearLayout>
-                    <include layout="@layout/bjsc_1to10_lay2"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/stitistic_header_10"
-                    android:layout_width="@dimen/bjsc_title_1to10_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="第十名"/>
-                    </LinearLayout>
-                    <include layout="@layout/bjsc_1to10_lay2"/>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/statistic_header_dt"
-                    android:layout_width="@dimen/trend_header_dt_w"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:id="@+id/statistic_winner_runner_sum_headerll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:visibility="gone"
                     >
-
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/bjsc_statistic_title7_h"
-                        android:background="@drawable/border_b_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color"
+                            >
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="冠亚和值分布"/>
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_3to19_lay2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
                         >
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="龙虎"/>
+                            android:layout_height="@dimen/bjsc_statistic_title7_h"
+                            android:background="@drawable/border_b_color"
+                            >
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="冠亚和值形态"/>
+
+                        </LinearLayout>
+                        <include layout="@layout/bjsc_trend_dxds_lay2"/>
                     </LinearLayout>
-                    <include layout="@layout/bjsc_statistic_dragon_tiger_lay"/>
                 </LinearLayout>
 
             </LinearLayout>

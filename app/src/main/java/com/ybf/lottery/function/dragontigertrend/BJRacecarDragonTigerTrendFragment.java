@@ -78,8 +78,6 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
     CustomTrendLineView customTrendView;
     @BindView(R.id.basic_trend_statistic_recycle)
     RecyclerView statisticRecyclerView;
-    @BindView(R.id.trend_header_ll)
-    LinearLayout headerll;
 
     private static String DTTREND_TYPE = "DTTrendType";//fragment 入口传参 key
     private int dtTrendType;

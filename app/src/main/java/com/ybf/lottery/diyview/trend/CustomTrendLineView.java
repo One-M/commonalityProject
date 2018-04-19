@@ -98,6 +98,9 @@ public class CustomTrendLineView extends View{
             case 1:
                 NumY = 22;
                 break;
+            case 2:
+                NumY = 22;
+                break;
         }
         requestLayout();
     }
@@ -308,7 +311,8 @@ public class CustomTrendLineView extends View{
 
                 if (zsDataList.get(j) == 0) {
                     //画圆
-                    setPaintColor(mPaintNumBg, j/10);
+//                    setPaintColor(mPaintNumBg, j/10);
+                    setBgPaintColor(j);
                     canvas.drawOval(rf2 , mPaintNumBg);
                     mPaintText.setColor(getResources().getColor(R.color.white));
                 }else{
@@ -334,9 +338,36 @@ public class CustomTrendLineView extends View{
                         }
                         canvas.drawText(dtStr, rf.centerX(), baseline, mPaintText);
                         break;
+                    case 2:
+                        String sumStr = "";
+                        if ( zsDataList.get(j) == 0) {
+                            sumStr = (j == zsDataList.size()-4) ? "大" : ((j == zsDataList.size()-3) ? "小" : ((j == zsDataList.size()-2) ?
+                                    "单" : ((j == zsDataList.size()-1) ? "双" : (j%18 +3)+"")));
+                        }else{
+                            sumStr = mOmitShow ? zsDataList.get(j)+"" : "";
+                        }
+                        canvas.drawText(sumStr, rf.centerX(), baseline, mPaintText);
+                        break;
                 }
 
             }
+        }
+    }
+    private void setBgPaintColor(int position){
+        switch (mTrendType){
+            case 0:
+                setPaintColor(mPaintNumBg, position/10);
+                break;
+            case 1:
+                setPaintColor(mPaintNumBg, position/10);
+                break;
+            case 2:
+                if (position < 18) {
+                    setPaintColor(mPaintNumBg, 0);
+                }else{
+                    setPaintColor(mPaintNumBg, (position - 18)/2 + 1);
+                }
+                break;
         }
     }
 
@@ -528,26 +559,97 @@ public class CustomTrendLineView extends View{
                 lineNumList.add(listList2);
                 lineNumList.add(listList3);
                 break;
+            case 2:
+                for (int i = 0; i < showDatas.size(); i++) {
+                    TrendShowBean zsBean = showDatas.get(i);
+                    List<Integer> zsDataList = zsBean.getZsData();
+                    for (int j = 0; j < zsDataList.size(); j++) {
+                        if (j < 18) {
+                            if (zsDataList.get(j) == 0) {listList1.add(j +1);}
+                        }else if (18 <= j && j < 20) {
+                            if (zsDataList.get(j) == 0) {listList2.add(j-18 +1);}
+                        }else if (20 <= j && j < 22) {
+                            if (zsDataList.get(j) == 0) {listList3.add(j-20 +1);}
+                        }
+                    }
+                }
+                lineNumList.add(listList1);
+                lineNumList.add(listList2);
+                lineNumList.add(listList3);
+                break;
         }
         return lineNumList;
     }
     /**绘制数字连线*/
     private void drawNumLine(Canvas canvas){
         if (mTrendLineType) {
-            List<List<Integer>> trendLindNum = getTrendLineNumList();
-            for (int i = 0; i < trendLindNum.size(); i++) {
-                setPaintColor(mPaintTrrenLine , i);
-                List<Integer> numList = trendLindNum.get(i);
-                float filstXY[] = translateSingleNumXY(0 , numList.get(0) - 1);
-                filstXY[0] = filstXY[0] + kjNumWidth*10 + mDeltaX*10*i;
-                for (int j = 1; j < numList.size(); j++) {
-                    float[] currXY = translateSingleNumXY(j , numList.get(j)-1);
-                    currXY[0] = currXY[0] + kjNumWidth*10 + mDeltaX*10*i;
-                    canvas.drawLine(filstXY[0]+mDeltaX*0.5f , filstXY[1] + mDeltaY*0.7f ,
-                            currXY[0] + mDeltaX*0.5f , currXY[1] + mDeltaY*0.3f , mPaintTrrenLine);
-                    filstXY[0] = currXY[0];
-                    filstXY[1] = currXY[1];
-                }
+            switch (mTrendType){
+                case 0:
+                    linePaint(canvas);
+                    break;
+                case 1:
+                    linePaint(canvas);
+                    break;
+                case 2:
+                    sumValueLinePaint(canvas);
+                    break;
+            }
+//            List<List<Integer>> trendLindNum = getTrendLineNumList();
+//            for (int i = 0; i < trendLindNum.size(); i++) {
+//                setPaintColor(mPaintTrrenLine , i);
+//                List<Integer> numList = trendLindNum.get(i);
+//                float filstXY[] = translateSingleNumXY(0 , numList.get(0) - 1);
+//                filstXY[0] = filstXY[0] + kjNumWidth*10 + mDeltaX*10*i;
+//                for (int j = 1; j < numList.size(); j++) {
+//                    float[] currXY = translateSingleNumXY(j , numList.get(j)-1);
+//                    currXY[0] = currXY[0] + kjNumWidth*10 + mDeltaX*10*i;
+//                    canvas.drawLine(filstXY[0]+mDeltaX*0.5f , filstXY[1] + mDeltaY*0.7f ,
+//                            currXY[0] + mDeltaX*0.5f , currXY[1] + mDeltaY*0.3f , mPaintTrrenLine);
+//                    filstXY[0] = currXY[0];
+//                    filstXY[1] = currXY[1];
+//                }
+//            }
+        }
+    }
+    /**折线绘制(走势 10格折线)*/
+    private void linePaint(Canvas canvas){
+        List<List<Integer>> trendLindNum = getTrendLineNumList();
+        for (int i = 0; i < trendLindNum.size(); i++) {
+            setPaintColor(mPaintTrrenLine , i);
+            List<Integer> numList = trendLindNum.get(i);
+            float filstXY[] = translateSingleNumXY(0 , numList.get(0) - 1);
+            filstXY[0] = filstXY[0] + kjNumWidth*10 + mDeltaX*10*i;
+            for (int j = 1; j < numList.size(); j++) {
+                float[] currXY = translateSingleNumXY(j , numList.get(j)-1);
+                currXY[0] = currXY[0] + kjNumWidth*10 + mDeltaX*10*i;
+                canvas.drawLine(filstXY[0]+mDeltaX*0.5f , filstXY[1] + mDeltaY*0.7f ,
+                        currXY[0] + mDeltaX*0.5f , currXY[1] + mDeltaY*0.3f , mPaintTrrenLine);
+                filstXY[0] = currXY[0];
+                filstXY[1] = currXY[1];
+            }
+        }
+    }
+    /**冠亚和值折线*/
+    private void sumValueLinePaint(Canvas canvas){
+        List<List<Integer>> trendLindNum = getTrendLineNumList();
+        for (int i = 0; i < trendLindNum.size(); i++) {
+            setPaintColor(mPaintTrrenLine , i);
+            List<Integer> numList = trendLindNum.get(i);
+            float filstXY[] = translateSingleNumXY(0 , numList.get(0) - 1);
+            if (i == 0) {
+                filstXY[0] = filstXY[0] + kjNumWidth*10 + mDeltaX*18*i;
+            }else{
+                filstXY[0] = filstXY[0] + kjNumWidth*10 + mDeltaX*18 + mDeltaX*2*(i-1);
+            }
+            for (int j = 1; j < numList.size(); j++) {
+                float[] currXY = translateSingleNumXY(j , numList.get(j)-1);
+
+                currXY[0] = (i == 0) ? currXY[0] + kjNumWidth*10 : currXY[0] + kjNumWidth*10 + mDeltaX*18 + mDeltaX*2*(i-1);
+
+                canvas.drawLine(filstXY[0]+mDeltaX*0.5f , filstXY[1] + mDeltaY*0.7f ,
+                        currXY[0] + mDeltaX*0.5f , currXY[1] + mDeltaY*0.3f , mPaintTrrenLine);
+                filstXY[0] = currXY[0];
+                filstXY[1] = currXY[1];
             }
         }
     }

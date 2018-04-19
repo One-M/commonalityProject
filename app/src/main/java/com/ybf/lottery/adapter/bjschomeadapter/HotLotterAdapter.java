@@ -16,6 +16,7 @@ import com.ybf.lottery.activity.BasicTrendActivity;
 import com.ybf.lottery.activity.DragonTigerTrendActivity;
 import com.ybf.lottery.activity.HistoryKJActivity;
 import com.ybf.lottery.activity.StatisticActivity;
+import com.ybf.lottery.activity.WinnerRunnerSumValueActivity;
 import com.ybf.lottery.model.bean.homebean.HotLotteryBean;
 
 import java.util.List;
@@ -86,6 +87,9 @@ public class HotLotterAdapter extends BaseAdapter{
                 break;
             case 4://龙虎走势
                 mContext.startActivity(new Intent(mContext , DragonTigerTrendActivity.class));
+                break;
+            case 6:
+                mContext.startActivity(new Intent(mContext , WinnerRunnerSumValueActivity.class));
                 break;
             default:
                 Toast.makeText(mContext, "敬请期待", Toast.LENGTH_SHORT).show();

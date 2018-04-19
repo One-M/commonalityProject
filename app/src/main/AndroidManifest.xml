@@ -32,6 +32,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.ybf.lottery.activity.DragonTigerTrendActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.WinnerRunnerSumValueActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

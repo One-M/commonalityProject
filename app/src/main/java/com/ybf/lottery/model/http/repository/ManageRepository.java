@@ -6,6 +6,7 @@ import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSMTJBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
 import com.ybf.lottery.model.bean.dragontigertrendbean.DragonTigerTrendBean;
+import com.ybf.lottery.model.bean.winnerrunnersumvaluebean.WinnerRunnerSumValueBean;
 import com.ybf.lottery.model.http.api.ManageApi;
 
 import io.reactivex.Flowable;
@@ -87,5 +88,14 @@ public class ManageRepository {
      */
     public Flowable<DragonTigerTrendBean> bjscDTTrendLoginData(String period , String fType){
         return manageApi.bjscDTThrendLoginData(period , fType);
+    }
+
+    /***
+     * 北京赛车冠亚和值
+     * @param period
+     * @return
+     */
+    public Flowable<WinnerRunnerSumValueBean> bjscWRSumValueLoginData(String period){
+        return manageApi.bjscWRSumValueLoginData(period);
     }
 }

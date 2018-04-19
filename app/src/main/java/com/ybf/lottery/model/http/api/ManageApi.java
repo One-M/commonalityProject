@@ -6,6 +6,7 @@ import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSMTJBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
 import com.ybf.lottery.model.bean.dragontigertrendbean.DragonTigerTrendBean;
+import com.ybf.lottery.model.bean.winnerrunnersumvaluebean.WinnerRunnerSumValueBean;
 
 import io.reactivex.Flowable;
 import okhttp3.ResponseBody;
@@ -78,4 +79,12 @@ public interface ManageApi {
     @GET("trend-api/pk10/findDragonTigerTrend")
     Flowable<DragonTigerTrendBean> bjscDTThrendLoginData(@Query("period") String period ,
                                                          @Query("fType") String fType);
+
+    /**
+     * 北京赛车冠亚和值
+     * @param period 期数
+     * @return
+     */
+    @GET("trend-api/pk10/findFirstSecondSumTrend")
+    Flowable<WinnerRunnerSumValueBean> bjscWRSumValueLoginData(@Query("period") String period);
 }

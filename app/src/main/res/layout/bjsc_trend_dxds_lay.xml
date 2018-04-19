@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/kj_half_header_itemh"
+    >
+    <TextView
+        android:layout_width="@dimen/kj_history_itemw"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/border_b_color"
+        android:text="大"/>
+    <TextView
+        android:layout_width="@dimen/kj_history_itemw"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/border_b_color"
+        android:text="小"/>
+    <TextView
+        android:layout_width="@dimen/kj_history_itemw"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/border_b_color"
+        android:text="单"/>
+    <TextView
+        android:layout_width="@dimen/kj_history_itemw"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/border_b_color"
+        android:text="双"/>
+</LinearLayout>
