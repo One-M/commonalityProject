@@ -1,11 +1,14 @@
 package com.ybf.lottery.model.http.repository;
 
 import com.ybf.lottery.model.bean.BJRacecarCountDownBean;
+import com.ybf.lottery.model.bean.bigsmalltrendbean.BigSmallTrendBean;
 import com.ybf.lottery.model.bean.bjscbasictrendbean.BasicTrendBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSMTJBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticSumBean;
 import com.ybf.lottery.model.bean.bjscstatisticbean.BJRacecarStatisticYDDLBean;
 import com.ybf.lottery.model.bean.dragontigertrendbean.DragonTigerTrendBean;
+import com.ybf.lottery.model.bean.firstsecondtrendbean.FirstSecondTrendBean;
+import com.ybf.lottery.model.bean.locationtrendbean.LocationTrendBean;
 import com.ybf.lottery.model.bean.winnerrunnersumvaluebean.WinnerRunnerSumValueBean;
 import com.ybf.lottery.model.http.api.ManageApi;
 
@@ -97,5 +100,33 @@ public class ManageRepository {
      */
     public Flowable<WinnerRunnerSumValueBean> bjscWRSumValueLoginData(String period){
         return manageApi.bjscWRSumValueLoginData(period);
+    }
+
+    /**
+     * 北京赛车定位走势
+     * @param period
+     * @param fType
+     * @return
+     */
+    public Flowable<LocationTrendBean> bjscLocationTrendLoginData(String period , int fType){
+        return manageApi.bjscLocationTrendLoginData(period , fType);
+    }
+
+    /***
+     * 北京赛车冠亚走势
+     * @param period
+     * @return
+     */
+    public Flowable<FirstSecondTrendBean> bjscFirstSecondTrendLoginData(String period){
+        return manageApi.bjscFirstSecondTrendLoginData(period);
+    }
+
+    /**
+     * 大小形态
+     * @param period
+     * @return
+     */
+    public Flowable<BigSmallTrendBean> bjscBigSmallLoginData(String period){
+        return manageApi.bjscBigSmallLoginData(period);
     }
 }

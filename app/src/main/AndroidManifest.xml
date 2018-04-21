@@ -34,6 +34,12 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.ybf.lottery.activity.WinnerRunnerSumValueActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.LocationTrendActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.FirstSecondTrendActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.BigSmallTrendActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

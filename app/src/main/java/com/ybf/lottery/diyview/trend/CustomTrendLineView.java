@@ -290,7 +290,7 @@ public class CustomTrendLineView extends View{
 
             for (int j = 0; j < zsDataList.size(); j++) {
                 float[] xy = translateSingleNumXY(i , j);
-                //重新定位蓝球在x轴的位置;在红球后面;
+                //重新定位x轴的位置;在开奖号码后面;
                 xy[0]=xy[0] + 10*kjNumWidth;
                 initialRect.left = 0;
                 initialRect.top = 0;
@@ -309,48 +309,99 @@ public class CustomTrendLineView extends View{
                 allNumRace.bottom = (int) (allNumRace.top + mDeltaY * 0.75f);
                 RectF rf2=new RectF(allNumRace.left,allNumRace.top,allNumRace.right,allNumRace.bottom);
 
-                if (zsDataList.get(j) == 0) {
-                    //画圆
-//                    setPaintColor(mPaintNumBg, j/10);
-                    setBgPaintColor(j);
-                    canvas.drawOval(rf2 , mPaintNumBg);
-                    mPaintText.setColor(getResources().getColor(R.color.white));
-                }else{
-                    mPaintText.setColor(getResources().getColor(R.color.txt_color666));
-                }
+//                if (zsDataList.get(j) == 0) {
+//                    //画圆
+//                    setBgPaintColor(j);
+//                    canvas.drawOval(rf2 , mPaintNumBg);
+//                    mPaintText.setColor(getResources().getColor(R.color.white));
+//                }else{
+//                    mPaintText.setColor(getResources().getColor(R.color.txt_color666));
+//                }
 
-                //文字(居中处理)
-                Paint.FontMetrics fontMetrics=mPaintText.getFontMetrics();
-                float distance=(fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;
-                float baseline= rf.centerY()+distance;
-                mPaintText.setTextAlign(Paint.Align.CENTER);
-                switch (mTrendType){
-                    case 0:
-                        String showValue = (zsDataList.get(j) == 0) ? (j%10 +1)+"" : (mOmitShow ? zsDataList.get(j)+"" : "");
-                        canvas.drawText(showValue, rf.centerX(), baseline, mPaintText);
-                        break;
-                    case 1:
-                        String dtStr = "";
-                        if ( zsDataList.get(j) == 0) {
-                            dtStr = (j == (zsDataList.size()-2)) ? "龙" : (j == (zsDataList.size()-1) ? "虎" : (j%10 +1)+"");
-                        }else{
-                            dtStr = mOmitShow ? zsDataList.get(j)+"" : "";
-                        }
-                        canvas.drawText(dtStr, rf.centerX(), baseline, mPaintText);
-                        break;
-                    case 2:
-                        String sumStr = "";
-                        if ( zsDataList.get(j) == 0) {
-                            sumStr = (j == zsDataList.size()-4) ? "大" : ((j == zsDataList.size()-3) ? "小" : ((j == zsDataList.size()-2) ?
-                                    "单" : ((j == zsDataList.size()-1) ? "双" : (j%18 +3)+"")));
-                        }else{
-                            sumStr = mOmitShow ? zsDataList.get(j)+"" : "";
-                        }
-                        canvas.drawText(sumStr, rf.centerX(), baseline, mPaintText);
-                        break;
-                }
+                setNumData(canvas , zsDataList , j ,rf2 , rf);
+//                //文字(居中处理)
+//                Paint.FontMetrics fontMetrics=mPaintText.getFontMetrics();
+//                float distance=(fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;
+//                float baseline= rf.centerY()+distance;
+//                mPaintText.setTextAlign(Paint.Align.CENTER);
+//                switch (mTrendType){
+//                    case 0:
+//                        String showValue = (zsDataList.get(j) == 0) ? (j%10 +1)+"" : (mOmitShow ? zsDataList.get(j)+"" : "");
+//                        canvas.drawText(showValue, rf.centerX(), baseline, mPaintText);
+//                        break;
+//                    case 1:
+//                        String dtStr = "";
+//                        if ( zsDataList.get(j) == 0) {
+//                            dtStr = (j == (zsDataList.size()-2)) ? "龙" : (j == (zsDataList.size()-1) ? "虎" : (j%10 +1)+"");
+//                        }else{
+//                            dtStr = mOmitShow ? zsDataList.get(j)+"" : "";
+//                        }
+//                        canvas.drawText(dtStr, rf.centerX(), baseline, mPaintText);
+//                        break;
+//                    case 2:
+//                        String sumStr = "";
+//                        if ( zsDataList.get(j) == 0) {
+//                            sumStr = (j == zsDataList.size()-4) ? "大" : ((j == zsDataList.size()-3) ? "小" : ((j == zsDataList.size()-2) ?
+//                                    "单" : ((j == zsDataList.size()-1) ? "双" : (j%18 +3)+"")));
+//                        }else{
+//                            sumStr = mOmitShow ? zsDataList.get(j)+"" : "";
+//                        }
+//                        canvas.drawText(sumStr, rf.centerX(), baseline, mPaintText);
+//                        break;
+//                }
 
             }
+        }
+    }
+
+    /**
+     * 走势数据显示
+     * @param canvas
+     * @param zsList 横向数据集
+     * @param pos 当前位置
+     * @param rfBg 背景绘制的RectF
+     * @param rfTxt 文字绘制的RectF
+     */
+    private void setNumData(Canvas canvas , List<Integer> zsList , int pos ,RectF rfBg , RectF rfTxt){
+        //画圆
+        if (zsList.get(pos) == 0) {
+            setBgPaintColor(pos);
+            canvas.drawOval(rfBg , mPaintNumBg);
+            mPaintText.setColor(getResources().getColor(R.color.white));
+        }else{
+            mPaintText.setColor(getResources().getColor(R.color.txt_color666));
+        }
+
+        //文字(居中处理)
+        Paint.FontMetrics fontMetrics=mPaintText.getFontMetrics();
+        float distance=(fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;
+        float baseline= rfTxt.centerY()+distance;
+        mPaintText.setTextAlign(Paint.Align.CENTER);
+
+        switch (mTrendType){
+            case 0:
+                String showValue = (zsList.get(pos) == 0) ? (pos%10 +1)+"" : (mOmitShow ? zsList.get(pos)+"" : "");
+                canvas.drawText(showValue, rfTxt.centerX(), baseline, mPaintText);
+                break;
+            case 1:
+                String dtStr = "";
+                if ( zsList.get(pos) == 0) {
+                    dtStr = (pos == (zsList.size()-2)) ? "龙" : (pos == (zsList.size()-1) ? "虎" : (pos%10 +1)+"");
+                }else{
+                    dtStr = mOmitShow ? zsList.get(pos)+"" : "";
+                }
+                canvas.drawText(dtStr, rfTxt.centerX(), baseline, mPaintText);
+                break;
+            case 2:
+                String sumStr = "";
+                if ( zsList.get(pos) == 0) {
+                    sumStr = (pos == zsList.size()-4) ? "大" : ((pos == zsList.size()-3) ? "小" : ((pos == zsList.size()-2) ?
+                            "单" : ((pos == zsList.size()-1) ? "双" : (pos%18 +3)+"")));
+                }else{
+                    sumStr = mOmitShow ? zsList.get(pos)+"" : "";
+                }
+                canvas.drawText(sumStr, rfTxt.centerX(), baseline, mPaintText);
+                break;
         }
     }
     private void setBgPaintColor(int position){
@@ -369,122 +420,6 @@ public class CustomTrendLineView extends View{
                 }
                 break;
         }
-    }
-
-    /**1-10显示数据封装*/
-    private List<Integer> getSingleData(BasicTrendBean.ZsBean zsData){
-        List<Integer> zsList = new ArrayList<>();
-        //N11
-        zsList.add(zsData.getN11());
-        zsList.add(zsData.getN12());
-        zsList.add(zsData.getN13());
-        zsList.add(zsData.getN14());
-        zsList.add(zsData.getN15());
-        zsList.add(zsData.getN16());
-        zsList.add(zsData.getN17());
-        zsList.add(zsData.getN18());
-        zsList.add(zsData.getN19());
-        zsList.add(zsData.getN110());
-        //N21
-        zsList.add(zsData.getN21());
-        zsList.add(zsData.getN22());
-        zsList.add(zsData.getN23());
-        zsList.add(zsData.getN24());
-        zsList.add(zsData.getN25());
-        zsList.add(zsData.getN26());
-        zsList.add(zsData.getN27());
-        zsList.add(zsData.getN28());
-        zsList.add(zsData.getN29());
-        zsList.add(zsData.getN210());
-        //31
-        zsList.add(zsData.getN31());
-        zsList.add(zsData.getN32());
-        zsList.add(zsData.getN33());
-        zsList.add(zsData.getN34());
-        zsList.add(zsData.getN35());
-        zsList.add(zsData.getN36());
-        zsList.add(zsData.getN37());
-        zsList.add(zsData.getN38());
-        zsList.add(zsData.getN39());
-        zsList.add(zsData.getN310());
-        //41
-        zsList.add(zsData.getN41());
-        zsList.add(zsData.getN42());
-        zsList.add(zsData.getN43());
-        zsList.add(zsData.getN44());
-        zsList.add(zsData.getN45());
-        zsList.add(zsData.getN46());
-        zsList.add(zsData.getN47());
-        zsList.add(zsData.getN48());
-        zsList.add(zsData.getN49());
-        zsList.add(zsData.getN410());
-        //51
-        zsList.add(zsData.getN51());
-        zsList.add(zsData.getN52());
-        zsList.add(zsData.getN53());
-        zsList.add(zsData.getN54());
-        zsList.add(zsData.getN55());
-        zsList.add(zsData.getN56());
-        zsList.add(zsData.getN57());
-        zsList.add(zsData.getN58());
-        zsList.add(zsData.getN59());
-        zsList.add(zsData.getN510());
-        //61
-        zsList.add(zsData.getN61());
-        zsList.add(zsData.getN62());
-        zsList.add(zsData.getN63());
-        zsList.add(zsData.getN64());
-        zsList.add(zsData.getN65());
-        zsList.add(zsData.getN66());
-        zsList.add(zsData.getN67());
-        zsList.add(zsData.getN68());
-        zsList.add(zsData.getN69());
-        zsList.add(zsData.getN610());
-        //71
-        zsList.add(zsData.getN71());
-        zsList.add(zsData.getN72());
-        zsList.add(zsData.getN73());
-        zsList.add(zsData.getN74());
-        zsList.add(zsData.getN75());
-        zsList.add(zsData.getN76());
-        zsList.add(zsData.getN77());
-        zsList.add(zsData.getN78());
-        zsList.add(zsData.getN79());
-        zsList.add(zsData.getN710());
-        //81
-        zsList.add(zsData.getN81());
-        zsList.add(zsData.getN82());
-        zsList.add(zsData.getN83());
-        zsList.add(zsData.getN84());
-        zsList.add(zsData.getN85());
-        zsList.add(zsData.getN86());
-        zsList.add(zsData.getN87());
-        zsList.add(zsData.getN88());
-        zsList.add(zsData.getN89());
-        zsList.add(zsData.getN810());
-        //91
-        zsList.add(zsData.getN91());
-        zsList.add(zsData.getN92());
-        zsList.add(zsData.getN93());
-        zsList.add(zsData.getN94());
-        zsList.add(zsData.getN95());
-        zsList.add(zsData.getN96());
-        zsList.add(zsData.getN97());
-        zsList.add(zsData.getN98());
-        zsList.add(zsData.getN99());
-        zsList.add(zsData.getN910());
-        //101
-        zsList.add(zsData.getN101());
-        zsList.add(zsData.getN102());
-        zsList.add(zsData.getN103());
-        zsList.add(zsData.getN104());
-        zsList.add(zsData.getN105());
-        zsList.add(zsData.getN106());
-        zsList.add(zsData.getN107());
-        zsList.add(zsData.getN108());
-        zsList.add(zsData.getN109());
-        zsList.add(zsData.getN1010());
-        return zsList;
     }
 
     /**数据封装,获得走势连线的数值集合*/
