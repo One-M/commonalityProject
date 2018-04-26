@@ -14,12 +14,18 @@ import android.widget.Toast;
 import com.ybf.lottery.R;
 import com.ybf.lottery.activity.BasicTrendActivity;
 import com.ybf.lottery.activity.BigSmallTrendActivity;
+import com.ybf.lottery.activity.DivideRenainderActivity;
 import com.ybf.lottery.activity.DragonTigerTrendActivity;
 import com.ybf.lottery.activity.FirstSecondTrendActivity;
 import com.ybf.lottery.activity.HistoryKJActivity;
 import com.ybf.lottery.activity.LocationTrendActivity;
+import com.ybf.lottery.activity.MantissaTrendActivity;
+import com.ybf.lottery.activity.OddEvenActivity;
+import com.ybf.lottery.activity.PrimeNumHeActivity;
+import com.ybf.lottery.activity.SpanTrendActivity;
 import com.ybf.lottery.activity.StatisticActivity;
 import com.ybf.lottery.activity.WinnerRunnerSumValueActivity;
+import com.ybf.lottery.activity.WuXingTrendActivity;
 import com.ybf.lottery.model.bean.homebean.HotLotteryBean;
 
 import java.util.List;
@@ -102,6 +108,25 @@ public class HotLotterAdapter extends BaseAdapter{
                 break;
             case 7://大小形态
                 mContext.startActivity(new Intent(mContext , BigSmallTrendActivity.class));
+                break;
+                //TODO-------------------以下暂无接口------------------
+            case 8://奇偶形态
+                mContext.startActivity(new Intent(mContext , OddEvenActivity.class));
+                break;
+            case 9://质合形态
+                mContext.startActivity(new Intent(mContext , PrimeNumHeActivity.class));
+                break;
+            case 10://跨度走势
+                mContext.startActivity(new Intent(mContext , SpanTrendActivity.class));
+                break;
+            case 11://尾数走势
+                mContext.startActivity(new Intent(mContext , MantissaTrendActivity.class));
+                break;
+            case 12://五行走势
+                mContext.startActivity(new Intent(mContext , WuXingTrendActivity.class));
+                break;
+            case 13://除三余(012)走势
+                mContext.startActivity(new Intent(mContext , DivideRenainderActivity.class));
                 break;
             default:
                 Toast.makeText(mContext, "敬请期待", Toast.LENGTH_SHORT).show();

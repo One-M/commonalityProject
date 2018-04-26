@@ -40,6 +40,18 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.ybf.lottery.activity.BigSmallTrendActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.MantissaTrendActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.DivideRenainderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.OddEvenActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.PrimeNumHeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.SpanTrendActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ybf.lottery.activity.WuXingTrendActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 
