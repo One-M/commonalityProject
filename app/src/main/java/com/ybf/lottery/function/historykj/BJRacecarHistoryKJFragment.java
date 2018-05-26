@@ -223,7 +223,9 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
         mPresenter.loadData(dateStr);
     }
     private void initTimeData(){
-        mPresenter.loadTimeData();
+        if (mPresenter != null ) {
+            mPresenter.loadTimeData();
+        }
     }
     @Override
     public void loadSuccess(List<BJRacecarHistoryKJBean> historyKJBeanList) {
@@ -399,7 +401,7 @@ public class BJRacecarHistoryKJFragment extends BaseMvpFragment<BJRacecarHistory
                 }
                 break;
             case R.id.public_img_back:
-                mActivity.finish();
+                getActivity().finish();
                 break;
         }
     }

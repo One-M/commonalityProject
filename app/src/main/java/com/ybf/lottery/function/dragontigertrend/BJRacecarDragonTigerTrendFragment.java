@@ -79,6 +79,11 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
     @BindView(R.id.basic_trend_statistic_recycle)
     RecyclerView statisticRecyclerView;
 
+    @BindView(R.id.first_ranking)
+    TextView first_ranking;
+    @BindView(R.id.tenth_ranking)
+    TextView tenth_ranking;
+
     private static String DTTREND_TYPE = "DTTrendType";//fragment 入口传参 key
     private int dtTrendType;
     private String mFType = "1";
@@ -153,6 +158,10 @@ public class BJRacecarDragonTigerTrendFragment extends BaseMvpFragment<BJRacecar
             mBackImg.setVisibility(View.GONE);
         }
         titleTxt.setText("龙虎走势");
+
+        first_ranking.setText("冠军走势");
+        tenth_ranking.setText("第十名走势");
+
         //隐藏2-9名
         for (int i = 0; i < headerRanking.size(); i++) {
             headerRanking.get(i).setVisibility(View.GONE);

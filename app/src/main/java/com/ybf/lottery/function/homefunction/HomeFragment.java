@@ -41,6 +41,8 @@ public class HomeFragment extends BaseMvpFragment<HomeContract.Presenter> implem
     TextView kjIssueTxt;
     @BindView(R.id.home_hot_lottery_gridlay)
     GridView hotLotterGrid;
+    @BindView(R.id.kj_time)
+    TextView dataTime;
     @BindViews({R.id.home_kj_num1 ,
                 R.id.home_kj_num2,
                 R.id.home_kj_num3,
@@ -68,6 +70,7 @@ public class HomeFragment extends BaseMvpFragment<HomeContract.Presenter> implem
     private String issue;
     private MyCountDown countDown;
     private Context mContext;
+    private int issuenum;
 
     @Override
     public HomeContract.Presenter initPresenter() {
@@ -81,6 +84,7 @@ public class HomeFragment extends BaseMvpFragment<HomeContract.Presenter> implem
 
         ButterKnife.bind(this , mView);
 
+        dataTime.setVisibility(View.INVISIBLE);
         initTimeData();
         initHotLotteryData();
         return mView;
@@ -126,9 +130,12 @@ public class HomeFragment extends BaseMvpFragment<HomeContract.Presenter> implem
 
         String timeStr = formatLongToTimeStr(time);
         issue = countDownBean.getInfo().getIssue();
+
+        issuenum = Integer.parseInt(issue)+1;//倒计时期号要加一
+
         countDown = new MyCountDown(time , 1000);
         countDown.start();
-        kjIssue.setText("距离" + issue + "期开奖还有");
+        kjIssue.setText("距离" + issuenum + "期开奖还有");
         kjTime.setText(timeStr);
 
         kjIssueTxt.setText("第" + issue + "期开奖");
@@ -152,7 +159,7 @@ public class HomeFragment extends BaseMvpFragment<HomeContract.Presenter> implem
         @Override
         public void onTick(long l) {
             String timeStr = formatLongToTimeStr(l);
-            kjIssue.setText("距离" + issue + "期开奖还有");
+            kjIssue.setText("距离" + issuenum + "期开奖还有");
             kjTime.setText(timeStr);
         }
 

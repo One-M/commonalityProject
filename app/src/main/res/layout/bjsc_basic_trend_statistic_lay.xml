@@ -113,6 +113,7 @@
                             android:background="@drawable/border_b_color"
                             >
                             <TextView
+                                android:id="@+id/first_ranking"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
@@ -267,6 +268,7 @@
                             android:layout_height="@dimen/bjsc_statistic_title7_h"
                             android:background="@drawable/border_b_color">
                             <TextView
+                                android:id="@+id/tenth_ranking"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
@@ -293,7 +295,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:text="龙虎"/>
+                                android:text="龙虎走势"/>
 
                         </LinearLayout>
                         <include layout="@layout/bjsc_statistic_dragon_tiger_lay"/>

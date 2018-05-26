@@ -31,7 +31,7 @@
                     android:layout_height="@dimen/bjsc_statistic_title6_h"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="亚冠统计"
+                    android:text="冠亚统计"
                     android:textSize="@dimen/text_size_14"
                     />
             </LinearLayout>
