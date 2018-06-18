@@ -5,19 +5,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/fragment"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9">
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+        <ImageView
+            android:id="@+id/to_more_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@mipmap/ic_launcher_round" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ly_tab_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_home_h"
-        android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:orientation="vertical">
 

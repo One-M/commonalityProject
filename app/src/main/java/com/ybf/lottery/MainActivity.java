@@ -1,14 +1,18 @@
 package com.ybf.lottery;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.ybf.lottery.activity.DaoTestActivity;
 import com.ybf.lottery.base.BaseActivity;
 import com.ybf.lottery.eventBusInfo.HistoryKJEvent;
 import com.ybf.lottery.function.basictrend.BJRacecarBasicTrendFragment;
@@ -27,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * app 主入口
@@ -43,6 +48,8 @@ public class MainActivity extends BaseActivity {
     RadioButton sjtj;
     @BindView(R.id.bottom_bar_jbzs)
     RadioButton jbzs;
+    @BindView(R.id.to_more_img)
+    ImageView toMore;
 
     // 退出程序...时间
     private long mExitApp;
@@ -162,5 +169,15 @@ public class MainActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @OnClick(R.id.to_more_img)
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.to_more_img:
+                ToastUtils.showTipMsg("more");
+                startActivity(new Intent(MainActivity.this , DaoTestActivity.class));
+                break;
+        }
     }
 }

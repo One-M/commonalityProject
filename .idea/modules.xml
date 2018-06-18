@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YBFLottery.iml" filepath="$PROJECT_DIR$/YBFLottery.iml" />
+      <module fileurl="file://D:\project\commonalityProject\YBFLottery.iml" filepath="D:\project\commonalityProject\YBFLottery.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

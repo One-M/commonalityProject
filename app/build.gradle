@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
     compileSdkVersion 26
@@ -22,6 +23,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+greendao {
+    schemaVersion 1
+    daoPackage 'com.ybf.lottery.gen'
+    targetGenDir 'src/main/java'
 }
 
 dependencies {
@@ -69,4 +75,6 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     //沉浸式bar
     implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
+    //greendao
+    implementation 'org.greenrobot:greendao:3.2.2' // add library
 }

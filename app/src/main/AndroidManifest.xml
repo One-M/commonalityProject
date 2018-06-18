@@ -52,7 +52,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.ybf.lottery.activity.WuXingTrendActivity"
             android:screenOrientation="portrait"/>
-
+        <activity android:name="com.ybf.lottery.activity.DaoTestActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
